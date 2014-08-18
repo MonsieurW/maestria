@@ -1,7 +1,12 @@
-{
+{	"repositories" : [	
+		{
+			"type" : "vcs",
+			"url"  : "https://github.com/camael24/framework"
+		}
+	],
     "name": "sohoa/sohoa",
     "require": {
-        "sohoa/framework": "dev-master"
+        "sohoa/framework": "dev-f/generate_controller"
     },
     "config": {
         "bin-dir": "Binaries"
