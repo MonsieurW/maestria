@@ -14,3 +14,6 @@ db:
 update:
 	git pull -u origin master
 	composer update
+
+install:
+	composer install
