@@ -13,8 +13,13 @@ namespace Application\Controller {
     		$session = new \Hoa\Session\Session('user');
 			if(isset($session['connect']) or $session['connect'] === false ){
 
-        		$this->connected 		= true;
-        		$this->data->isConnect 	= true;
+        		$this->connected 		 = true;
+                $this->data->isAdmin     = true;
+                $this->data->isModerator = true;
+                $this->data->isProfessor = true;
+        		$this->data->isConnect 	 = true;
+                $this->data->user        = 'Gordon Freeman x';
+                $this->data->idProfil    = 5;
         	}
         	
     	}
@@ -64,6 +69,25 @@ namespace Application\Controller {
         public function registerAction()
         {
         	$this->greut->render();
+        }
+
+        public function profilAction($id)
+        {
+
+            if($this->connected === false){
+
+                $this->redirector->redirect('mainlogin');
+            }
+
+            $this->data->login       = 'foo';
+            $this->data->idProfil    = 5;   
+            $this->data->class       = array(
+                array('id' => 1 , 'name' => '2°K'),
+                array('id' => 2 , 'name' => '2°L'),
+                array('id' => 3 , 'name' => 'T°L'),
+            );
+            $this->data->domain     = array('Physique' , 'Chimie');
+            $this->greut->render();
         }
     }
 }

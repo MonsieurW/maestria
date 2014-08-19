@@ -8,7 +8,7 @@ $this->endBlock();
 $this->block('container');
 ?>
 <div class="container">
-	<div class="lcont">
+	<div class="lcont login-container">
 		<?php
 			if(isset($hasError) and $hasError === true)
 				echo '<div class="error"><b><i class="fa fa-frown-o"></i></b> Something went wrong !</div>';
