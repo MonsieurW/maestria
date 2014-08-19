@@ -38,8 +38,19 @@ namespace Application\Model {
             return !empty($sqt);
         }
 
-        public function add($login, $isAdmin, $isModerator, $isProfessor, $user, $class, $domain)
+        public function add($login, $password, $user, $class, $domain)
         {
+            $class  = str_replace(',', '|', $class);
+            $domain = str_replace(',', '|', $domain);
+
+            $sql = "INSERT INTO user VAlUES (null,:l,'0','0','0',:p, :n, :c, :d);";
+            $this->sql($sql, array(
+                'l' => $login,
+                'p' => sha1($password),
+                'n' => $user,
+                'c' => $class,
+                'd' => $domain
+            ));
 
             
         }

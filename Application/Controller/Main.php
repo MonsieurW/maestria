@@ -105,6 +105,28 @@ namespace Application\Controller {
             $this->greut->render();
         }
 
+        public function createAction()
+        {
+            $p = function ($id) {
+                if(array_key_exists($id, $_POST))
+                    return $_POST[$id];
+
+                return '';
+            };
+
+            $login      = $p('login');
+            $user       = $p('name');
+            $password   = $p('passwd');
+            $class      = $p('classroom');
+            $domain     = $p('domain');
+            $model      = new \Application\Model\User();
+
+            $model->add($login, $password, $user, $class, $domain);
+
+            $this->redirector->redirect('mainlogin');
+
+        }
+
         protected function readUserInformation($id) 
         {
             $model = new \Application\Model\User();
