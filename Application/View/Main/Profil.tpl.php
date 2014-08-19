@@ -8,7 +8,7 @@ $group = function($bool , $label, $class) {
 };
 ?>
 
-<div class="container">
+<div class="container" style="margin-top: 50px">
       <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3">
    
@@ -48,7 +48,7 @@ $group = function($bool , $label, $class) {
                         <td>Classroom:</td>
                         <td>
                         <?php foreach ($class as $v) {
-                          echo $group(true, $v['name'], 'info');
+                          echo $group(true, $v, 'info');
                         }
                         ?>
                         </td>
@@ -61,7 +61,7 @@ $group = function($bool , $label, $class) {
             </div>
                  <div class="panel-footer">
                         <a data-original-title="Broadcast Message" data-toggle="tooltip" type="button" class="btn btn-sm btn-primary"><i class="glyphicon glyphicon-envelope"></i></a>
-                        <?php if(isset($isAdmin) and $isAdmin === true) { ?>
+                        <?php if(isset($loginIsAdmin) and $loginIsAdmin === true) { ?>
                         <span class="pull-right">
                             <a href="#" data-original-title="Edit this user" data-toggle="tooltip" type="button" class="btn btn-sm btn-warning"><i class="glyphicon glyphicon-edit"></i></a>
                             <a href="#" data-original-title="Remove this user" data-toggle="tooltip" type="button" class="btn btn-sm btn-danger"><i class="glyphicon glyphicon-remove"></i></a>

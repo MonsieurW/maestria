@@ -4,54 +4,11 @@ namespace Application\Model {
     class User
     {
         private $_layer = null;
-        private $_user  = array();
 
         public function __construct()
         {
-            //$this->_layer = \Hoa\Database\Dal::getLastInstance();
-            $this->_user[1]  = array(
-                'idProfil'      => 1,
-                'login'         => 'Foobar',
-                'isAdmin'       => true,
-                'isModerator'   => true,
-                'isProfessor'   => true,
-                'user'          => 'Foo Bar 1',
-                'class'         => array(
-                    array('id' => 1 , 'name' => '2°K'),
-                    array('id' => 2 , 'name' => '2°L'),
-                    array('id' => 3 , 'name' => 'T°L'),
-                ),
-                'domain'        => array('Physique' , 'Chimie')
-            );
-            $this->_user[2]  = array(
-                'idProfil'      => 2,
-                'login'         => 'Hello',
-                'isAdmin'       => true,
-                'isModerator'   => true,
-                'isProfessor'   => false,
-                'user'          => 'Not a professor',
-                'class'         => array(
-                    array('id' => 1 , 'name' => '2°K'),
-                    array('id' => 2 , 'name' => '2°L'),
-                    array('id' => 3 , 'name' => 'T°L'),
-                ),
-                'domain'        => array()
-            );
-            $this->_user[3]  = array(
-                'idProfil'      => 3,
-                'login'         => 'Hello World',
-                'isAdmin'       => false,
-                'isModerator'   => false,
-                'isProfessor'   => true,
-                'user'          => 'Professor',
-                'class'         => array(
-                    array('id' => 1 , 'name' => '2°K'),
-                    array('id' => 2 , 'name' => '2°L'),
-                    array('id' => 3 , 'name' => 'T°L'),
-                ),
-                'domain'        => array('Math')
-            );
-
+            $this->_layer = \Hoa\Database\Dal::getLastInstance();
+            
         }
 
         public function sql($statement, $data = array())
@@ -67,31 +24,51 @@ namespace Application\Model {
 
         public function exists($id)
         {
-            return array_key_exists($id, $this->_user);
+            return true;
+        
         }
 
-        public function add($login, $name, $password)
+        public function check($login, $password)
         {
+            $sqt = $this->sql('SELECT * FROM user WHERE login = :login AND password = :password ', array(
+                'login' => $login,
+                'password' => sha1($password)
+            ))->fetchAll();   
+
+            return !empty($sqt);
+        }
+
+        public function add($login, $isAdmin, $isModerator, $isProfessor, $user, $class, $domain)
+        {
+
             
-            return true;
         }
 
         public function get($id)
         {
-           if(array_key_exists($id, $this->_user))
-                return $this->_user[$id];
+            $st             = $this->sql('SELECT * FROM user WHERE idProfil = :id' , array('id' => $id))->fetchAll();
+            $item           = $st[0];
+            $item['class']  = explode('|', $item['class']);
+            $item['domain'] = explode('|', $item['domain']);
 
-            return array();
+            return $item;
         }
 
         public function all()
         {
-            return $this->_user;
+            $st = $this->sql('SELECT * FROM user')->fetchAll();
+
+            foreach ($st as $i => $value) {
+                $st[$i]['class']    = explode('|', $value['class']);    
+                $st[$i]['domain']   = explode('|', $value['domain']);
+            }
+
+            return $st;
         }
 
         public function count()
         {
-            return count($this->_user);
+        
         }
     }
 }

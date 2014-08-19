@@ -31,12 +31,12 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#"><i class="fa fa-graduation-cap"></i> Maestria</a>
+          <a class="navbar-brand" href="/"><i class="fa fa-graduation-cap"></i> Maestria</a>
         </div>
         <?php if(isset($isConnect) === true) { ?>
           <div class="navbar-collapse collapse">
              <ul class="nav navbar-nav">
-                <li><a href="#"></a></li>
+                <li><a href="/"></a></li>
               </ul>  
               <ul class="nav navbar-nav pull-right">
                 <li class="active"><a href="/user/<?php echo $loginId; ?>"><i class="fa fa-user"></i> <?php echo $loginUser; ?></a></li>

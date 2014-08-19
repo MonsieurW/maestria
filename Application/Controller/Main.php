@@ -13,12 +13,14 @@ namespace Application\Controller {
     		$session = new \Hoa\Session\Session('user');
 			if(isset($session['connect']) and $session['connect'] === true)
             {
-        		$this->connected 		 = true;
-                $model                   = new \Application\Model\User();
-                $model                   = $model->get($session['id']);
-                $this->data->isConnect   = true;
-                $this->data->loginUser   = $model['user'];
-                $this->data->loginId     = $session['id'];
+        		$this->connected 		        = true;
+                $model                          = new \Application\Model\User();
+                $model                          = $model->get($session['id']);
+                $this->data->isConnect          = true;
+                $this->data->loginUser          = $model['user'];
+                $this->data->loginIsAdmin       = ($model['isAdmin'] === '1') ? true : false;
+                $this->data->loginIsModerator   = ($model['isModerator'] === '1') ? true : false;
+                $this->data->loginId            = $session['id'];
         	}
         	
     	}
@@ -44,14 +46,22 @@ namespace Application\Controller {
         	$user 		= isset($_POST['user']) ? $_POST['user'] : '';
         	$password 	= isset($_POST['password']) ? $_POST['password'] : '';
 			$session 	= new \Hoa\Session\Session('user');
+            $model      = new \Application\Model\User();
 
-        	if($user === '' or $password === ''){ // TODO : 
+        	if($user === '' or $password === '')
+            { 
         		$this->data->hasError = true;
         		return $this->greut->render(array('Main' , 'connect'));
         	}
 
+            if($model->check($user, $password) === false)
+            {
+                $this->data->hasError = true;
+                return $this->greut->render(array('Main' , 'connect'));   
+            }
+
         	$session['connect'] = true;
-            $session['id']      = 2;
+            $session['id']      = 1;
 
         	$this->redirector->redirect('mainindex');	
         }
@@ -103,9 +113,9 @@ namespace Application\Controller {
                 $model                      = $model->get($id);
                 $this->data->idProfil       = $model['idProfil'];
                 $this->data->login          = $model['login'];
-                $this->data->isAdmin        = $model['isAdmin'];
-                $this->data->isModerator    = $model['isModerator'];
-                $this->data->isProfessor    = $model['isProfessor'];
+                $this->data->isAdmin        = ($model['isAdmin'] === '1') ? true : false;
+                $this->data->isModerator    = ($model['isModerator'] === '1') ? true : false;
+                $this->data->isProfessor    = ($model['isProfessor'] === '1') ? true : false;
                 $this->data->user           = $model['user'];
                 $this->data->class          = $model['class'];
                 $this->data->domain         = $model['domain'];

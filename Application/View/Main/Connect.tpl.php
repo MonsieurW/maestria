@@ -14,6 +14,7 @@ $this->block('container');
 				echo '<div class="error"><b><i class="fa fa-frown-o"></i></b> Something went wrong !</div>';
 		?>
         <div class="form-box">
+            <p>use admin/admin</p>
             <form action="/login" method="post">
                 <input name="user" type="text" placeholder="username">
                 <input name="password" type="password" placeholder="password">

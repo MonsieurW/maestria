@@ -8,7 +8,7 @@ $group = function($bool , $label, $class) {
 };
 
 ?>
-<div class="container">
+<div class="container" style="margin-top: 50px">
   <table class="table">
     <thead>
       <tr>
@@ -26,9 +26,9 @@ $group = function($bool , $label, $class) {
         <td><?php echo $user['user']; ?></td>
         <td>          
 <?php
-        $isAdmin = $user['isAdmin'];
-        $isModerator = $user['isModerator'];
-        $isProfessor = $user['isProfessor'];
+        $isAdmin = ($user['isAdmin'] === '1') ? true : false;
+        $isModerator = ($user['isModerator'] === '1') ? true : false;
+        $isProfessor = ($user['isProfessor'] === '1') ? true : false;
         if(isset($isAdmin)) echo $group($isAdmin, 'Administrator', 'danger');
         if(isset($isModerator)) echo $group($isModerator, 'Moderator', 'warning');
         if(isset($isProfessor)) echo $group($isProfessor, 'Professor', 'success');
@@ -39,7 +39,7 @@ $group = function($bool , $label, $class) {
 <?php
         if(isset($user['class']))
           foreach($user['class'] as $v)
-            echo $group(true, ucfirst($v['name']), 'info');
+            echo $group(true, ucfirst($v), 'info');
 ?>
         </td>
         <td>

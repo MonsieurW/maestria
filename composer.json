@@ -6,7 +6,8 @@
 	],
     "name": "sohoa/sohoa",
     "require": {
-        "sohoa/framework": "dev-f/generate_controller"
+        "sohoa/framework": "dev-f/generate_controller",
+        "hoa/database" : "dev-master"
     },
     "config": {
         "bin-dir": "Binaries"

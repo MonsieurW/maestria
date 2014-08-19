@@ -3,6 +3,12 @@
 /* @var $framework \Sohoa\Framework\Framework */
 
 // Defines the defaults route
+
+$this
+	->resource('professor' , array('only' => array('index' , 'show')))
+	->resource('task')
+	->resource('question');
+
 $this->get('/', 					array('as' => 'mainindex', 		'to' => 'Main#Index'));
 $this->get('/login', 				array('as' => 'mainconnect', 	'to' => 'Main#Connect'));
 $this->post('/login', 				array('as' => 'mainlogin', 		'to' => 'Main#Login'));
@@ -12,12 +18,9 @@ $this->post('/register', 			array('as' => 'maincreate', 	'to' => 'Main#Create'))
 $this->get('/user/', 				array('as' => 'profilall',	 	'to' => 'Main#Profilall'));
 $this->get('/user/(?<id>[^/]+)/?', 	array('as' => 'profiluser', 	'to' => 'Main#Profil'));
 
-$this
-	->resource('professor')
-	->resource('task')
-	->resource('question');
 
-$this
+
+/*$this
 	->resource('student')
 	->resource('answer');
 
@@ -27,4 +30,4 @@ $this
 
 
 $this->resource('capabilites');
-$this->resource('instruction');
+$this->resource('instruction');*/
