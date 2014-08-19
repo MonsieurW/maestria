@@ -6,8 +6,8 @@ db-reset:
 	if [ -f $(DB) ]; then rm -f $(DB); else echo "Database not exist yet"; fi;
 
 db-install:
-	chmod 0777 $(DB)
 	if [ -f $(DB) ]; then echo "Hello"; else sqlite3 $(DB) < $(SQL); fi;
+	chmod 0777 $(DB)
 
 db:
 	make db-reset
