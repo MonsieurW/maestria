@@ -9,6 +9,7 @@ $this->post('/login', 				array('as' => 'mainlogin', 		'to' => 'Main#Login'));
 $this->get('/logout', 				array('as' => 'mainlogout', 	'to' => 'Main#Logout'));
 $this->get('/register', 			array('as' => 'mainregister', 	'to' => 'Main#Register'));
 $this->post('/register', 			array('as' => 'maincreate', 	'to' => 'Main#Create'));
+$this->get('/user/', 				array('as' => 'profilall',	 	'to' => 'Main#Profilall'));
 $this->get('/user/(?<id>[^/]+)/?', 	array('as' => 'profiluser', 	'to' => 'Main#Profil'));
 
 $this

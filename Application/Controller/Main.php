@@ -11,15 +11,14 @@ namespace Application\Controller {
     	public function construct()
     	{
     		$session = new \Hoa\Session\Session('user');
-			if(isset($session['connect']) or $session['connect'] === false ){
-
+			if(isset($session['connect']) and $session['connect'] === true)
+            {
         		$this->connected 		 = true;
-                $this->data->isAdmin     = true;
-                $this->data->isModerator = true;
-                $this->data->isProfessor = true;
-        		$this->data->isConnect 	 = true;
-                $this->data->user        = 'Gordon Freeman x';
-                $this->data->idProfil    = 5;
+                $model                   = new \Application\Model\User();
+                $model                   = $model->get($session['id']);
+                $this->data->isConnect   = true;
+                $this->data->loginUser   = $model['user'];
+                $this->data->loginId     = $session['id'];
         	}
         	
     	}
@@ -52,6 +51,7 @@ namespace Application\Controller {
         	}
 
         	$session['connect'] = true;
+            $session['id']      = 2;
 
         	$this->redirector->redirect('mainindex');	
         }
@@ -73,21 +73,47 @@ namespace Application\Controller {
 
         public function profilAction($id)
         {
-
             if($this->connected === false){
 
                 $this->redirector->redirect('mainlogin');
             }
 
-            $this->data->login       = 'foo';
-            $this->data->idProfil    = 5;   
-            $this->data->class       = array(
-                array('id' => 1 , 'name' => '2°K'),
-                array('id' => 2 , 'name' => '2°L'),
-                array('id' => 3 , 'name' => 'T°L'),
-            );
-            $this->data->domain     = array('Physique' , 'Chimie');
+            if($this->readUserInformation($id) === true)
+                return $this->greut->render();
+            else
+                return $this->greut->render(array('Main' , 'NotFound'));
+
+            
+        }
+
+        public function profilallAction()
+        {
+            $model              = new \Application\Model\User();
+            $model              = $model->all();
+            $this->data->all    = $model;
+
             $this->greut->render();
+        }
+
+        protected function readUserInformation($id) 
+        {
+            $model = new \Application\Model\User();
+
+            if($model->exists($id) === true ) {
+                $model                      = $model->get($id);
+                $this->data->idProfil       = $model['idProfil'];
+                $this->data->login          = $model['login'];
+                $this->data->isAdmin        = $model['isAdmin'];
+                $this->data->isModerator    = $model['isModerator'];
+                $this->data->isProfessor    = $model['isProfessor'];
+                $this->data->user           = $model['user'];
+                $this->data->class          = $model['class'];
+                $this->data->domain         = $model['domain'];
+
+                return true;
+            }
+
+            return false;
         }
     }
 }

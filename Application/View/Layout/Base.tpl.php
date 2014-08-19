@@ -39,7 +39,8 @@
                 <li><a href="#"></a></li>
               </ul>  
               <ul class="nav navbar-nav pull-right">
-                <li class="active"><a href="/user/<?php echo $idProfil; ?>"><i class="fa fa-user"></i> <?php echo $user; ?></a></li>
+                <li class="active"><a href="/user/<?php echo $loginId; ?>"><i class="fa fa-user"></i> <?php echo $loginUser; ?></a></li>
+                <li><a href="/user/"><i class="fa fa-users"></i></a></li>
                 <li><a href="/logout"><i class="fa fa-sign-out"></i></a></li>
               </ul>
           </div><!--/.navbar-collapse -->
