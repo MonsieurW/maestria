@@ -121,10 +121,10 @@ namespace Application\Controller {
             $domain     = $p('domain');
             $model      = new \Application\Model\User();
 
+            var_dump(resolve('hoa://Application/Database/Maestria.db'));
+
             $model->add($login, $password, $user, $class, $domain);
-
             $this->redirector->redirect('mainlogin');
-
         }
 
         protected function readUserInformation($id) 
