@@ -18,7 +18,7 @@ $group = function($bool , $label, $class) {
             <div class="panel-heading">
               <h3 class="panel-title"><?php echo $user; ?></h3> 
               <?php 
-                if(isset($isAdmin)) echo $group($isAdmin, 'Administrator', 'danger');
+                if(isset($isAdmin))     echo $group($isAdmin, 'Administrator', 'danger');
                 if(isset($isModerator)) echo $group($isModerator, 'Moderator', 'warning');
                 if(isset($isProfessor)) echo $group($isProfessor, 'Professor', 'success');
               ?>
