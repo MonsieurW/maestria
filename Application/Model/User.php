@@ -38,6 +38,26 @@ namespace Application\Model {
             return !empty($sqt);
         }
 
+        public function checkWithId($id, $password)
+        {
+            $sqt = $this->sql('SELECT * FROM user WHERE idProfil = :id AND password = :password ', array(
+                'id' => $id,
+                'password' => sha1($password)
+            ))->fetchAll();   
+
+            return !empty($sqt);
+        }
+
+        public function getByUser($user) 
+        {
+            $st             = $this->sql('SELECT * FROM user WHERE login = :id' , array('id' => $user))->fetchAll();
+            $item           = $st[0];
+            $item['class']  = explode('|', $item['class']);
+            $item['domain'] = explode('|', $item['domain']);
+
+            return $item;
+        }
+
         public function add($login, $password, $user, $class, $domain)
         {
             $class  = str_replace(',', '|', $class);
@@ -51,8 +71,16 @@ namespace Application\Model {
                 'c' => $class,
                 'd' => $domain
             ));
+        }
 
-            
+        public function updatePassword($id, $password)
+        {
+            $this->update($id, 'password', sha1($password));
+        }
+
+        public function update($id, $col, $value)
+        {
+            $this->sql('UPDATE user set '.$col.' = :p WHERE idProfil = :i' , array('p' => $value,'i' => $id));
         }
 
         public function get($id)

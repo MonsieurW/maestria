@@ -1,6 +1,7 @@
 <?php
 $this->inherits('hoa://Application/View/Layout/Base.tpl.php');
 $this->block('container');
+$router = $this->_framework->getRouter();
 
 $group = function($bool , $label, $class) {
     if($bool === true)
@@ -59,16 +60,12 @@ $group = function($bool , $label, $class) {
                 </div>
               </div>
             </div>
-                 <div class="panel-footer">
-                        <a data-original-title="Broadcast Message" data-toggle="tooltip" type="button" class="btn btn-sm btn-primary"><i class="glyphicon glyphicon-envelope"></i></a>
-                        <?php if(isset($loginIsAdmin) and $loginIsAdmin === true) { ?>
-                        <!--span class="pull-right">
-                            <a href="#" data-original-title="Edit this user" data-toggle="tooltip" type="button" class="btn btn-sm btn-warning"><i class="glyphicon glyphicon-edit"></i></a>
-                            <a href="#" data-original-title="Remove this user" data-toggle="tooltip" type="button" class="btn btn-sm btn-danger"><i class="glyphicon glyphicon-remove"></i></a>
-                        </span-->
-                        <?php } ?>
-                    </div>
-          </div>
+           <div class="panel-footer">
+              <?php if(isset($loginIsAdmin) and $loginIsAdmin === true) { ?>
+                  <a href="<?php echo $router->unroute('profiledit', array('id' => $idProfil)); ?>" class="btn btn-sm btn-warning"><i class="glyphicon glyphicon-edit"></i></a>
+              <?php } ?>
+            </div>
+        </div>
         </div>
       </div>
     </div>

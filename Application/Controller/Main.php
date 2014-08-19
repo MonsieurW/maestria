@@ -59,9 +59,9 @@ namespace Application\Controller {
                 $this->data->hasError = true;
                 return $this->greut->render(array('Main' , 'connect'));   
             }
-
+            $model              = $model->getByUser($user);
         	$session['connect'] = true;
-            $session['id']      = 1;
+            $session['id']      = $model['idProfil'];
 
         	$this->redirector->redirect('mainindex');	
         }
@@ -70,6 +70,7 @@ namespace Application\Controller {
         {
         	$session 			= new \Hoa\Session\Session('user');
         	$session['connect'] = false;
+            $session['id']      = null;
 
         	\Hoa\Session\Session::destroy();
 
@@ -121,8 +122,53 @@ namespace Application\Controller {
             $domain     = $p('domain');
             $model      = new \Application\Model\User();
 
-            //$model->add($login, $password, $user, $class, $domain);
+            $model->add($login, $password, $user, $class, $domain);
             $this->redirector->redirect('mainlogin');
+        }
+
+        public function profileditAction($id)
+        {
+            $model                      = new \Application\Model\User();
+            $model                      = $model->get($id);
+            $this->data->idProfil       = $model['idProfil'];
+            $this->data->login          = $model['login'];
+            $this->data->user           = $model['user'];
+            $this->data->class          = $model['class'];
+            $this->data->domain         = $model['domain'];
+            $this->greut->render();
+        }
+
+        public function profilupdateAction($id)
+        {
+            $p = function ($id) {
+                if(array_key_exists($id, $_POST))
+                    return $_POST[$id];
+
+                return '';
+            };
+
+            $model      = new \Application\Model\User();
+            $login      = $p('login');
+            $user       = $p('name');
+            $password   = $p('passwd');
+            $opassword  = $p('oldpasswd');
+            $class      = $p('classroom');
+            $domain     = $p('domain');
+
+            // UPDATE Password
+
+            if($opassword !== '' && $model->checkWithId($id, $opassword) === true)
+            {
+                $model->updatePassword($id, $password);
+                echo 'UPDATE password';
+            }
+
+            $model->update($id, 'login', $login);
+            $model->update($id, 'user', $user);
+            $model->update($id, 'class', str_replace(',', '|', $class));
+            $model->update($id, 'domain', str_replace(',', '|', $domain));
+
+            $this->redirector->redirect('profiluser', array('id' => $id));
         }
 
         protected function readUserInformation($id) 
