@@ -33,35 +33,39 @@ $group = function($bool , $label, $class) {
                         <td>Login :</td>
                         <td><?php echo $login; ?></td>
                       </tr>
-                    <?php if(isset($domain) and !empty($domain)) { ?>
-                      <tr>
-                        <td>Domain:</td>
-                        <td>
-                        <?php foreach ($domain as $v) {
-                          echo $group(true, ucfirst($v), 'success');
-                        }
-                        ?>
-                        </td>
-                      </tr>
-                      <?php } ?>
-                      <?php if(isset($class) and !empty($class)) { ?>
-                      <tr>
-                        <td>Classroom:</td>
-                        <td>
-                        <?php foreach ($class as $v) {
-                          echo $group(true, $v, 'info');
-                        }
-                        ?>
-                        </td>
-                      </tr>
-                      <?php } ?>
+                    <?php 
+                    if(isset($isProfessor) and $isProfessor === true) {
+                      if(isset($domain) and !empty($domain)) { ?>
+                        <tr>
+                          <td>Domain:</td>
+                          <td>
+                          <?php foreach ($domain as $v) {
+                            echo $group(true, ucfirst($v), 'success');
+                          }
+                          ?>
+                          </td>
+                        </tr>
+                        <?php } ?>
+                        <?php if(isset($class) and !empty($class)) { ?>
+                        <tr>
+                          <td>Classroom:</td>
+                          <td>
+                          <?php foreach ($class as $v) {
+                            echo $group(true, $v, 'info');
+                          }
+                          ?>
+                          </td>
+                        </tr>
+                        <?php }
+                      }
+                      ?>
                     </tbody>
                   </table>
                 </div>
               </div>
             </div>
            <div class="panel-footer">
-              <?php if(isset($loginIsAdmin) and $loginIsAdmin === true) { ?>
+              <?php if( (isset($loginIsAdmin) and $loginIsAdmin === true) or ($idProfil === $loginId) ) { ?>
                   <a href="<?php echo $router->unroute('profiledit', array('id' => $idProfil)); ?>" class="btn btn-sm btn-warning"><i class="glyphicon glyphicon-edit"></i></a>
               <?php } ?>
             </div>

@@ -18,9 +18,11 @@ namespace Application\Controller {
                 $model                          = $model->get($session['id']);
                 $this->data->isConnect          = true;
                 $this->data->loginUser          = $model['user'];
-                $this->data->loginIsAdmin       = ($model['isAdmin'] === '1') ? true : false;
+                $this->isAdmin                  = ($model['isAdmin'] === '1') ? true : false;
                 $this->data->loginIsModerator   = ($model['isModerator'] === '1') ? true : false;
-                $this->data->loginId            = $session['id'];
+                $this->data->loginIsAdmin       = $this->isAdmin;
+                $this->loginId                  = $session['id'];
+                $this->data->loginId            = $this->loginId;
         	}
         	
     	}
@@ -128,14 +130,24 @@ namespace Application\Controller {
 
         public function profileditAction($id)
         {
-            $model                      = new \Application\Model\User();
-            $model                      = $model->get($id);
-            $this->data->idProfil       = $model['idProfil'];
-            $this->data->login          = $model['login'];
-            $this->data->user           = $model['user'];
-            $this->data->class          = $model['class'];
-            $this->data->domain         = $model['domain'];
-            $this->greut->render();
+
+            if($this->isAdmin === true or $id === $this->loginId ) {
+            
+                $model                      = new \Application\Model\User();
+                $model                      = $model->get($id);
+                $this->data->idProfil       = $model['idProfil'];
+                $this->data->login          = $model['login'];
+                $this->data->user           = $model['user'];
+                $this->data->class          = $model['class'];
+                $this->data->domain         = $model['domain'];
+                $this->data->isAdmin        = ($model['isAdmin'] === '1') ? true : false;
+                $this->data->isModerator    = ($model['isModerator'] === '1') ? true : false;
+                $this->data->isProfessor    = ($model['isProfessor'] === '1') ? true : false;
+                
+                return $this->greut->render();
+            }
+            
+            $this->redirector->redirect('mainindex');
         }
 
         public function profilupdateAction($id)
@@ -147,28 +159,46 @@ namespace Application\Controller {
                 return '';
             };
 
-            $model      = new \Application\Model\User();
-            $login      = $p('login');
-            $user       = $p('name');
-            $password   = $p('passwd');
-            $opassword  = $p('oldpasswd');
-            $class      = $p('classroom');
-            $domain     = $p('domain');
+            $c = function ($id) {
+                if(array_key_exists($id, $_POST) and $_POST[$id] === 'on')
+                    return '1';
 
-            // UPDATE Password
+                return '0';
+            };
 
-            if($opassword !== '' && $model->checkWithId($id, $opassword) === true)
-            {
-                $model->updatePassword($id, $password);
-                echo 'UPDATE password';
+            if($this->isAdmin === true or $id === $this->loginId ) {
+
+                $model          = new \Application\Model\User();
+                $login          = $p('login');
+                $user           = $p('name');
+                $password       = $p('passwd');
+                $opassword      = $p('oldpasswd');
+                $class          = $p('classroom');
+                $domain         = $p('domain');
+                $isAdmin        = $c('isAdmin');
+                $isModerator    = $c('isModerator');
+                $isProfessor    = $c('isProfessor');
+
+                // UPDATE Password
+
+                if($opassword !== '' && $model->checkWithId($id, $opassword) === true)
+                {
+                    $model->updatePassword($id, $password);
+                    echo 'UPDATE password';
+                }
+
+                $model->update($id, 'login', $login);
+                $model->update($id, 'user', $user);
+                $model->update($id, 'class', str_replace(',', '|', $class));
+                $model->update($id, 'domain', str_replace(',', '|', $domain));
+                $model->update($id, 'isAdmin', $isAdmin);
+                $model->update($id, 'isModerator', $isModerator);
+                $model->update($id, 'isProfessor', $isProfessor);
+
+                $this->redirector->redirect('profiluser', array('id' => $id));
             }
-
-            $model->update($id, 'login', $login);
-            $model->update($id, 'user', $user);
-            $model->update($id, 'class', str_replace(',', '|', $class));
-            $model->update($id, 'domain', str_replace(',', '|', $domain));
-
-            $this->redirector->redirect('profiluser', array('id' => $id));
+            
+            $this->redirector->redirect('mainindex');
         }
 
         protected function readUserInformation($id) 
