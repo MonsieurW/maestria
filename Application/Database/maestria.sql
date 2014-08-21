@@ -16,8 +16,9 @@ CREATE TABLE IF NOT EXISTS evaluation (
 	refUser			INTEGER,
 	label			VARCHAR(255),  /* Question existenciel */
 	description		TEXT,	/* Qui est arrivé en premier, l'oeuf ou la poule ? */
+	time			VARCHAR(255),
 
-	PRIMARY KEY (idTask)
+	PRIMARY KEY (idEvaluation)
 );
 
 CREATE TABLE IF NOT EXISTS questions (
@@ -26,8 +27,8 @@ CREATE TABLE IF NOT EXISTS questions (
 	title			VARCHAR(255), /* Quelle est le meilleur prof d'informatique du monde ? */
 	note			INTEGER, 	/* 5 */
 	taxoPrincipal	INTEGER, /* 0= CN, 1= CP, AP= 2, SY=3 */
-	refCnPr     	INTEGER,
-	refCnSe		    INTEGER,
+	refItem1		INTEGER,
+	refItem2	    INTEGER,
 
 	PRIMARY KEY (idQuestion)
 );
@@ -38,8 +39,9 @@ CREATE TABLE IF NOT EXISTS connaissance (
 	idConnaissance 	INTEGER,
 	refDomain		INTEGER,
 	refTheme		INTEGER,
+	type			INTEGER, 	/* Connaissance | Compétence */
 	lvl				INTEGER, 	/* lvl 9 */
-	value		 	TEXT,		/* Les conducteurs sont parcourus par un courant sans avoir de tension à leurs bornes car les conducteurs ne consomment pas d'énergie électrique. */
+	item		 	TEXT,		/* Les conducteurs sont parcourus par un courant sans avoir de tension à leurs bornes car les conducteurs ne consomment pas d'énergie électrique. */
 	
 	PRIMARY KEY (idConnaissance)
 );
@@ -67,25 +69,49 @@ CREATE TABLE IF NOT EXISTS theme (
 /**
 	Association user/class (la partie gestion par le prof uniquement sera gerer dans l'interface web)
 */
-CREATE TABLE IF NOT EXISTS user_class {
+CREATE TABLE IF NOT EXISTS user_class (
 	idUserClass		INTEGER,
 	refUser			INTEGER,
 	refClass		INTEGER,
 
 	PRIMARY KEY (idUserClass)
-};
+);
 /**
 	Association user/domain
 */
-CREATE TABLE IF NOT EXISTS user_domain {
+CREATE TABLE IF NOT EXISTS user_domain (
 	idUserDomain	INTEGER,
 	refUser			INTEGER,
 	refDomain		INTEGER,
 
-	PRIMARY KEY (idUserClass)
-};
+	PRIMARY KEY (idUserDomain)
+);
 
 
 
-INSERT INTO user VAlUES (null,'admin','1','1','1','d033e22ae348aeb5660fc2140aec35850c4da997','Administrateur','','');
-INSERT INTO user VAlUES (null,'thehawk','1','1','1','4438ce731657057ba02736526d2018bfac7d4971','Julien le meilleur prof du monde ;D','2°K|2°L','Math|Anglais');
+INSERT INTO user VAlUES (null,'admin','1','1','1','d033e22ae348aeb5660fc2140aec35850c4da997','Administrateur');
+INSERT INTO user VAlUES (null,'thehawk','1','1','1','4438ce731657057ba02736526d2018bfac7d4971','Julien le meilleur prof du monde ;D');
+
+INSERT INTO class VAlUES (null, '1°L');
+INSERT INTO class VAlUES (null, '1°S');
+INSERT INTO class VAlUES (null, '1°ES');
+INSERT INTO class VAlUES (null, 'T°L');
+INSERT INTO class VAlUES (null, 'T°S');
+INSERT INTO class VAlUES (null, 'T°ES');
+
+INSERT INTO user_class VAlUES (null, 1, 1);
+INSERT INTO user_class VAlUES (null, 1, 2);
+INSERT INTO user_class VAlUES (null, 1, 3);
+INSERT INTO user_class VAlUES (null, 2, 4);
+INSERT INTO user_class VAlUES (null, 2, 5);
+INSERT INTO user_class VAlUES (null, 2, 6);
+
+INSERT INTO domain VAlUES (null, 'math');
+INSERT INTO domain VAlUES (null, 'svt');
+INSERT INTO domain VAlUES (null, 'physique');
+INSERT INTO domain VAlUES (null, 'chimie');
+
+INSERT INTO user_domain VAlUES(null , 1 , 1);
+INSERT INTO user_domain VAlUES(null , 1 , 2);
+INSERT INTO user_domain VAlUES(null , 2 , 3);
+INSERT INTO user_domain VAlUES(null , 2 , 4);

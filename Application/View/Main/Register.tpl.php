@@ -3,7 +3,6 @@ $this->inherits('hoa://Application/View/Layout/Base.tpl.php');
 $this->block('stylesheet');
 ?>
 <link href="/css/login.css" rel="stylesheet">
-<link href="/css/bootstrap-tagsinput.css" rel="stylesheet">
 <?php
 $this->endBlock();
 $this->block('container');
@@ -31,18 +30,6 @@ $this->block('container');
                         </div>
                     </div>     
                     <div class="form-group">
-                        <label for="classroom" class="col-md-3 control-label">Classroom</label>
-                        <div class="col-md-9">
-                            <input type="text" value="" name="classroom" data-role="tagsinput" />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="domain" class="col-md-3 control-label">Domain</label>
-                        <div class="col-md-9">
-                            <input type="text" value="" name="domain" data-role="tagsinput" />
-                        </div>
-                    </div>
-                    <div class="form-group">
                         <!-- Button -->                                        
                         <div class="col-md-offset-3 col-md-9">
                             <button type="submit" class="btn btn-info"><i class="fa fa-sign-in"></i> Sign Up</button>
@@ -53,9 +40,4 @@ $this->block('container');
      </div> 
 </div>
 <?php $this->endBlock();
-$this->block('script');
-?>
-<script src="/js/bootstrap-tagsinput.js"></script>
-<?php
-$this->endBlock();
  ?>

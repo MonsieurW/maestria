@@ -8,6 +8,9 @@ namespace Application\Controller {
     {
 
     	protected $connected = false;
+        protected $loginId = null;
+        protected $isAdmin = false;
+        
     	public function construct()
     	{
     		$session = new \Hoa\Session\Session('user');
@@ -114,17 +117,15 @@ namespace Application\Controller {
                 if(array_key_exists($id, $_POST))
                     return $_POST[$id];
 
-                return '';
+                return null;
             };
 
             $login      = $p('login');
             $user       = $p('name');
             $password   = $p('passwd');
-            $class      = $p('classroom');
-            $domain     = $p('domain');
             $model      = new \Application\Model\User();
 
-            $model->add($login, $password, $user, $class, $domain);
+            $model->add($login, $password, $user);
             $this->redirector->redirect('mainlogin');
         }
 
@@ -156,7 +157,7 @@ namespace Application\Controller {
                 if(array_key_exists($id, $_POST))
                     return $_POST[$id];
 
-                return '';
+                return null;
             };
 
             $c = function ($id) {
@@ -169,6 +170,8 @@ namespace Application\Controller {
             if($this->isAdmin === true or $id === $this->loginId ) {
 
                 $model          = new \Application\Model\User();
+                $uc             = new \Application\Model\UserClass();
+                $ud             = new \Application\Model\UserDomain();
                 $login          = $p('login');
                 $user           = $p('name');
                 $password       = $p('passwd');
@@ -187,13 +190,21 @@ namespace Application\Controller {
                     echo 'UPDATE password';
                 }
 
-                $model->update($id, 'login', $login);
-                $model->update($id, 'user', $user);
-                $model->update($id, 'class', str_replace(',', '|', $class));
-                $model->update($id, 'domain', str_replace(',', '|', $domain));
-                $model->update($id, 'isAdmin', $isAdmin);
-                $model->update($id, 'isModerator', $isModerator);
-                $model->update($id, 'isProfessor', $isProfessor);
+
+                if($domain !== null)
+                    $domain = explode(',', $domain);
+
+                if($class !== null)
+                    $class = explode(',', $class);
+
+                //$model->update($id, 'login', $login);
+                //$model->update($id, 'user', $user);
+                //$model->update($id, 'isAdmin', $isAdmin);
+                //$model->update($id, 'isModerator', $isModerator);
+                //$model->update($id, 'isProfessor', $isProfessor);
+
+                $uc->sync($id, $class); //TODO : Use UserClass::sync
+                $ud->sync($id, $domain); //TODO : Use UserDomain::sync
 
                 $this->redirector->redirect('profiluser', array('id' => $id));
             }
