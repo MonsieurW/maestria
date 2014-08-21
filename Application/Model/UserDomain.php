@@ -75,12 +75,13 @@ namespace Application\Model {
             foreach ($new as $value) {
                 $value  = trim($value);
                 $get    = $class->getID($value);
-                if($get === null){
+                /*if($get === null){ // HERE for add new value
                     $class->add($value);
                     $get = $class->getID($value);
-                }
+                }*/
 
-                $this->associate($id, $get);
+                if($get !== null)
+                    $this->associate($id, $get);
             }
         }
 

@@ -58,10 +58,8 @@ namespace Application\Model {
             return $item;
         }
 
-        public function add($login, $password, $user, $class, $domain)
-        {
-            $class  = str_replace(',', '|', $class); // TODO : Update API 
-            $domain = str_replace(',', '|', $domain); // TODO : Update API 
+        public function add($login, $password, $user)
+        { 
 
             $sql = "INSERT INTO user VAlUES (null,:l,'0','0','0',:p, :n);";
             $this->sql($sql, array(
@@ -69,8 +67,6 @@ namespace Application\Model {
                 'p' => sha1($password),
                 'n' => $user
             ));
-
-            // TODO : Insert in insert
         }
 
         public function updatePassword($id, $password)

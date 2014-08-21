@@ -135,7 +135,7 @@ namespace Application\Controller {
             if($this->isAdmin === true or $id === $this->loginId ) {
             
                 $model                      = new \Application\Model\User();
-                $model                      = $model->get($id);
+                $model                      = $model->get($id); // TODO : Check if profil exist or notfound
                 $this->data->idProfil       = $model['idProfil'];
                 $this->data->login          = $model['login'];
                 $this->data->user           = $model['user'];
@@ -197,14 +197,14 @@ namespace Application\Controller {
                 if($class !== null)
                     $class = explode(',', $class);
 
-                //$model->update($id, 'login', $login);
-                //$model->update($id, 'user', $user);
-                //$model->update($id, 'isAdmin', $isAdmin);
-                //$model->update($id, 'isModerator', $isModerator);
-                //$model->update($id, 'isProfessor', $isProfessor);
+                $model->update($id, 'login', $login);
+                $model->update($id, 'user', $user);
+                $model->update($id, 'isAdmin', $isAdmin);
+                $model->update($id, 'isModerator', $isModerator);
+                $model->update($id, 'isProfessor', $isProfessor);
 
-                $uc->sync($id, $class); //TODO : Use UserClass::sync
-                $ud->sync($id, $domain); //TODO : Use UserDomain::sync
+                $uc->sync($id, $class);
+                $ud->sync($id, $domain);
 
                 $this->redirector->redirect('profiluser', array('id' => $id));
             }
