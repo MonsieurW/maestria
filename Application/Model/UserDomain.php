@@ -45,7 +45,8 @@ namespace Application\Model {
         	$a   = array();
 
         	foreach ($sql as $key => $value) {
-        		$a[] = $value['value'];
+                if(isset($value['value']))
+        		  $a[] = $value['value'];
         	}
 
         	return $a;
