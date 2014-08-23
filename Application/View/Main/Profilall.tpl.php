@@ -53,5 +53,10 @@ $group = function($bool , $label, $class) {
       <?php } ?>
     </tbody>
   </table>
+
 </div>  
-<?php $this->endBlock(); ?>
+<?php if( (isset($loginIsAdmin) and $loginIsAdmin === true) or ($idProfil === $loginId) ) { ?>
+<div class="container">
+  <a href="/register" class="btn btn-sm btn-success"><i class="glyphicon glyphicon-plus"></i></a>
+</div>
+<?php } $this->endBlock(); ?>

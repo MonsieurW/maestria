@@ -26,8 +26,11 @@ namespace Application\Model {
         {
             if($this->exists($value) === false)
                 $this->sql('INSERT INTO class VALUES(null, :v);' , array('v' => $value));
+        }
 
-
+        public function all()
+        {
+            return $this->sql('SELECT * FROM class', array())->fetchAll();
         }
 
         public function exists($value)

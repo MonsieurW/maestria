@@ -87,11 +87,16 @@ namespace Application\Model {
             $class          = new \Application\Model\UserClass();
             $domain         = new \Application\Model\UserDomain();
             $st             = $this->sql('SELECT * FROM user WHERE idProfil = :id' , array('id' => $id))->fetchAll();
-            $item           = $st[0];
-            $item['class']  = $class->getClass($id);
-            $item['domain'] = $domain->getDomain($id);
+            
+            if(isset($st[0])) {
+                $item           = $st[0];
+                $item['class']  = $class->getClass($id);
+                $item['domain'] = $domain->getDomain($id);
 
-            return $item;
+                return $item;
+            }
+
+            return false;
         }
 
         public function all()

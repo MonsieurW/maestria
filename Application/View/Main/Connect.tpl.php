@@ -19,7 +19,8 @@ $this->block('container');
                 <input name="user" type="text" placeholder="username">
                 <input name="password" type="password" placeholder="password">
                 <button class="btn btn-info btn-block login" type="submit">Login</button>
-                <a href="/register" class="btn btn-success btn-block">Sign-in</a>
+                <!--a href="/register" class="btn btn-success btn-block">Sign-in</a-->
+                <p>Ask an administrator for register into the application thank you.</p>
             </form>
         </div>
      </div>

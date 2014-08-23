@@ -55,14 +55,14 @@ CREATE TABLE IF NOT EXISTS class (
 
 CREATE TABLE IF NOT EXISTS domain (
 	idDomain    	INTEGER,
-	value		 	VARCHAR(50), /* Math, Physique, Chimie, SVT */
+	domainValue		VARCHAR(50), /* Math, Physique, Chimie, SVT */
 	
 	PRIMARY KEY (idDomain)
 );
 
 CREATE TABLE IF NOT EXISTS theme (
 	idTheme     	INTEGER,
-	value		 	VARCHAR(50), /* Electricité statique, Circuit électrique */
+	themeValue		VARCHAR(50), /* Electricité statique, Circuit électrique */
 	
 	PRIMARY KEY (idTheme)
 );
@@ -86,8 +86,6 @@ CREATE TABLE IF NOT EXISTS user_domain (
 
 	PRIMARY KEY (idUserDomain)
 );
-
-
 
 INSERT INTO user VAlUES (null,'admin','1','1','1','d033e22ae348aeb5660fc2140aec35850c4da997','Administrateur');
 INSERT INTO user VAlUES (null,'thehawk','1','1','1','4438ce731657057ba02736526d2018bfac7d4971','Julien le meilleur prof du monde ;D');

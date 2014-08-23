@@ -41,13 +41,13 @@ $this->block('container');
             ?>
             <div class="form-group">
                 <label for="classroom" class="col-md-3 control-label">Classroom</label>
-                <div class="col-md-9"><!-- TODO : Make API to control the new entity -->
-                    <input type="text" value="<?php echo implode(',', $class); ?>" name="classroom" data-role="tagsinput" />
+                <div class="col-md-9">
+                    <input type="text" value="<?php echo implode(',', $class); ?>" data-role="tagsinput" name="classroom" />
                 </div>
             </div>
             <div class="form-group">
                 <label for="domain" class="col-md-3 control-label">Domain</label>
-                <div class="col-md-9"><!-- TODO : Make API to control the new entity -->
+                <div class="col-md-9">
                     <input type="text" value="<?php echo implode(',', $domain); ?>" name="domain" data-role="tagsinput" />
                 </div>
             </div>
@@ -81,7 +81,7 @@ $this->block('container');
 $this->block('script');
 ?>
 <script src="/js/bootstrap-tagsinput.js"></script>
+<script src="/js/typeahead.js"></script>
 <?php
 $this->endBlock();
  ?>
-                <label for="classroom" class="col-md-3 control-label">Classroom</label>

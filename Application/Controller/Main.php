@@ -4,38 +4,17 @@ namespace Application\Controller {
 
     use Sohoa\Framework\Kit;
 
-    class Main extends Kit
+    class Main extends Generic
     {
-
-    	protected $connected = false;
-        protected $loginId = null;
-        protected $isAdmin = false;
-        
-    	public function construct()
-    	{
-    		$session = new \Hoa\Session\Session('user');
-			if(isset($session['connect']) and $session['connect'] === true)
-            {
-        		$this->connected 		        = true;
-                $model                          = new \Application\Model\User();
-                $model                          = $model->get($session['id']);
-                $this->data->isConnect          = true;
-                $this->data->loginUser          = $model['user'];
-                $this->isAdmin                  = ($model['isAdmin'] === '1') ? true : false;
-                $this->data->loginIsModerator   = ($model['isModerator'] === '1') ? true : false;
-                $this->data->loginIsAdmin       = $this->isAdmin;
-                $this->loginId                  = $session['id'];
-                $this->data->loginId            = $this->loginId;
-        	}
-        	
-    	}
-
         public function indexAction()
         {
 
         	if($this->connected === true){
 
-        		return $this->greut->render();	
+                if($this->isProfessor === true)
+                  $this->redirector->redirect('showProfessor', array('professor_id' => $this->loginId));
+                else
+        		  $this->redirector->redirect('showStudent', array('professor_id' => $this->loginId));
         	}
 
         	$this->redirector->redirect('mainlogin');
@@ -84,7 +63,12 @@ namespace Application\Controller {
 
         public function registerAction()
         {
-        	$this->greut->render();
+            if($this->connected === true){
+
+                return $this->greut->render();  
+            }
+
+            $this->redirector->redirect('mainlogin');
         }
 
         public function profilAction($id)
@@ -120,22 +104,39 @@ namespace Application\Controller {
                 return null;
             };
 
+              if($this->connected === false){
+
+                $this->redirector->redirect('mainlogin');
+            }
+
+
             $login      = $p('login');
             $user       = $p('name');
             $password   = $p('passwd');
             $model      = new \Application\Model\User();
 
             $model->add($login, $password, $user);
-            $this->redirector->redirect('mainlogin');
+            $this->redirector->redirect('profilall');
         }
 
         public function profileditAction($id)
         {
+              if($this->connected === false){
+
+                $this->redirector->redirect('mainlogin');
+            }
+
 
             if($this->isAdmin === true or $id === $this->loginId ) {
             
                 $model                      = new \Application\Model\User();
                 $model                      = $model->get($id); // TODO : Check if profil exist or notfound
+                
+                if($model === false)
+                {
+                    return $this->greut->render('hoa://Application/View/Main/NotFound.tpl.php'); // Check
+                }
+
                 $this->data->idProfil       = $model['idProfil'];
                 $this->data->login          = $model['login'];
                 $this->data->user           = $model['user'];
@@ -167,7 +168,7 @@ namespace Application\Controller {
                 return '0';
             };
 
-            if($this->isAdmin === true or $id === $this->loginId ) {
+            if($this->isAdmin === true or $id === $this->loginId ) { // TODO : Only mod,prof,admin
 
                 $model          = new \Application\Model\User();
                 $uc             = new \Application\Model\UserClass();

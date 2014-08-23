@@ -68,6 +68,10 @@ $group = function($bool , $label, $class) {
               <?php if( (isset($loginIsAdmin) and $loginIsAdmin === true) or ($idProfil === $loginId) ) { ?>
                   <a href="<?php echo $router->unroute('profiledit', array('id' => $idProfil)); ?>" class="btn btn-sm btn-warning"><i class="glyphicon glyphicon-edit"></i></a>
               <?php } ?>
+
+              <?php if(isset($isProfessor) and $isProfessor === true) { ?>
+                    <a href="<?php echo $router->unroute('indexEvaluation', array('professor_id' => $idProfil)); ?>" class="btn btn-sm btn-success"><i class="glyphicon glyphicon-question-sign"></i></a>
+              <?php } ?>
             </div>
         </div>
         </div>

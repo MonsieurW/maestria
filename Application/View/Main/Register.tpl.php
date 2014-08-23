@@ -33,9 +33,9 @@ $this->block('container');
                         <!-- Button -->                                        
                         <div class="col-md-offset-3 col-md-9">
                             <button type="submit" class="btn btn-info"><i class="fa fa-sign-in"></i> Sign Up</button>
-                            <a href="/login" class="btn btn-success"><i class="fa fa-unlock"></i> Sign In</a>
                         </div>
                     </div>
+                    <p>You can modify the permission after the register</p>
                 </form>
      </div> 
 </div>
