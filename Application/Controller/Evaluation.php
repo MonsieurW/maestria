@@ -58,7 +58,7 @@ namespace Application\Controller {
             foreach($question as $q)
                 $ques->create($q['title'], $q['note'], $q['taxo'], $q['item1'],1, 2); // TODO : Make relation 1 & 2
 
-           $this->redirector->redirect('showEvaluate', array('evaluate_id' => $evId));
+           $this->redirector->redirect('showEvaluation', array('evaluation_id' => $evId, 'professor_id' => $professor_id));
         }
 
         protected function filter($array)
