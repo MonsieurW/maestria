@@ -45,8 +45,8 @@ namespace Application\Model {
         	$a   = array();
 
         	foreach ($sql as $key => $value) {
-                if(isset($value['value']))
-        		  $a[] = $value['value'];
+                if(isset($value['domainValue']))
+        		  $a[] = $value['domainValue'];
         	}
 
         	return $a;
