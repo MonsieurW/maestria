@@ -12,9 +12,9 @@ namespace Application\Controller {
         	if($this->connected === true){
 
                 if($this->isProfessor === true)
-                  $this->redirector->redirect('showProfessor', array('professor_id' => $this->loginId));
+                  $this->redirector->redirect('showEvaluation', array('professor_id' => $this->loginId));
                 else
-        		  $this->redirector->redirect('showStudent', array('professor_id' => $this->loginId));
+        		  $this->redirector->redirect('showStudent', array('student_id' => $this->loginId));
         	}
 
         	$this->redirector->redirect('mainlogin');

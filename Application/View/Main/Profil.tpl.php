@@ -45,7 +45,8 @@ $group = function($bool , $label, $class) {
                           ?>
                           </td>
                         </tr>
-                        <?php } ?>
+                        <?php } 
+                        }?>
                         <?php if(isset($class) and !empty($class)) { ?>
                         <tr>
                           <td>Classroom:</td>
@@ -57,7 +58,6 @@ $group = function($bool , $label, $class) {
                           </td>
                         </tr>
                         <?php }
-                      }
                       ?>
                     </tbody>
                   </table>

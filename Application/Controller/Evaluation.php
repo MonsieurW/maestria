@@ -12,6 +12,7 @@ namespace Application\Controller {
                 $this->redirector->redirect('mainlogin');
             }
 
+            //TODO : Check ACL Permission !
         }
 
         public function indexAction($professor_id)

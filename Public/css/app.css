@@ -55,3 +55,10 @@
 .tt-suggestion p {
   margin: 0;
 }
+
+.btn-on-bottom {
+  position: fixed;
+  bottom: 5px;
+  right: 25px;
+  z-index: 999;  
+}

@@ -6,7 +6,7 @@ namespace Application\Model {
         private $_layer = null;
         private $_prof  = null;
 
-        public function __construct($professor_id)
+        public function __construct($professor_id = null)
         {
             $this->_layer = \Hoa\Database\Dal::getLastInstance();
             $this->_prof  = $professor_id;

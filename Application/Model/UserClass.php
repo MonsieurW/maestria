@@ -51,6 +51,18 @@ namespace Application\Model {
         	return $a;
         }
 
+        public function getUsers($idClass)
+        {
+            
+            $sql = 'SELECT * FROM user_class as uc, user as u WHERE 
+                uc.refUser = u.idProfil AND 
+                u.isAdmin  = 0 AND
+                u.isModerator  = 0 AND 
+                u.isProfessor  = 0 AND 
+                refClass = :c';
+            return $this->sql($sql, array('c' => $idClass))->fetchAll();
+        }
+
         public function remove($idUser, $idClass)
         {
             $this->sql('DELETE FROM user_class WHERE refUser = :i AND refClass = :c', array('i' => $idUser, 'c' => $idClass));

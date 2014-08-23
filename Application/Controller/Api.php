@@ -37,6 +37,25 @@ namespace Application\Controller {
             $this->capAction();
         }
 
+        public function classeActionAsync($classe)
+        {
+            $eleve = new \Application\Model\UserClass();
+            $eleve = $eleve->getUsers($classe);
+
+            echo json_encode($eleve);
+        }
+
+        public function controlActionAsync($user, $eval)
+        {
+            $evaluation = new \Application\Model\Evaluation();
+            $evaluation = $evaluation->get($eval);
+            $question   = new \Application\Model\Questions($eval);
+            $question   = $question->get();
+            
+            $this->data->question = $question;
+            $this->greut->render('hoa://Application/View/Evaluate/Control.tpl.php');
+        }
+
         public function capAction()
         {
 

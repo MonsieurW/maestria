@@ -23,7 +23,7 @@ $this
 	->resource('evaluation');
 
 $this
-	->resource('evaluate', array('only' => array('show', 'update'))); // ID Evaluation
+	->resource('evaluate'); // ID Evaluation
 	
 $this
 	->resource('student')
@@ -39,8 +39,13 @@ $this->get('/user/', 					array('as' => 'profilall',	 	'to' => 'Main#Profilall')
 $this->get('/user/(?<id>[^/]+)/?', 		array('as' => 'profiluser', 	'to' => 'Main#Profil'));
 $this->get('/user/(?<id>[^/]+)/edit', 	array('as' => 'profiledit', 	'to' => 'Main#Profiledit'));
 $this->post('/user/(?<id>[^/]+)/?', 	array('as' => 'profilupdate', 	'to' => 'Main#Profilupdate'));
-$this->get('/api/cap',					array('as' => 'apiclass',		'to' => 'Api#Cap')); // TODO : Make an API
+$this->get('/api/cap',					array('as' => 'apicap',			'to' => 'Api#Cap')); // TODO : Make an API
 //$this->get('/api/domain',				array('as' => 'apidomain',		'to' => 'Api#Domain'));  // TODO : Make an API
+$this->get('/api/class/(?<classe>.*)',	array('as' => 'apiclass',		'to' => 'Api#Classe'));
+$this->get('/api/control/(?<user>[^/]+)/eval/(?<eval>.*)',	array('as' => 'apicontrol',		'to' => 'Api#Control')); // TODO : Make an API
+
+
+
 
 /*
 $this

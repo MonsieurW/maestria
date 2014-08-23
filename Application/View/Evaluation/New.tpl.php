@@ -49,11 +49,11 @@ $this->block('container');
       </div>
     </div>
     <?php } ?>
-  <div class="form-group">
-    <div class="col-sm-offset-2 col-sm-5">
+  
+    <div class="btn-on-bottom">
       <button type="submit" class="btn btn-success">Create</button>
     </div>
-  </div>
+
 </form>
 <?php
 $this->endBlock();
