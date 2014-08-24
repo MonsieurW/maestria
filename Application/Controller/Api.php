@@ -37,12 +37,20 @@ namespace Application\Controller {
             $this->capAction();
         }
 
-        public function classeActionAsync($classe)
+        public function classeActionAsync($classe = null)
         {
             $eleve = new \Application\Model\UserClass();
             $eleve = $eleve->getUsers($classe);
 
             echo json_encode($eleve);
+        }
+
+        public function classeallActionAsync($classe = null)
+        {
+            $eleve = new \Application\Model\Classe();
+            
+
+            echo json_encode($eleve->All());
         }
 
         public function controlActionAsync($user, $eval)
@@ -54,6 +62,13 @@ namespace Application\Controller {
             
             $this->data->question = $question;
             $this->greut->render('hoa://Application/View/Evaluate/Control.tpl.php');
+        }
+
+        public function domainActionAsync()
+        {
+            $domaine = new \Application\Model\Domain();
+
+            echo json_encode($domaine->all());
         }
 
         public function capAction()

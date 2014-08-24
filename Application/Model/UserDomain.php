@@ -33,10 +33,14 @@ namespace Application\Model {
 
         }
 
-        public function exists($idUser, $idDomain)
+       public function exists($idUser, $idDomain)
         {
-        	return false;  // TODO : Make it
+            $sql = 'SELECT COUNT(*) FROM user_class WHERE refUser = :u AND refDomain = :d';
+            $smt = $this->sql($sql, array('u' => $idUser, 'd' => $idDomain))->fetchColumn(0);
+
+            return (intval($smt) > 0);
         }
+
 
         public function getDomain($idUser)
         {
@@ -76,6 +80,7 @@ namespace Application\Model {
             foreach ($new as $value) {
                 $value  = trim($value);
                 $get    = $class->getID($value);
+
                 /*if($get === null){ // HERE for add new value
                     $class->add($value);
                     $get = $class->getID($value);
@@ -85,7 +90,5 @@ namespace Application\Model {
                     $this->associate($id, $get);
             }
         }
-
-
     }
 }

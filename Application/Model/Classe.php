@@ -35,18 +35,19 @@ namespace Application\Model {
 
         public function exists($value)
         {
-            return false; // TODO : Make it
+            $sql = 'SELECT COUNT(*) FROM class WHERE value = :id';
+            $smt = $this->sql($sql, array('id' => $value))->fetchColumn(0);
+
+            return (intval($smt) > 0);
         }
 
         public function update($id, $value)
         {
             $this->sql('UPDATE FROM class SET value = :v WHERE idClass = :i', array('v' => $value, 'i' => $id));
-
         }
 
         public function getID($value)
         {
-
             $sql = 'SELECT * FROM class WHERE value = :v';
             $sql = $this->sql($sql, array('v' => $value))->fetchAll();
 

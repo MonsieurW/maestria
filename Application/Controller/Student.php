@@ -4,13 +4,14 @@ namespace Application\Controller {
 
     use Sohoa\Framework\Kit;
 
-    class Professor extends Generic
+    class Student extends Generic
     {
         public function check()
         {
             if($this->connected === false){
                 $this->redirector->redirect('mainlogin');
             }
+
         }
 
         public function indexAction()
@@ -18,9 +19,9 @@ namespace Application\Controller {
             $this->redirector->redirect('profilall');
         }
 
-        public function showAction($professor_id)
+        public function showAction($student_id)
         {
-            $this->redirector->redirect('profiluser', array('id' => $professor_id));
+            $this->redirector->redirect('profiluser', array('id' => $student_id));
         }
         
     }

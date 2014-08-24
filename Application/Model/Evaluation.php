@@ -64,6 +64,12 @@ namespace Application\Model {
             return  $this->_layer->query($statement);
         }
 
-        
+         public function exists($idEvaluation)
+         {
+            $sql = 'SELECT COUNT(*) FROM evaluation WHERE idEvaluation = :e';
+            $smt = $this->sql($sql, array('e' => $idEvaluation))->fetchColumn(0);
+
+            return (intval($smt) > 0);
+        }
     }
 }

@@ -37,6 +37,15 @@ namespace Application\Model {
             $this->sql('DELETE FROM questions WHERE refEvaluation = :e', array('e' => $this->_eval));
         }
 
+        public function exists($idQuestion)
+        {
+            $sql = 'SELECT COUNT(*) FROM questions WHERE idQuestion = :q';
+            $smt = $this->sql($sql, array('q' => $idQuestion))->fetchColumn(0);
+
+            return (intval($smt) > 0);
+        }
+
+
         public function sql($statement, $data = array())
         {
             $statement = strval($statement);

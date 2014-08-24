@@ -28,27 +28,27 @@ namespace Application\Model {
 
             if($this->exists($value) === false)
                 $this->sql('INSERT INTO domain VALUES(null, :v);' , array('v' => $value));
-
-
         }
 
         public function exists($value)
         {
-            return false; // TODO : Make it
+            $sql = 'SELECT COUNT(*) FROM domain WHERE domainValue = :id';
+            $smt = $this->sql($sql, array('id' => $value))->fetchColumn(0);
+
+            return (intval($smt) > 0);
         }
 
         public function update($id, $value)
         {
             $value = strtolower($value);
 
-            $this->sql('UPDATE FROM domain SET value = :v WHERE idDomain = :i', array('v' => $value, 'i' => $id));
-
+            $this->sql('UPDATE FROM domain SET domainValue = :v WHERE idDomain = :i', array('v' => $value, 'i' => $id));
         }
 
         public function getID($value)
         {
             $value = strtolower($value);
-            $sql = 'SELECT * FROM domain WHERE value = :v';
+            $sql = 'SELECT * FROM domain WHERE domainValue = :v';
             $sql = $this->sql($sql, array('v' => $value))->fetchAll();
 
             if(count($sql) === 1)
@@ -57,5 +57,11 @@ namespace Application\Model {
             return null;
         }
 
+        public function all()
+        {
+           $sql = 'SELECT * FROM domain';
+           
+           return $this->sql($sql)->fetchAll();
+        }
     }
 }

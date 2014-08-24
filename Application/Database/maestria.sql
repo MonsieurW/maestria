@@ -32,6 +32,16 @@ CREATE TABLE IF NOT EXISTS questions (
 
 	PRIMARY KEY (idQuestion)
 );
+
+CREATE TABLE IF NOT EXISTS answer (
+	idAnswer		INTEGER,
+	refUser			INTEGER,
+	refQuestion		INTEGER,
+	notation		VARCHAR(5),
+
+	PRIMARY KEY (idAnswer)
+);
+
 /*
 Item de connaissance : https://docs.google.com/spreadsheet/ccc?key=0AiLqRPkYo7F_dDF4TDRsSEgtdFRjbG1rZkZFcDc0RUE&usp=sharing#gid=0
 */

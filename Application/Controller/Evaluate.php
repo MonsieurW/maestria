@@ -11,7 +11,7 @@ namespace Application\Controller {
             if($this->connected === false){
                 $this->redirector->redirect('mainlogin');
             }
-
+            // TODO : Make ACL
         }
 
         public function indexAction()
@@ -25,6 +25,10 @@ namespace Application\Controller {
             $data                    = $ev->get($evaluate_id);
             $class                   = (new \Application\Model\Classe)->all();
             
+            if(empty($data)) {
+                return $this->greut->render('hoa://Application/View/Main/NotFound.tpl.php');
+            }
+
             $this->data->id          = $data['idEvaluation'];
             $this->data->titre       = $data['label'];
             $this->data->description = $data['description'];
@@ -36,7 +40,7 @@ namespace Application\Controller {
         public function createAction()
         {
             echo '<pre>';
-            print_r($_POST);
+            print_r($_POST); // TODO : Make
         }
 
         public function createActionAsync()

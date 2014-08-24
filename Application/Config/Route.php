@@ -23,35 +23,31 @@ $this
 	->resource('evaluation');
 
 $this
-	->resource('evaluate'); // ID Evaluation
+	->resource('evaluate');
 	
+// TODO : Administration des themes, domaine, classroom
+
 $this
 	->resource('student')
 	->resource('answer'); // ID Evaluation
 
-$this->get('/', 						array('as' => 'mainindex', 		'to' => 'Main#Index'));
-$this->get('/login', 					array('as' => 'mainconnect', 	'to' => 'Main#Connect'));
-$this->post('/login', 					array('as' => 'mainlogin', 		'to' => 'Main#Login'));
-$this->get('/logout', 					array('as' => 'mainlogout', 	'to' => 'Main#Logout'));
-$this->get('/register', 				array('as' => 'mainregister', 	'to' => 'Main#Register'));
-$this->post('/register', 				array('as' => 'maincreate', 	'to' => 'Main#Create'));
-$this->get('/user/', 					array('as' => 'profilall',	 	'to' => 'Main#Profilall'));
-$this->get('/user/(?<id>[^/]+)/?', 		array('as' => 'profiluser', 	'to' => 'Main#Profil'));
-$this->get('/user/(?<id>[^/]+)/edit', 	array('as' => 'profiledit', 	'to' => 'Main#Profiledit'));
-$this->post('/user/(?<id>[^/]+)/?', 	array('as' => 'profilupdate', 	'to' => 'Main#Profilupdate'));
-$this->get('/api/cap',					array('as' => 'apicap',			'to' => 'Api#Cap')); // TODO : Make an API
-//$this->get('/api/domain',				array('as' => 'apidomain',		'to' => 'Api#Domain'));  // TODO : Make an API
-$this->get('/api/class/(?<classe>.*)',	array('as' => 'apiclass',		'to' => 'Api#Classe'));
+$this->get('/', 											array('as' => 'mainindex', 		'to' => 'Main#Index'));
+$this->get('/login', 										array('as' => 'mainconnect', 	'to' => 'Main#Connect'));
+$this->post('/login', 										array('as' => 'mainlogin', 		'to' => 'Main#Login'));
+$this->get('/logout', 										array('as' => 'mainlogout', 	'to' => 'Main#Logout'));
+$this->get('/register', 									array('as' => 'mainregister', 	'to' => 'Main#Register'));
+$this->post('/register', 									array('as' => 'maincreate', 	'to' => 'Main#Create'));
+$this->get('/user/', 										array('as' => 'profilall',	 	'to' => 'Main#Profilall'));
+$this->get('/user/(?<id>[^/]+)/?', 							array('as' => 'profiluser', 	'to' => 'Main#Profil'));
+$this->get('/user/(?<id>[^/]+)/edit', 						array('as' => 'profiledit', 	'to' => 'Main#Profiledit'));
+$this->post('/user/(?<id>[^/]+)/?', 						array('as' => 'profilupdate', 	'to' => 'Main#Profilupdate'));
+$this->get('/api/cap',										array('as' => 'apicap',			'to' => 'Api#Cap')); // TODO : Make an API
+$this->get('/api/domain/',				                    array('as' => 'apidomain',		'to' => 'Api#Domain'));  // TODO : Make an API
+$this->get('/api/class/',                                   array('as' => 'apiclasse',      'to' => 'Api#Classeall'));
+$this->get('/api/class/(?<classe>.*)',						array('as' => 'apiclass',		'to' => 'Api#Classe'));
 $this->get('/api/control/(?<user>[^/]+)/eval/(?<eval>.*)',	array('as' => 'apicontrol',		'to' => 'Api#Control')); // TODO : Make an API
 
 
-
-
-/*
-$this
-	->resource('classroom')
-	->resource('student');
-
-
-$this->resource('capabilites');
-$this->resource('instruction');*/
+$this->resource('theme');
+$this->resource('domain');
+$this->resource('classroom');

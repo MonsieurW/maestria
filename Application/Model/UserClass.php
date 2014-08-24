@@ -35,7 +35,10 @@ namespace Application\Model {
 
         public function exists($idUser, $idClass)
         {
-        	return false;  // TODO : Make it
+        	$sql = 'SELECT COUNT(*) FROM user_class WHERE refUser = :u AND refClass = :c';
+            $smt = $this->sql($sql, array('u' => $idUser, 'c' => $idClass))->fetchColumn(0);
+
+            return (intval($smt) > 0);
         }
 
         public function getClass($idUser)
@@ -54,12 +57,8 @@ namespace Application\Model {
         public function getUsers($idClass)
         {
             
-            $sql = 'SELECT * FROM user_class as uc, user as u WHERE 
-                uc.refUser = u.idProfil AND 
-                u.isAdmin  = 0 AND
-                u.isModerator  = 0 AND 
-                u.isProfessor  = 0 AND 
-                refClass = :c';
+            //$sql = 'SELECT * FROM user_class as uc, user as u WHERE uc.refUser = u.idProfil AND u.isAdmin  = 0 AND u.isModerator  = 0 AND u.isProfessor  = 0 AND refClass = :c';
+            $sql = 'SELECT * FROM user_class as uc, user as u WHERE uc.refUser = u.idProfil AND refClass = :c';
             return $this->sql($sql, array('c' => $idClass))->fetchAll();
         }
 
@@ -70,6 +69,7 @@ namespace Application\Model {
 
         public function sync($id, $values)
         {
+
 
             if(empty($values))
                 return;
@@ -97,6 +97,5 @@ namespace Application\Model {
                     $this->associate($id, $get);
             }
         }
-
     }
 }

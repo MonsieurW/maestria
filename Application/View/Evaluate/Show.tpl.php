@@ -43,7 +43,8 @@ $this->endBlock();
 
 </div>
 <form method="post" action="/evaluate/">
-	<input type="hidden" name="id" value="<?php echo $id; ?>" />
+	<input type="hidden" name="evaluation" value="<?php echo $id; ?>" />
+	<input type="hidden" id="profil" name="user" value="" />
 	<div class="container" id="output">
 
 	</div>

@@ -24,8 +24,10 @@ namespace Application\Model {
 
         public function exists($id)
         {
-            return true; // TODO : : Check
-        
+            $sql = 'SELECT COUNT(*) FROM user WHERE idProfil = :id';
+            $smt = $this->sql($sql, array('id' => $id))->fetchColumn(0);
+
+            return (intval($smt) > 0);
         }
 
         public function check($login, $password)
@@ -61,7 +63,7 @@ namespace Application\Model {
         public function add($login, $password, $user)
         { 
 
-            $sql = "INSERT INTO user VAlUES (null,:l,'0','0','0',:p, :n);";
+            $sql = "INSERT INTO user VAlUES (null,:l,'0','0','0',:p,:n);";
             $this->sql($sql, array(
                 'l' => $login,
                 'p' => sha1($password),

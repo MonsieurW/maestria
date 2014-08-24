@@ -77,7 +77,6 @@ namespace Application\Controller {
 
                 $this->redirector->redirect('mainlogin');
             }
-
             if($this->readUserInformation($id) === true)
                 return $this->greut->render();
             else
