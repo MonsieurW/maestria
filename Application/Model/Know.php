@@ -39,9 +39,17 @@ namespace Application\Model {
             return false;
         }
 
-        public function update($id, $value)
+        public function update($id, $col, $value)
         {
+            var_dump($value, $col, $id);
+            $sql = 'UPDATE connaissance SET '.$col.' = :d WHERE idConnaissance = :i';
+            $this->sql($sql, array('d' => $value, 'i'=> $id));
             
+        }
+
+        public function destroy($id)
+        {
+            $this->sql('DELETE FROM connaissance WHERE idConnaissance = :i', array('i' => $id));
         }
 
         public function all()

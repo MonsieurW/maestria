@@ -15,16 +15,31 @@ $this->block('container');
 			<th>Type</th>
 			<th>Level</th>
 			<th class="col-lg-5">Item</th>
+			<th></th>
 		</tr>
 		<?php if(isset($know)){
+			$th = function ($id) use ($t) {
+				if(isset($t[$id]))
+					return $t[$id];
+
+				return '';
+			};
+			$do = function ($id) use ($d) {
+				if(isset($d[$id]))
+					return $d[$id];
+
+				return '';
+			};
+
 			foreach ($know as $key => $value) {
-				echo 	'<tr>'.
-						'<td><span class="label label-info">'.$t[$value['refTheme']].'</span></td>'.
-						'<td><span class="label label-success">'.$d[$value['refDomain']].'</span></td>'.
-						'<td>'.(($value['type'] === '0') ? 'Connaissance' :'Compétence').'</td>'.
-						'<td>'.$value['lvl'].'</td>'.
-						'<td>'.$value['item'].'</td>'.
-						'</tr>';
+				echo '<tr>'.
+						'<td><a href="#" id="theme" data-source="/api/theme" data-type="select" data-pk="'.$value['idConnaissance'].'"  class="editable label label-info">'.$th($value['refTheme']).'</a></td>'.
+						'<td><a href="#" id="domain" data-source="/api/domaine" data-type="select" data-pk="'.$value['idConnaissance'].'"  class="editable label label-success">'.$do($value['refDomain']).'</a></td>'.
+						'<td><a href="#" id="type" data-source="/api/type" data-type="select" data-pk="'.$value['idConnaissance'].'" class="editable">'.(($value['type'] === '0') ? 'Connaissance' :'Compétence').'</a></td>'.
+						'<td><a href="#" id="level" data-source="/api/level" data-type="select" data-pk="'.$value['idConnaissance'].'" class="editable">'.$value['lvl'].'</a></td>'.
+						'<td><a href="#" id="item" data-type="textarea" data-pk="'.$value['idConnaissance'].'" class="editable">'.$value['item'].'</a></td>'.
+						'<td><a href="#" class="trash btn btn-danger" data-id="'.$value['idConnaissance'].'"><i class="glyphicon glyphicon-trash"></i></a>'.
+					'</tr>';
 			}
 		}?>
 	</table>
@@ -47,7 +62,7 @@ $this->block('container');
 		  <div class="form-group">
 		    <label for="inputEmail3" class="col-sm-2 control-label">Theme</label>
 		    <div class="col-sm-10">
-		      <select id="theme">
+		      <select id="Qtheme">
 		      <?php foreach ($theme as $t) { ?>
 		      	<option value="<?php echo $t['idTheme']; ?>"><?php echo $t['themeValue']; ?></option>
 		      <?php } ?>
@@ -57,7 +72,7 @@ $this->block('container');
 		  <div class="form-group">
 		    <label for="inputPassword3" class="col-sm-2 control-label">Domaine</label>
 		    <div class="col-sm-10">
-		      <select id="domain">
+		      <select id="Qdomain">
 		      <?php foreach ($domain as $t) { ?>
 		      	<option value="<?php echo $t['idDomain']; ?>"><?php echo $t['domainValue']; ?></option>
 		      <?php } ?>
@@ -67,7 +82,7 @@ $this->block('container');
 		  <div class="form-group">
 		    <label for="inputPassword3" class="col-sm-2 control-label">Type</label>
 		    <div class="col-sm-10">
-		      <select id="type">
+		      <select id="Qtype">
 		      	<option value="0">Connaissance</option>
 		      	<option value="1">Compétence</option>
 		      </select>
@@ -76,7 +91,7 @@ $this->block('container');
 		  <div class="form-group">
 		    <label for="inputPassword3" class="col-sm-2 control-label">Level</label>
 		    <div class="col-sm-10">
-		 		<select id="level">
+		 		<select id="Qlevel">
 		      	<option>1</option>
 		      	<option>2</option>
 		      	<option>3</option>
@@ -92,7 +107,7 @@ $this->block('container');
 		  <div class="form-group">
 		    <label for="inputPassword3" class="col-sm-2 control-label">Item</label>
 		    <div class="col-sm-10">
-		      <textarea id="item" class="form-control"></textarea>
+		      <textarea id="Qitem" class="form-control"></textarea>
 		    </div>
 		  </div>
 		

@@ -3,7 +3,8 @@
     $('.editable').editable({
         type: 'text',
         url: '/know/',
-        mode: 'inline'
+        mode: 'inline',
+        sourceCache: true
     });
 
     $('.trash').click(function(event) {
@@ -14,8 +15,9 @@
     		type: 'POST',
     		dataType: 'html',
     		data: {
-    			pk: $(this).attr('data-id'),
-    			mode: 'delete'},
+                pk: $(this).attr('data-id'),
+    			mode: 'delete'
+            },
     	});
     });
 
@@ -25,11 +27,12 @@
     		type: 'POST',
     		dataType: 'html',
     		data: {
-    			theme: $('#theme').val(),
-                domain: $('#domain').val(),
-                type: $('#type').val(),
-                level: $('#level').val(),
-    			item: $('#item').val()
+    			theme: $('#Qtheme').val(),
+                domain: $('#Qdomain').val(),
+                type: $('#Qtype').val(),
+                level: $('#Qlevel').val(),
+    			item: $('#Qitem').val(),
+                mode: 'new'
     		},
     	});
     	

@@ -32,11 +32,6 @@ namespace Application\Controller {
             echo json_encode($api);     
         }
 
-        public function capActionAsync()
-        {
-            $this->capAction();
-        }
-
         public function classeActionAsync($classe = null)
         {
             $eleve = new \Application\Model\UserClass();
@@ -69,6 +64,58 @@ namespace Application\Controller {
             $domaine = new \Application\Model\Domain();
 
             echo json_encode($domaine->all());
+        }
+
+        public function levelActionAsync()
+        {
+          $lvl = array();
+
+          for($i = 1; $i <= 9; $i++)
+            $lvl[] = array('value' => $i, 'text' => $i);
+
+
+          echo json_encode($lvl);
+        }  
+        
+        public function typeActionAsync()
+        {
+          $type = array(
+            array('value' => 0, 'text' => 'Connaissance'),
+            array('value' => 1, 'text' => 'Compétence')
+          );
+
+          echo json_encode($type);
+        }
+
+        public function domaineActionAsync() 
+        {
+
+          $type    = array();
+          $domaine = new \Application\Model\Domain();
+
+          foreach ($domaine->all() as $value) {
+            $type[] = array('value' => $value['idDomain'], 'text' => $value['domainValue']);
+          }
+
+          echo json_encode($type);
+        }
+
+        public function themeActionAsync() 
+        {
+
+          $type    = array();
+          $domaine = new \Application\Model\Theme();
+
+          foreach ($domaine->all() as $value) {
+            $type[] = array('value' => $value['idTheme'], 'text' => $value['themeValue']);
+          }
+
+          echo json_encode($type);
+        }
+
+        public function capActionAsync()
+        {
+            $this->capAction();
         }
 
         public function capAction()
