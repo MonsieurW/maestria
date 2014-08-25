@@ -1,7 +1,7 @@
 <?php
 namespace Application\Model {
 
-    class Domain
+    class Theme
     {
         private $_layer = null;
 
@@ -25,14 +25,17 @@ namespace Application\Model {
         public function add($value)
         {
             $value = strtolower($value);
+            $this->sql('INSERT INTO theme VALUES(null, :v);' , array('v' => $value));
+        }
 
-            if($this->exists($value) === false)
-                $this->sql('INSERT INTO domain VALUES(null, :v);' , array('v' => $value));
+        public function destroy($id)
+        {
+            $this->sql('DELETE FROM theme WHERE idTheme = :i' , array('i' => $id));   
         }
 
         public function exists($value)
         {
-            $sql = 'SELECT COUNT(*) FROM domain WHERE domainValue = :id';
+            $sql = 'SELECT COUNT(*) FROM theme WHERE themeValue = :id';
             $smt = $this->sql($sql, array('id' => $value))->fetchColumn(0);
 
             return (intval($smt) > 0);
@@ -42,24 +45,24 @@ namespace Application\Model {
         {
             $value = strtolower($value);
 
-            $this->sql('UPDATE domain SET domainValue = :v WHERE idDomain = :i', array('v' => $value, 'i' => $id));
+            $this->sql('UPDATE theme SET themeValue = :v WHERE idTheme = :i', array('v' => $value, 'i' => $id));
         }
 
         public function getID($value)
         {
             $value = strtolower($value);
-            $sql = 'SELECT * FROM domain WHERE domainValue = :v';
+            $sql = 'SELECT * FROM theme WHERE themeValue = :v';
             $sql = $this->sql($sql, array('v' => $value))->fetchAll();
 
             if(count($sql) === 1)
-                return $sql[0]['idDomain'];
+                return $sql[0]['idTheme'];
 
             return null;
         }
 
         public function all()
         {
-           $sql = 'SELECT * FROM domain';
+           $sql = 'SELECT * FROM theme';
            
            return $this->sql($sql)->fetchAll();
         }

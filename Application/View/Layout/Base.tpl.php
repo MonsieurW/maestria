@@ -37,7 +37,15 @@
           <div class="navbar-collapse collapse">
              <ul class="nav navbar-nav">
                 <li><a href="/"></a></li>
-              </ul>  
+              </ul>
+
+              <ul class="nav navbar-nav">
+                <li><a href="/theme/"><i class="fa fa-bookmark"></i></a></li>
+                <li><a href="/classroom/"><i class="fa fa-desktop"></i></a></li>
+                <li><a href="/domain/"><i class="fa fa-road"></i></a></li>
+                <li><a href="/know/"><i class="fa fa-paw"></i></a></li>
+              </ul>
+
               <ul class="nav navbar-nav pull-right">
                 <li class="active"><a href="/user/<?php echo $loginId; ?>"><i class="fa fa-user"></i> <?php echo $loginUser; ?></a></li>
                 <li><a href="/user/"><i class="fa fa-users"></i></a></li>
@@ -61,7 +69,10 @@
       </footer>
     </div> <!-- /container -->
 
-
+    <?php 
+    $this->block('script:before');
+    $this->endBlock();
+    ?>
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->

@@ -30,7 +30,12 @@ namespace Application\Model {
 
         public function all()
         {
-            return $this->sql('SELECT * FROM class', array())->fetchAll();
+            return $this->sql('SELECT * FROM class')->fetchAll();
+        }
+
+        public function destroy($id)
+        {
+            $this->sql('DELETE FROM class WHERE idClass = :i', array('i' => $id));
         }
 
         public function exists($value)
@@ -43,7 +48,7 @@ namespace Application\Model {
 
         public function update($id, $value)
         {
-            $this->sql('UPDATE FROM class SET value = :v WHERE idClass = :i', array('v' => $value, 'i' => $id));
+            $this->sql('UPDATE class SET value = :v WHERE idClass = :i', array('v' => $value, 'i' => $id));
         }
 
         public function getID($value)

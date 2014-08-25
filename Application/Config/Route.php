@@ -1,5 +1,4 @@
 <?php
-
 /* @var $framework \Sohoa\Framework\Framework */
 
 /*
@@ -47,7 +46,7 @@ $this->get('/api/class/',                                   array('as' => 'apicl
 $this->get('/api/class/(?<classe>.*)',						array('as' => 'apiclass',		'to' => 'Api#Classe'));
 $this->get('/api/control/(?<user>[^/]+)/eval/(?<eval>.*)',	array('as' => 'apicontrol',		'to' => 'Api#Control')); // TODO : Make an API
 
-
-$this->resource('theme');
-$this->resource('domain');
-$this->resource('classroom');
+$this->resource('theme',        array('only' => array('index', 'create')));
+$this->resource('classroom',    array('only' => array('index', 'create')));
+$this->resource('domain',       array('only' => array('index', 'create')));
+$this->resource('know',         array('only' => array('index', 'create')));

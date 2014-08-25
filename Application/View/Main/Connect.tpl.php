@@ -14,10 +14,13 @@ $this->block('container');
 				echo '<div class="error"><b><i class="fa fa-frown-o"></i></b> Something went wrong !</div>';
 		?>
         <div class="form-box">
-            <p>use admin/admin</p>
+            <p>admin/admin</p>
+            <p>mod/mod</p>
+            <p>prof/prof</p>
+            <p>eleve/eleve</p>
             <form action="/login" method="post">
-                <input name="user" type="text" placeholder="username">
-                <input name="password" type="password" placeholder="password">
+                <input name="user" type="text" placeholder="username" tabindex="1" autofocus="autofocus">
+                <input name="password" type="password" placeholder="password" tabindex="2">
                 <button class="btn btn-info btn-block login" type="submit">Login</button>
                 <!--a href="/register" class="btn btn-success btn-block">Sign-in</a-->
                 <p>Ask an administrator for register into the application thank you.</p>
