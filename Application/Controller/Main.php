@@ -120,20 +120,19 @@ namespace Application\Controller {
 
         public function profileditAction($id)
         {
-              if($this->connected === false){
+            if($this->connected === false){
 
                 $this->redirector->redirect('mainlogin');
             }
 
-
             if($this->isAdmin === true or $id === $this->loginId ) {
             
                 $model                      = new \Application\Model\User();
-                $model                      = $model->get($id); // TODO : Check if profil exist or notfound
+                $model                      = $model->get($id);
                 
                 if($model === false)
                 {
-                    return $this->greut->render('hoa://Application/View/Main/NotFound.tpl.php'); // Check
+                    return $this->greut->render('hoa://Application/View/Main/NotFound.tpl.php');
                 }
 
                 $this->data->idProfil       = $model['idProfil'];

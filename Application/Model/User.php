@@ -52,10 +52,26 @@ namespace Application\Model {
 
         public function getByUser($user) 
         {
-            $st             = $this->sql('SELECT * FROM user WHERE login = :id' , array('id' => $user))->fetchAll();
+
+
+            $st             = $this->sql('SELECT * FROM user WHERE idProfil = :id' , array('id' => $id))->fetchAll();
+            
+            if(isset($st[0])) {
+                $item           = $st[0];
+                $item['class']  = $class->getClass($id);
+                $item['domain'] = $domain->getDomain($id);
+
+                return $item;
+            }
+
+            $class          = new \Application\Model\UserClass();
+            $domain         = new \Application\Model\UserDomain();
+            $st             = $this
+                                ->sql('SELECT * FROM user WHERE login = :id' , array('id' => $user))
+                                ->fetchAll();
             $item           = $st[0];
-            $item['class']  = explode('|', $item['class']); // TODO : Update API 
-            $item['domain'] = explode('|', $item['domain']); // TODO : Update API 
+            $item['class']  = $class->getClass($item['idProfil']);
+            $item['domain'] = $domain->getDomain($item['idProfil']);
 
             return $item;
         }
@@ -117,7 +133,12 @@ namespace Application\Model {
 
         public function count()
         {
-            // TODO :: Do it
+            $sql = 'SELECT COUNT(*) FROM domain';
+            $smt = $this
+                        ->sql($sql)
+                        ->fetchColumn(0);
+
+            return $smt;
         }
     }
 }
