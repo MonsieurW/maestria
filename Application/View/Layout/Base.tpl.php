@@ -39,12 +39,14 @@
                 <li><a href="/"></a></li>
               </ul>
 
+              <?php if (isset($isAdmin) === true) { ?>
               <ul class="nav navbar-nav">
                 <li><a href="/theme/"><i class="fa fa-bookmark"></i></a></li>
                 <li><a href="/classroom/"><i class="fa fa-desktop"></i></a></li>
                 <li><a href="/domain/"><i class="fa fa-road"></i></a></li>
                 <li><a href="/know/"><i class="fa fa-paw"></i></a></li>
               </ul>
+              <?php } ?>
 
               <ul class="nav navbar-nav pull-right">
                 <li class="active"><a href="/user/<?php echo $loginId; ?>"><i class="fa fa-user"></i> <?php echo $loginUser; ?></a></li>
