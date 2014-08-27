@@ -6,9 +6,9 @@ namespace Application\Controller {
 
     class Classroom extends Generic
     {
-    	public function check()
+        public function check()
         {
-            if($this->connected === false){
+            if ($this->connected === false) {
                 $this->redirector->redirect('mainlogin');
             }
             // TODO : Make ACL
@@ -29,7 +29,7 @@ namespace Application\Controller {
             $mode   = (isset($_POST['mode']))   ? $_POST['mode']    : 'update';
             $classe = new \Application\Model\Classe();
 
-            switch($mode) {
+            switch ($mode) {
                 case 'delete';
                     $classe->destroy($id);
                     break;
@@ -42,9 +42,42 @@ namespace Application\Controller {
             }
         }
 
-        public function createAction()
+        public function updateActionAsync($classroom_id)
         {
-           
+
+            $mode   = (isset($_POST['mode']))   ? $_POST['mode']    : 'nothing';
+            $id     = (isset($_POST['id']))     ? $_POST['id']      : 'nothing';
+            $model  = new \Application\Model\UserClass();
+
+            if ($mode !== 'nothing') {
+                switch ($mode) {
+                    case 'add':
+                        $model->associate($id, $classroom_id);
+                        break;
+                    case 'remove':
+                        $model->remove($id, $classroom_id);
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+
+        public function EditAction($classroom_id)
+        {
+           $model   = new \Application\Model\UserClass();
+           $users   = array();
+           $model   = $model->getUsers($classroom_id);
+
+           foreach ($model as $m) {
+                if ($m['isProfessor'] === '0' && $m['isModerator'] === '0' && $m['isAdmin'] === '0') {
+                    $users[] = $m;
+                }
+           }
+
+           $this->data->users   = $users;
+
+           $this->greut->render();
         }
     }
 }

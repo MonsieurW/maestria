@@ -39,7 +39,7 @@
                 <li><a href="/"></a></li>
               </ul>
 
-              <?php if (isset($loginIsAdmin) === true) { ?>
+              <?php if (isset($loginIsAdmin) && $loginIsAdmin === true) { ?>
               <ul class="nav navbar-nav">
                 <li><a href="/theme/"><i class="fa fa-bookmark"></i></a></li>
                 <li><a href="/classroom/"><i class="fa fa-desktop"></i></a></li>

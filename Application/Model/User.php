@@ -8,7 +8,7 @@ namespace Application\Model {
         public function __construct()
         {
             $this->_layer = \Hoa\Database\Dal::getLastInstance();
-            
+
         }
 
         public function sql($statement, $data = array())
@@ -35,7 +35,7 @@ namespace Application\Model {
             $sqt = $this->sql('SELECT * FROM user WHERE login = :login AND password = :password ', array(
                 'login' => $login,
                 'password' => sha1($password)
-            ))->fetchAll();   
+            ))->fetchAll();
 
             return !empty($sqt);
         }
@@ -45,18 +45,16 @@ namespace Application\Model {
             $sqt = $this->sql('SELECT * FROM user WHERE idProfil = :id AND password = :password ', array(
                 'id' => $id,
                 'password' => sha1($password)
-            ))->fetchAll();   
+            ))->fetchAll();
 
             return !empty($sqt);
         }
 
-        public function getByUser($user) 
+        public function getByUser($user)
         {
-
-
             $st             = $this->sql('SELECT * FROM user WHERE idProfil = :id' , array('id' => $id))->fetchAll();
-            
-            if(isset($st[0])) {
+
+            if (isset($st[0])) {
                 $item           = $st[0];
                 $item['class']  = $class->getClass($id);
                 $item['domain'] = $domain->getDomain($id);
@@ -77,7 +75,7 @@ namespace Application\Model {
         }
 
         public function add($login, $password, $user)
-        { 
+        {
 
             $sql = "INSERT INTO user VAlUES (null,:l,'0','0','0',:p,:n);";
             $this->sql($sql, array(
@@ -95,8 +93,9 @@ namespace Application\Model {
         public function update($id, $col, $value)
         {
             if($value === null)
+
                 return;
-            
+
             $this->sql('UPDATE user set '.$col.' = :p WHERE idProfil = :i' , array('p' => $value,'i' => $id));
         }
 
@@ -105,8 +104,8 @@ namespace Application\Model {
             $class          = new \Application\Model\UserClass();
             $domain         = new \Application\Model\UserDomain();
             $st             = $this->sql('SELECT * FROM user WHERE idProfil = :id' , array('id' => $id))->fetchAll();
-            
-            if(isset($st[0])) {
+
+            if (isset($st[0])) {
                 $item           = $st[0];
                 $item['class']  = $class->getClass($id);
                 $item['domain'] = $domain->getDomain($id);
@@ -122,6 +121,22 @@ namespace Application\Model {
             $class   = new \Application\Model\UserClass();
             $domain  = new \Application\Model\UserDomain();
             $st      = $this->sql('SELECT * FROM user')->fetchAll();
+
+            foreach ($st as $i => $value) {
+                $st[$i]['class']    = $class->getClass($value['idProfil']);
+                $st[$i]['domain']   = $domain->getDomain($value['idProfil']);
+            }
+
+            return $st;
+        }
+
+        public function getEleves()
+        {
+            $class   = new \Application\Model\UserClass();
+            $domain  = new \Application\Model\UserDomain();
+            $st      = $this
+                            ->sql('SELECT * FROM user WHERE isAdmin = 0 AND isProfessor = 0 AND isModerator = 0')
+                            ->fetchAll();
 
             foreach ($st as $i => $value) {
                 $st[$i]['class']    = $class->getClass($value['idProfil']);
