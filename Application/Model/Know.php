@@ -54,7 +54,7 @@ namespace Application\Model {
 
         public function all()
         {
-            return $this->sql('SELECT * FROM connaissance')->fetchAll();
+            return $this->sql('SELECT * FROM connaissance ORDER BY refDomain')->fetchAll();
         }
     }
 }

@@ -28,13 +28,13 @@ $this->endBlock();
 	  </div>
 	
 	<div class="form-group">
-		<label for="inputEmail3" class="col-sm-2 control-label">Classe</label>
+		<label for="inputEmail3" class="col-sm-2 control-label">Eleve</label>
 		<div class="input-group">
-	        <span class="input-group-addon" id="prevUser" style="cursor: pointer">
+	        <span class="btn btn-success input-group-addon" id="prevUser" style="cursor: pointer">
 	        	<span class="glyphicon glyphicon-arrow-left"></span>
 	        </span>
 	        <input type="text" class="form-control col-sm-2" id="user" readonly="readonly">
-	        <span class="input-group-addon" id="nextUser" style="cursor: pointer">
+	        <span class="btn btn-success input-group-addon" id="nextUser" style="cursor: pointer">
 	        	<span class="glyphicon glyphicon-arrow-right"></span>
 	        </span>
 	    </div>
