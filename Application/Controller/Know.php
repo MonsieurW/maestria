@@ -6,9 +6,9 @@ namespace Application\Controller {
 
     class Know extends Generic
     {
-    	public function check()
+        public function check()
         {
-            if($this->connected === false){
+            if ($this->connected === false) {
                 $this->redirector->redirect('mainlogin');
             }
             // TODO : Make ACL
@@ -37,8 +37,6 @@ namespace Application\Controller {
             $this->data->d      = $d;
             $this->data->t      = $t;
             $this->data->theme  = $theme;
-
-
 
             $this->greut->render();
         }

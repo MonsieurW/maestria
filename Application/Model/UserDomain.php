@@ -8,7 +8,7 @@ namespace Application\Model {
         public function __construct()
         {
             $this->_layer = \Hoa\Database\Dal::getLastInstance();
-            
+
         }
 
         public function sql($statement, $data = array())
@@ -24,11 +24,12 @@ namespace Application\Model {
 
         public function associate($idUser, $idDomain)
         {
-        	if($this->exists($idUser, $idDomain) === false)
-            {
+            if ($this->exists($idUser, $idDomain) === false) {
                 $sql = 'INSERT INTO user_domain VALUES(null, :u, :d);';
 
                 $this->sql($sql, array('u' => $idUser, 'd' => $idDomain));
+
+               return $this->_layer->lastInsertId();
             }
 
         }
@@ -41,19 +42,18 @@ namespace Application\Model {
             return (intval($smt) > 0);
         }
 
-
         public function getDomain($idUser)
         {
-        	$sql = 'SELECT * FROM user_domain as uc, domain as c WHERE uc.refDomain = c.idDomain AND uc.refUser = :i';
-        	$sql = $this->sql($sql, array('i' => $idUser))->fetchAll();
-        	$a   = array();
+            $sql = 'SELECT * FROM user_domain as uc, domain as c WHERE uc.refDomain = c.idDomain AND uc.refUser = :i';
+            $sql = $this->sql($sql, array('i' => $idUser))->fetchAll();
+            $a   = array();
 
-        	foreach ($sql as $key => $value) {
+            foreach ($sql as $key => $value) {
                 if(isset($value['domainValue']))
-        		  $a[] = $value['domainValue'];
-        	}
+                  $a[] = $value['domainValue'];
+            }
 
-        	return $a;
+            return $a;
         }
 
         public function remove($idUser, $idDomain)
@@ -64,6 +64,7 @@ namespace Application\Model {
         public function sync($id, $values)
         {
             if(empty($values))
+
                 return;
 
             $class  = new \Application\Model\Domain();
@@ -81,7 +82,7 @@ namespace Application\Model {
                 $value  = trim($value);
                 $get    = $class->getID($value);
 
-                /*if($get === null){ // HERE for add new value
+                /*if ($get === null) { // HERE for add new value
                     $class->add($value);
                     $get = $class->getID($value);
                 }*/

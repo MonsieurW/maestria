@@ -8,7 +8,7 @@ namespace Application\Model {
         public function __construct()
         {
             $this->_layer = \Hoa\Database\Dal::getLastInstance();
-            
+
         }
 
         public function sql($statement, $data = array())
@@ -24,8 +24,11 @@ namespace Application\Model {
 
         public function add($value)
         {
-            if($this->exists($value) === false)
+            if ($this->exists($value) === false) {
                 $this->sql('INSERT INTO class VALUES(null, :v);' , array('v' => $value));
+
+                return $this->_layer->lastInsertId();
+            }
         }
 
         public function all()
@@ -57,6 +60,7 @@ namespace Application\Model {
             $sql = $this->sql($sql, array('v' => $value))->fetchAll();
 
             if(count($sql) === 1)
+
                 return $sql[0]['idClass'];
 
             return null;

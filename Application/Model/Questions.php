@@ -23,6 +23,8 @@ namespace Application\Model {
                 'i1'    => $item1,
                 'i2'    => $item2
             ));
+
+            return $this->_layer->lastInsertId();
         }
 
         public function all()

@@ -9,6 +9,9 @@ db-reset:
 db-install:
 	if [ -f $(DB) ]; then echo "Hello"; else sqlite3 $(DB) < $(SQL); fi;
 	chmod 0777 -R $(DBD)
+	chmod +x Binaries/sohoa
+	chmod +x Binaries/hoa
+	Binaries/sohoa application sample:data
 
 db:
 	make db-reset
@@ -16,7 +19,7 @@ db:
 
 update:
 	git pull -u origin master
-	$(COMPOSER) update
+	$(COMPOSER) update --no-dev
 
 install:
-	$(COMPOSER) install
+	$(COMPOSER) install --no-dev

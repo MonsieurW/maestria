@@ -71,7 +71,7 @@ namespace Application\Controller {
         {
           $lvl = array();
 
-          for($i = 1; $i <= 9; $i++)
+          for($i = 1; $i <= 15; $i++)
             $lvl[] = array('value' => $i, 'text' => $i);
 
           echo json_encode($lvl);

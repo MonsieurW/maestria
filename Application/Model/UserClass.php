@@ -8,7 +8,7 @@ namespace Application\Model {
         public function __construct()
         {
             $this->_layer = \Hoa\Database\Dal::getLastInstance();
-            
+
         }
 
         public function sql($statement, $data = array())
@@ -24,18 +24,19 @@ namespace Application\Model {
 
         public function associate($idUser, $idClass)
         {
-        	if($this->exists($idUser, $idClass) === false)
-            {
+            if ($this->exists($idUser, $idClass) === false) {
                 $sql = 'INSERT INTO user_class VALUES(null, :u, :c);';
 
                 $this->sql($sql, array('u' => $idUser, 'c' => $idClass));
+
+               return $this->_layer->lastInsertId();
             }
 
         }
 
         public function exists($idUser, $idClass)
         {
-        	$sql = 'SELECT COUNT(*) FROM user_class WHERE refUser = :u AND refClass = :c';
+            $sql = 'SELECT COUNT(*) FROM user_class WHERE refUser = :u AND refClass = :c';
             $smt = $this->sql($sql, array('u' => $idUser, 'c' => $idClass))->fetchColumn(0);
 
             return (intval($smt) > 0);
@@ -43,22 +44,23 @@ namespace Application\Model {
 
         public function getClass($idUser)
         {
-        	$sql = 'SELECT * FROM user_class as uc, class as c WHERE uc.refClass = c.idClass AND uc.refUser = :i';
-        	$sql = $this->sql($sql, array('i' => $idUser))->fetchAll();
-        	$a   = array();
+            $sql = 'SELECT * FROM user_class as uc, class as c WHERE uc.refClass = c.idClass AND uc.refUser = :i';
+            $sql = $this->sql($sql, array('i' => $idUser))->fetchAll();
+            $a   = array();
 
-        	foreach ($sql as $key => $value) {
-        		$a[] = $value['value'];
-        	}
+            foreach ($sql as $key => $value) {
+                $a[] = $value['value'];
+            }
 
-        	return $a;
+            return $a;
         }
 
         public function getUsers($idClass)
         {
-            
+
             //$sql = 'SELECT * FROM user_class as uc, user as u WHERE uc.refUser = u.idProfil AND u.isAdmin  = 0 AND u.isModerator  = 0 AND u.isProfessor  = 0 AND refClass = :c';
             $sql = 'SELECT * FROM user_class as uc, user as u WHERE uc.refUser = u.idProfil AND refClass = :c';
+
             return $this->sql($sql, array('c' => $idClass))->fetchAll();
         }
 
@@ -70,10 +72,10 @@ namespace Application\Model {
         public function sync($id, $values)
         {
 
-
             if(empty($values))
+
                 return;
-            
+
             $class  = new \Application\Model\Classe();
             $actual = $this->getClass($id);
             $delete = array_diff($actual, $values);
@@ -88,7 +90,7 @@ namespace Application\Model {
             foreach ($new as $value) {
                 $value  = trim($value);
                 $get    = $class->getID($value);
-                /*if($get === null){ // HERE for add new value
+                /*if ($get === null) { // HERE for add new value
                     $class->add($value);
                     $get = $class->getID($value);
                 }*/

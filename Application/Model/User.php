@@ -83,6 +83,8 @@ namespace Application\Model {
                 'p' => sha1($password),
                 'n' => $user
             ));
+
+            return $this->_layer->lastInsertId();
         }
 
         public function updatePassword($id, $password)

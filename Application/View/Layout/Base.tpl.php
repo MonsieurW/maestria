@@ -13,7 +13,7 @@
     <link href="/css/jumbotron.css" rel="stylesheet">
     <link href="/css/font-awesome.css" rel="stylesheet">
 
-    <?php 
+    <?php
     $this->block('stylesheet');
     $this->endBlock();
     ?>
@@ -33,7 +33,7 @@
           </button>
           <a class="navbar-brand" href="/"><i class="fa fa-graduation-cap"></i> Maestria</a>
         </div>
-        <?php if(isset($isConnect) === true) { ?>
+        <?php if (isset($isConnect) === true) { ?>
           <div class="navbar-collapse collapse">
              <ul class="nav navbar-nav">
                 <li><a href="/"></a></li>
@@ -59,7 +59,7 @@
     </div>
 
     <!-- Main jumbotron for a primary marketing message or call to action -->
-    <?php 
+    <?php
     $this->block('container');
     $this->endBlock();
     ?>
@@ -71,7 +71,7 @@
       </footer>
     </div> <!-- /container -->
 
-    <?php 
+    <?php
     $this->block('script:before');
     $this->endBlock();
     ?>
@@ -81,7 +81,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="/js/bootstrap.js"></script>
 
-    <?php 
+    <?php
     $this->block('script');
     $this->endBlock();
     ?>

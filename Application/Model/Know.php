@@ -8,7 +8,7 @@ namespace Application\Model {
         public function __construct()
         {
             $this->_layer = \Hoa\Database\Dal::getLastInstance();
-            
+
         }
 
         public function sql($statement, $data = array())
@@ -32,6 +32,8 @@ namespace Application\Model {
                 'lvl' => $lvl,
                 'item' => $item
                 ));
+
+            return $this->_layer->lastInsertId();
         }
 
         public function exists($value)
@@ -44,7 +46,7 @@ namespace Application\Model {
             var_dump($value, $col, $id);
             $sql = 'UPDATE connaissance SET '.$col.' = :d WHERE idConnaissance = :i';
             $this->sql($sql, array('d' => $value, 'i'=> $id));
-            
+
         }
 
         public function destroy($id)

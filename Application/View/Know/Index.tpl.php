@@ -3,44 +3,51 @@ $this->inherits('hoa://Application/View/Layout/Base.tpl.php');
 $this->block('stylesheet');
 ?>
 	<link href="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/css/bootstrap-editable.css" rel="stylesheet"/>
+	<link href="/css/datatable.css" rel="stylesheet"/>
 <?php
 $this->endBlock();
 $this->block('container');
 ?>
 <div class="container">
-	<table class="table">
-		<tr>
-			<th>Domain</th>
-			<th>Theme</th>
-			<th>Type</th>
-			<th>Level</th>
-			<th class="col-lg-5">Item</th>
-			<th></th>
-		</tr>
-		<?php if(isset($know)){
-			$th = function ($id) use ($t) {
-				if(isset($t[$id]))
-					return $t[$id];
+	<table class="table" id="exemple">
+		<thead>
+			<tr>
+				<th>Domain</th>
+				<th>Theme</th>
+				<th>Type</th>
+				<th>Level</th>
+				<th class="col-lg-5">Item</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+		<?php if (isset($know)) {
+            $th = function ($id) use ($t) {
+                if(isset($t[$id]))
 
-				return '';
-			};
-			$do = function ($id) use ($d) {
-				if(isset($d[$id]))
-					return $d[$id];
+                    return $t[$id];
 
-				return '';
-			};
-			foreach ($know as $key => $value) {
-				echo '<tr>'.
-						'<td><a href="#" id="domain" data-source="/api/domaine" data-type="select" data-pk="'.$value['idConnaissance'].'"  class="editable label label-success">'.$do($value['refDomain']).'</a></td>'.
-						'<td><a href="#" id="theme" data-source="/api/theme" data-type="select" data-pk="'.$value['idConnaissance'].'"  class="editable label label-info">'.$th($value['refTheme']).'</a></td>'.
-						'<td><a href="#" id="type" data-source="/api/type" data-type="select" data-pk="'.$value['idConnaissance'].'" class="editable">'.(($value['type'] === '0') ? 'Connaissance' :'Compétence').'</a></td>'.
-						'<td><a href="#" id="level" data-source="/api/level" data-type="select" data-pk="'.$value['idConnaissance'].'" class="editable">'.$value['lvl'].'</a></td>'.
-						'<td><a href="#" id="item" data-type="textarea" data-pk="'.$value['idConnaissance'].'" class="editable">'.$value['item'].'</a></td>'.
-						'<td><a href="#" class="trash btn btn-danger" data-id="'.$value['idConnaissance'].'"><i class="glyphicon glyphicon-trash"></i></a>'.
-					'</tr>';
-			}
-		}?>
+                return '';
+            };
+            $do = function ($id) use ($d) {
+                if(isset($d[$id]))
+
+                    return $d[$id];
+
+                return '';
+            };
+            foreach ($know as $key => $value) {
+                echo '<tr>'.
+                        '<td><a href="#" id="domain" data-source="/api/domaine" data-type="select" data-pk="'.$value['idConnaissance'].'"  class="editable label label-success">'.$do($value['refDomain']).'</a></td>'.
+                        '<td><a href="#" id="theme" data-source="/api/theme" data-type="select" data-pk="'.$value['idConnaissance'].'"  class="editable label label-info">'.$th($value['refTheme']).'</a></td>'.
+                        '<td><a href="#" id="type" data-source="/api/type" data-type="select" data-pk="'.$value['idConnaissance'].'" class="editable">'.(($value['type'] === '0') ? 'Connaissance' :'Compétence').'</a></td>'.
+                        '<td><a href="#" id="level" data-source="/api/level" data-type="select" data-pk="'.$value['idConnaissance'].'" class="editable">'.$value['lvl'].'</a></td>'.
+                        '<td><a href="#" id="item" data-type="textarea" data-pk="'.$value['idConnaissance'].'" class="editable">'.$value['item'].'</a></td>'.
+                        '<td><a href="#" class="trash btn btn-danger" data-id="'.$value['idConnaissance'].'"><i class="glyphicon glyphicon-trash"></i></a>'.
+                    '</tr>';
+            }
+        }?>
+		</tbody>
 	</table>
 </div>
 <div class="container">
@@ -57,7 +64,7 @@ $this->block('container');
         <h4 class="modal-title" id="myModalLabel">New Connaissance</h4>
       </div>
       <div class="modal-body">
-        
+
 		  <div class="form-group">
 		    <label for="inputEmail3" class="col-sm-2 control-label">Theme</label>
 		    <div class="col-sm-10">
@@ -77,7 +84,7 @@ $this->block('container');
 		      <?php } ?>
 		      </select>
 		    </div>
-		  </div>	 
+		  </div>
 		  <div class="form-group">
 		    <label for="inputPassword3" class="col-sm-2 control-label">Type</label>
 		    <div class="col-sm-10">
@@ -109,7 +116,7 @@ $this->block('container');
 		      <textarea id="Qitem" class="form-control"></textarea>
 		    </div>
 		  </div>
-		
+
       </div>
       <div class="modal-footer">
         <input type="submit" class="btn btn-primary" id="save" data-dismiss="modal" />
@@ -123,6 +130,7 @@ $this->endBlock();
 $this->block('script');
 ?>
 <script src="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/js/bootstrap-editable.min.js"></script>
+<script src="/js/jquery.datable.js"></script>
 <script src="/js/know.js"></script>
 <?php
 $this->endBlock();

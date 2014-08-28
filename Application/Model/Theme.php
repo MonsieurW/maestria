@@ -8,7 +8,7 @@ namespace Application\Model {
         public function __construct()
         {
             $this->_layer = \Hoa\Database\Dal::getLastInstance();
-            
+
         }
 
         public function sql($statement, $data = array())
@@ -25,12 +25,16 @@ namespace Application\Model {
         public function add($value)
         {
             $value = strtolower($value);
-            $this->sql('INSERT INTO theme VALUES(null, :v);' , array('v' => $value));
+            if ($this->exists($value) === false) {
+                $this->sql('INSERT INTO theme VALUES(null, :v);' , array('v' => $value));
+
+               return $this->_layer->lastInsertId();
+            }
         }
 
         public function destroy($id)
         {
-            $this->sql('DELETE FROM theme WHERE idTheme = :i' , array('i' => $id));   
+            $this->sql('DELETE FROM theme WHERE idTheme = :i' , array('i' => $id));
         }
 
         public function exists($value)
@@ -55,6 +59,7 @@ namespace Application\Model {
             $sql = $this->sql($sql, array('v' => $value))->fetchAll();
 
             if(count($sql) === 1)
+
                 return $sql[0]['idTheme'];
 
             return null;
@@ -63,7 +68,7 @@ namespace Application\Model {
         public function all()
         {
            $sql = 'SELECT * FROM theme';
-           
+
            return $this->sql($sql)->fetchAll();
         }
     }
