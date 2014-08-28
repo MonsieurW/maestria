@@ -45,6 +45,72 @@ namespace Application\Bin\Command\Sample {
             require 'hoa://Application/Config/Environnement.php';
 
             $this->readCapabilities();
+            $this->makeSomeUser();
+            $this->makeEvaluation();
+        }
+
+        public function makeEvaluation()
+        {
+            $user           = new \Application\Model\User();
+            $capabilities   = new \Application\Model\Know();
+            $capabilities   = $capabilities->all();
+            $m_cap          = count($capabilities) - 1;
+            $prof           = $user->getProfessor();
+            $faker          = \Faker\Factory::create();
+
+            foreach ($prof as $p)
+                for ($i =0; $i <= 5; $i++) {
+                    $e          = new \Application\Model\Evaluation($p['idProfil']);
+                    $label      = $faker->sentence;
+                    $id         = $e->create($label, $faker->paragraph);
+                    $question   = new \Application\Model\Questions($id);
+
+                    echo 'Evaluation for '.$p['user'].' #'.$id.' : '.$label."\n";
+
+                    for ($j= 0; $j <= 30; $j++) {
+                        $note   = rand(1, 10);
+                        $taxo   = rand(1, 4);
+                        $item1  = rand(0, $m_cap);
+                        $item2  = rand(0, $m_cap);
+                        $title  = $faker->slug;
+
+                        $question->create($title, $note, $taxo, $capabilities[$item1]['item'], $capabilities[$item2]['item']);
+                        echo "\t".$title.' : '.$note."\n";
+
+                    }
+                }
+
+        }
+
+        public function makeSomeUser()
+        {
+/*
+
+1 INSERT INTO class VAlUES (null, '1°L');
+2 INSERT INTO class VAlUES (null, '1°S');
+3 INSERT INTO class VAlUES (null, '1°ES');
+4 INSERT INTO class VAlUES (null, 'T°L');
+5 INSERT INTO class VAlUES (null, 'T°S');
+6 INSERT INTO class VAlUES (null, 'T°ES');
+
+*/
+
+            $user       = new \Application\Model\User();
+            $userclass  = new \Application\Model\UserClass();
+            $password   = 'sample';
+            $faker      = \Faker\Factory::create();
+
+            for ($i = 1; $i <= 6; $i++) {
+                for ($j = 0; $j <= 30; $j++) {
+
+                    $name       = $faker->name;
+                    $username   = $faker->username;
+                    $id         = $user->add($name, $password, $username);
+
+                    $userclass->associate($id, $i);
+                    echo 'User : '.$name. ' > '.$username."\n";
+                }
+            }
         }
 
         public function readCapabilities()

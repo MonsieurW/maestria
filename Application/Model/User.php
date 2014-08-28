@@ -148,6 +148,22 @@ namespace Application\Model {
             return $st;
         }
 
+        public function getProfessor()
+        {
+            $class   = new \Application\Model\UserClass();
+            $domain  = new \Application\Model\UserDomain();
+            $st      = $this
+                            ->sql('SELECT * FROM user WHERE isProfessor = 1')
+                            ->fetchAll();
+
+            foreach ($st as $i => $value) {
+                $st[$i]['class']    = $class->getClass($value['idProfil']);
+                $st[$i]['domain']   = $domain->getDomain($value['idProfil']);
+            }
+
+            return $st;
+        }
+
         public function count()
         {
             $sql = 'SELECT COUNT(*) FROM domain';

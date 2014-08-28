@@ -11,6 +11,8 @@ db-install:
 	chmod 0777 -R $(DBD)
 	chmod +x Binaries/sohoa
 	chmod +x Binaries/hoa
+	
+db-peuplate:
 	Binaries/sohoa application sample:data
 
 db:
