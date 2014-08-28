@@ -32,12 +32,12 @@ namespace Application\Controller {
             echo json_encode($api);
         }
 
-        public function classeActionAsync($classe = null)
+        public function classeActionAsync($classe)
         {
-            $eleve = new \Application\Model\UserClass();
-            $eleve = $eleve->getUsers($classe);
 
-            echo json_encode($eleve);
+          $eleve = new \Application\Model\UserClass();
+          $eleve = $eleve->getUsers($classe);
+          echo json_encode($eleve);
         }
 
         public function classeallActionAsync($classe = null)
@@ -47,14 +47,16 @@ namespace Application\Controller {
             echo json_encode($eleve->All());
         }
 
-        public function controlActionAsync($user, $eval)
+        public function controlActionAsync($clas, $eval)
         {
-            $evaluation = new \Application\Model\Evaluation();
-            $evaluation = $evaluation->get($eval);
-            $question   = new \Application\Model\Questions($eval);
-            $question   = $question->get();
 
-            $this->data->question = $question;
+            $eleve = new \Application\Model\UserClass();
+            $eleve = $eleve->getUsers($clas);
+            $question = new \Application\Model\Questions($eval);
+
+            $this->data->users = $eleve;
+            $this->data->questions = $question->all();
+
             $this->greut->render('hoa://Application/View/Evaluate/Control.tpl.php');
         }
 

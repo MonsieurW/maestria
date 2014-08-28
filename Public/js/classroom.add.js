@@ -17,7 +17,8 @@
             mode: 'add'
         });
     });
-ck(function(event) {
+
+    $('.remove').click(function(event) {
         alert(href);
         $.post(href, {
             id: $(this).parent().parent().attr('data-id'),

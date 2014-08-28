@@ -4,13 +4,13 @@ $this->block('container');
 ?>
 <div class="container">
 	<div class="col-md-4">
-		<a href="/professor/1/evaluation/new" class="btn btn-success"><i class="glyphicon glyphicon-plus-sign"></i></a>
+		<a href="/professor/<?php echo $pr; ?>/evaluation/new" class="btn btn-success"><i class="glyphicon glyphicon-plus-sign"></i></a>
 	</div>
 </div>
 <div class="container">
-	<?php 
-	if(isset($eval)){
-		foreach ($eval as $e) {?>
+	<?php
+    if (isset($eval)) {
+        foreach ($eval as $e) {?>
 			<div class="col-md-4">
 		        <h2>Evaluation #<?php echo $e['idEvaluation']; ?> <span class="badge"><?php echo $e['nb']; ?></span></h2>
 		        <p style="word-wrap: auto"><?php echo $e['label']; ?></p>
@@ -22,7 +22,7 @@ $this->block('container');
 		        </p>
 		    </div>
 	<?php }
-	} ?>
+    } ?>
 </div>
 <?php
 $this->endBlock();

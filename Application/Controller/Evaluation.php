@@ -8,7 +8,7 @@ namespace Application\Controller {
     {
         public function check()
         {
-            if($this->connected === false){
+            if ($this->connected === false) {
                 $this->redirector->redirect('mainlogin');
             }
 
@@ -25,13 +25,14 @@ namespace Application\Controller {
                 $q              = $question->get();
                 $mine[$i]['nb'] = count($q);
             }
+            $this->data->pr   = $professor_id;
             $this->data->eval = $mine;
             $this->greut->render();
         }
 
         public function newAction($professor_id)
         {
-
+            $this->data->pr   = $professor_id;
             $this->greut->render();
         }
 
@@ -42,7 +43,7 @@ namespace Application\Controller {
             $question       = array();
 
             foreach ($_POST as $key => $value) {
-                if($key[0] === 'q') {
+                if ($key[0] === 'q') {
 
                     preg_match('#q([0-9]+)_(.*)#', $key, $m);
                     $i                  = intval($m[1]);
@@ -105,9 +106,8 @@ namespace Application\Controller {
             var_dump($professor_id, $evaluation_id);
         }
 
-        public function destroyAction($evaluation_id, $professor_id) {
-            
-
+        public function destroyAction($evaluation_id, $professor_id)
+        {
             $evaluation = new \Application\Model\Evaluation($professor_id);
             $ques       = new \Application\Model\Questions($evaluation_id);
 
@@ -117,6 +117,6 @@ namespace Application\Controller {
            $this->redirector->redirect('indexEvaluation', array('professor_id' => $professor_id));
 
         }
-        
+
     }
 }

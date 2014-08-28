@@ -35,7 +35,7 @@ $this->get('/api/cap',                                      array('as' => 'apica
 $this->get('/api/domain/',                                  array('as' => 'apidomain',      'to' => 'Api#Domain'));
 $this->get('/api/class/',                                   array('as' => 'apiclasse',      'to' => 'Api#Classeall'));
 $this->get('/api/class/(?<classe>.*)',                      array('as' => 'apiclass',       'to' => 'Api#Classe'));
-$this->get('/api/control/(?<user>[^/]+)/eval/(?<eval>.*)',  array('as' => 'apicontrol',     'to' => 'Api#Control'));
+$this->get('/api/control/(?<clas>[^/]+)/eval/(?<eval>.*)',  array('as' => 'apicontrol',     'to' => 'Api#Control'));
 $this->get('/api/theme/?',                                  array('as' => 'apitheme',       'to' => 'Api#Theme'));
 $this->get('/api/domaine/?',                                array('as' => 'apidomaine',     'to' => 'Api#Domaine'));
 $this->get('/api/level/?',                                  array('as' => 'apilevel',       'to' => 'Api#Level'));

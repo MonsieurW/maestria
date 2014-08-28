@@ -6,8 +6,13 @@ namespace {
 
     require_once __DIR__ . '/../vendor/autoload.php';
 
-    
-    $framework = new Framework();
-    $framework->run();
+    try {
+
+        $framework = new Framework();
+        $framework->run();
+
+    } catch (\Hoa\Session\Exception\Expired $e) {
+
+    }
 
 }

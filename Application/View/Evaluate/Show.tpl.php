@@ -12,9 +12,9 @@ $this->endBlock();
 	<div class="well">
 		<h3><?php echo $titre; ?></h3>
 		<p><?php echo $description; ?></p>
-	</div>	
-	
-	<form class="form-horizontal" role="form" id="f" data-value="<?php echo $id; ?>">
+	</div>
+
+	<form class="form-horizontal" role="form" id="f" data-id="<?php echo $id; ?>">
 	  <div class="form-group">
 	    <label for="inputEmail3" class="col-sm-2 control-label">Classe</label>
 	    <div class="col-sm-10">
@@ -23,31 +23,15 @@ $this->endBlock();
 					<option value="<?php echo $value['idClass']; ?>"><?php echo $value['value']; ?></option>
 				<?php } ?>
 			</select>
-
 	    </div>
 	  </div>
-	
-	<div class="form-group">
-		<label for="inputEmail3" class="col-sm-2 control-label">Eleve</label>
-		<div class="input-group">
-	        <span class="btn btn-success input-group-addon" id="prevUser" style="cursor: pointer">
-	        	<span class="glyphicon glyphicon-arrow-left"></span>
-	        </span>
-	        <input type="text" class="form-control col-sm-2" id="user" readonly="readonly">
-	        <span class="btn btn-success input-group-addon" id="nextUser" style="cursor: pointer">
-	        	<span class="glyphicon glyphicon-arrow-right"></span>
-	        </span>
-	    </div>
-    </div>
     </form>
 
 </div>
 <form method="post" action="/evaluate/">
 	<input type="hidden" name="evaluation" value="<?php echo $id; ?>" />
 	<input type="hidden" id="profil" name="user" value="" />
-	<div class="container" id="output">
-
-	</div>
+	<div class="container" id="output"></div>
   	<div class="btn-on-bottom">
       <button type="submit" class="btn btn-success" id="fSend">Send</button>
     </div>

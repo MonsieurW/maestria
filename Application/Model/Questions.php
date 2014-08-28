@@ -6,7 +6,7 @@ namespace Application\Model {
         private $_layer = null;
         private $_eval  = null;
 
-        public function __construct($evaluation_id)
+        public function __construct($evaluation_id = null)
         {
             $this->_layer = \Hoa\Database\Dal::getLastInstance();
             $this->_eval  = $evaluation_id;
@@ -23,6 +23,14 @@ namespace Application\Model {
                 'i1'    => $item1,
                 'i2'    => $item2
             ));
+        }
+
+        public function all()
+        {
+            return $this
+                        ->sql('SELECT * FROM questions WHERE refEvaluation = :e', array('e' => $this->_eval))
+                        ->fetchAll();
+
         }
 
         public function get()
@@ -45,7 +53,6 @@ namespace Application\Model {
             return (intval($smt) > 0);
         }
 
-
         public function sql($statement, $data = array())
         {
             $statement = strval($statement);
@@ -57,6 +64,5 @@ namespace Application\Model {
             return  $this->_layer->query($statement);
         }
 
-        
     }
 }

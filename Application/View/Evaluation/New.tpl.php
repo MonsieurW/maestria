@@ -7,7 +7,7 @@ $this->block('stylesheet');
 $this->endBlock();
 $this->block('container');
 ?>
-<form class="form-horizontal" role="form" style="margin-top: 10px" method="post" action="/professor/1/evaluation/">
+<form class="form-horizontal" role="form" style="margin-top: 10px" method="post" action="/professor/<?php echo $pr; ?>/evaluation/">
   <div class="form-group">
     <label for="inputEmail3" class="col-sm-2 control-label">Titre</label>
     <div class="col-sm-5">
@@ -22,7 +22,7 @@ $this->block('container');
   </div>
 
   <h3 id="quest" data-max="1">Questions</h3>
-    <?php for($i = 1; $i <= 30; ++$i) { ?>
+    <?php for ($i = 1; $i <= 30; ++$i) { ?>
     <div class="form-group">
       <label for="inputEmail3" class="col-sm-2 control-label">#<?php echo $i; ?></label>
       <div class="col-sm-5 borde">
@@ -49,7 +49,7 @@ $this->block('container');
       </div>
     </div>
     <?php } ?>
-  
+
     <div class="btn-on-bottom">
       <button type="submit" class="btn btn-success">Create</button>
     </div>

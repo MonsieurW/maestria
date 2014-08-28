@@ -10,7 +10,7 @@ namespace Application\Bin\Command\Sample {
     use Hoa\Console\Chrome\Text;
     use Hoa\File\Finder;
 
-    class Welcome extends \Hoa\Console\Dispatcher\Kit
+    class Data extends \Hoa\Console\Dispatcher\Kit
     {
 
         /**
