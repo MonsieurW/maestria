@@ -105,7 +105,7 @@ namespace Application\Bin\Command\Sample {
 
                     $name       = $faker->name;
                     $username   = $faker->username;
-                    $id         = $user->add($name, $password, $username);
+                    $id         = $user->add($username, $password, $name);
 
                     $userclass->associate($id, $i);
                     echo 'User : '.$name. ' > '.$username."\n";

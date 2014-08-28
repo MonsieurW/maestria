@@ -51,7 +51,7 @@ namespace Application\Controller {
         {
 
             $eleve = new \Application\Model\UserClass();
-            $eleve = $eleve->getUsers($clas);
+            $eleve = $eleve->getEleves($clas);
             $question = new \Application\Model\Questions($eval);
 
             $this->data->users = $eleve;

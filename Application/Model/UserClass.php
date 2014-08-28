@@ -57,9 +57,14 @@ namespace Application\Model {
 
         public function getUsers($idClass)
         {
-
-            //$sql = 'SELECT * FROM user_class as uc, user as u WHERE uc.refUser = u.idProfil AND u.isAdmin  = 0 AND u.isModerator  = 0 AND u.isProfessor  = 0 AND refClass = :c';
             $sql = 'SELECT * FROM user_class as uc, user as u WHERE uc.refUser = u.idProfil AND refClass = :c';
+
+            return $this->sql($sql, array('c' => $idClass))->fetchAll();
+        }
+
+        public function getEleves($idClass)
+        {
+            $sql = 'SELECT * FROM user_class as uc, user as u WHERE uc.refUser = u.idProfil AND u.isAdmin  = 0 AND u.isModerator  = 0 AND u.isProfessor  = 0 AND refClass = :c';
 
             return $this->sql($sql, array('c' => $idClass))->fetchAll();
         }
