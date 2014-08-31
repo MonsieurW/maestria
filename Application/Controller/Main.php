@@ -9,63 +9,62 @@ namespace Application\Controller {
         public function indexAction()
         {
 
-        	if($this->connected === true){
+            if ($this->connected === false) {
+               $this->redirector->redirect('mainlogin');
+            }
 
-                if($this->isProfessor === true)
-                  $this->redirector->redirect('showEvaluation', array('professor_id' => $this->loginId));
-                else
-        		  $this->redirector->redirect('showStudent', array('student_id' => $this->loginId));
-        	}
+            $evaluation             = new \Application\Model\Evaluation();
+            $evaluation             = $evaluation->all();
+            $this->data->evaluation = $evaluation;
 
-        	$this->redirector->redirect('mainlogin');
+            return $this->greut->render();
         }
 
         public function connectAction()
         {
-        	return $this->greut->render();	
+            return $this->greut->render();
         }
 
         public function loginAction()
         {
-        	$user 		= isset($_POST['user']) ? $_POST['user'] : '';
-        	$password 	= isset($_POST['password']) ? $_POST['password'] : '';
-			$session 	= new \Hoa\Session\Session('user');
+            $user        = isset($_POST['user']) ? $_POST['user'] : '';
+            $password    = isset($_POST['password']) ? $_POST['password'] : '';
+            $session    = new \Hoa\Session\Session('user');
             $model      = new \Application\Model\User();
 
-        	if($user === '' or $password === '')
-            { 
-        		$this->data->hasError = true;
-        		return $this->greut->render(array('Main' , 'connect'));
-        	}
-
-            if($model->check($user, $password) === false)
-            {
+            if ($user === '' or $password === '') {
                 $this->data->hasError = true;
-                return $this->greut->render(array('Main' , 'connect'));   
+
+                return $this->greut->render(array('Main' , 'connect'));
+            }
+
+            if ($model->check($user, $password) === false) {
+                $this->data->hasError = true;
+
+                return $this->greut->render(array('Main' , 'connect'));
             }
             $model              = $model->getByUser($user);
-        	$session['connect'] = true;
+            $session['connect'] = true;
             $session['id']      = $model['idProfil'];
 
-        	$this->redirector->redirect('mainindex');	
+            $this->redirector->redirect('mainindex');
         }
 
         public function logoutAction()
         {
-        	$session 			= new \Hoa\Session\Session('user');
-        	$session['connect'] = false;
+            $session            = new \Hoa\Session\Session('user');
+            $session['connect'] = false;
             $session['id']      = null;
 
-        	\Hoa\Session\Session::destroy();
+            \Hoa\Session\Session::destroy();
 
-        	$this->redirector->redirect('mainindex');	
+            $this->redirector->redirect('mainindex');
         }
 
         public function registerAction()
         {
-            if($this->connected === true){
-
-                return $this->greut->render();  
+            if ($this->connected === true) {
+                return $this->greut->render();
             }
 
             $this->redirector->redirect('mainlogin');
@@ -73,16 +72,16 @@ namespace Application\Controller {
 
         public function profilAction($id)
         {
-            if($this->connected === false){
+            if ($this->connected === false) {
 
                 $this->redirector->redirect('mainlogin');
             }
             if($this->readUserInformation($id) === true)
+
                 return $this->greut->render();
             else
                 return $this->greut->render(array('Main' , 'NotFound'));
 
-            
         }
 
         public function profilallAction()
@@ -98,16 +97,16 @@ namespace Application\Controller {
         {
             $p = function ($id) {
                 if(array_key_exists($id, $_POST))
+
                     return $_POST[$id];
 
                 return null;
             };
 
-              if($this->connected === false){
+              if ($this->connected === false) {
 
                 $this->redirector->redirect('mainlogin');
             }
-
 
             $login      = $p('login');
             $user       = $p('name');
@@ -120,18 +119,17 @@ namespace Application\Controller {
 
         public function profileditAction($id)
         {
-            if($this->connected === false){
+            if ($this->connected === false) {
 
                 $this->redirector->redirect('mainlogin');
             }
 
-            if($this->isAdmin === true or $id === $this->loginId ) {
-            
+            if ($this->isAdmin === true or $id === $this->loginId) {
+
                 $model                      = new \Application\Model\User();
                 $model                      = $model->get($id);
-                
-                if($model === false)
-                {
+
+                if ($model === false) {
                     return $this->greut->render('hoa://Application/View/Main/NotFound.tpl.php');
                 }
 
@@ -143,10 +141,10 @@ namespace Application\Controller {
                 $this->data->isAdmin        = ($model['isAdmin'] === '1') ? true : false;
                 $this->data->isModerator    = ($model['isModerator'] === '1') ? true : false;
                 $this->data->isProfessor    = ($model['isProfessor'] === '1') ? true : false;
-                
+
                 return $this->greut->render();
             }
-            
+
             $this->redirector->redirect('mainindex');
         }
 
@@ -154,6 +152,7 @@ namespace Application\Controller {
         {
             $p = function ($id) {
                 if(array_key_exists($id, $_POST))
+
                     return $_POST[$id];
 
                 return null;
@@ -161,12 +160,13 @@ namespace Application\Controller {
 
             $c = function ($id) {
                 if(array_key_exists($id, $_POST) and $_POST[$id] === 'on')
+
                     return '1';
 
                 return '0';
             };
 
-            if($this->isAdmin === true or $id === $this->loginId ) { // TODO : Only mod,prof,admin
+            if ($this->isAdmin === true or $id === $this->loginId) { // TODO : Only mod,prof,admin
 
                 $model          = new \Application\Model\User();
                 $uc             = new \Application\Model\UserClass();
@@ -183,12 +183,10 @@ namespace Application\Controller {
 
                 // UPDATE Password
 
-                if($opassword !== '' && $model->checkWithId($id, $opassword) === true)
-                {
+                if ($opassword !== '' && $model->checkWithId($id, $opassword) === true) {
                     $model->updatePassword($id, $password);
                     echo 'UPDATE password';
                 }
-
 
                 if($domain !== null)
                     $domain = explode(',', $domain);
@@ -207,15 +205,15 @@ namespace Application\Controller {
 
                 $this->redirector->redirect('profiluser', array('id' => $id));
             }
-            
+
             $this->redirector->redirect('mainindex');
         }
 
-        protected function readUserInformation($id) 
+        protected function readUserInformation($id)
         {
             $model = new \Application\Model\User();
 
-            if($model->exists($id) === true ) {
+            if ($model->exists($id) === true ) {
                 $model                      = $model->get($id);
                 $this->data->idProfil       = $model['idProfil'];
                 $this->data->login          = $model['login'];

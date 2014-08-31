@@ -64,8 +64,6 @@
     $this->endBlock();
     ?>
 
-      <hr />
-
       <footer>
         <p>&copy; Metaphysik.fr 2014</p>
       </footer>

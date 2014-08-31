@@ -16,9 +16,9 @@ $this->block('container');
 		        <p style="word-wrap: auto"><?php echo $e['label']; ?></p>
 		        <p style="word-wrap: auto"><?php echo $e['description']; ?></p>
 		        <p>
-		        	<a class="btn btn-default" href="/professor/1/evaluation/<?php echo $e['idEvaluation']; ?>" role="button"><i class="glyphicon glyphicon-eye-open"></i></a>
+		        	<a class="btn btn-default" href="/professor/<?php echo $e['refUser']; ?>/evaluation/<?php echo $e['idEvaluation']; ?>" role="button"><i class="glyphicon glyphicon-eye-open"></i></a>
 		        	<a class="btn btn-primary" href="/evaluate/<?php echo $e['idEvaluation']; ?>" role="button"><i class="fa fa-file"></i></a>
-		        	<a class="btn btn-danger" href="/professor/1/evaluation/<?php echo $e['idEvaluation']; ?>/destroy" role="button"><i class="glyphicon glyphicon-trash"></i></a>
+		        	<a class="btn btn-danger" href="/professor/<?php echo $e['refUser']; ?>/evaluation/<?php echo $e['idEvaluation']; ?>/destroy" role="button"><i class="glyphicon glyphicon-trash"></i></a>
 		        </p>
 		    </div>
 	<?php }

@@ -20,13 +20,13 @@ namespace Application\Model {
                 'd' => $description,
                 't' => time()
             ));
-    
+
             return $this->_layer->lastInsertId();
         }
 
         public function all()
         {
-            return $this->sql('SELECT * FROM evaluation')->fetchAll();
+            return $this->sql('SELECT * FROM evaluation AS e, user AS u WHERE e.refUser = u.idProfil')->fetchAll();
         }
 
         public function mine()
@@ -41,8 +41,9 @@ namespace Application\Model {
             $all = $this
                         ->sql('SELECT * FROM evaluation WHERE idEvaluation = :e', array('e' => $id))
                         ->fetchAll();
-                        
+
             if(isset($all[0]))
+
                 return $all[0];
 
             return array();
