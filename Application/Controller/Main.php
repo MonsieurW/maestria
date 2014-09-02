@@ -15,6 +15,7 @@ namespace Application\Controller {
 
             $evaluation             = new \Application\Model\Evaluation();
             $evaluation             = $evaluation->all();
+            // TODO : Make pages
             $this->data->evaluation = $evaluation;
 
             return $this->greut->render();
@@ -89,6 +90,8 @@ namespace Application\Controller {
             $model              = new \Application\Model\User();
             $model              = $model->all();
             $this->data->all    = $model;
+
+// TODO : Make pages
 
             $this->greut->render();
         }

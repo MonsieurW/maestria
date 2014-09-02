@@ -21,34 +21,95 @@ $this->block('container');
     </div>
   </div>
 
-  <h3 id="quest" data-max="1">Questions</h3>
+  <h3 id="quest" data-max="30">Questions</h3>
     <?php for ($i = 1; $i <= 30; ++$i) { ?>
     <div class="form-group">
       <label for="inputEmail3" class="col-sm-2 control-label">#<?php echo $i; ?></label>
-      <div class="col-sm-5 borde">
-      	<div class="row">
-      		<div class="col-sm-8">
-      			<input type="text" name="q<?php echo $i; ?>_title" class="form-control" id="inputEmail3" placeholder="Titre">
-      		</div>
-      		<div class="col-sm-2">
-            <input type="text" name="q<?php echo $i; ?>_note" class="form-control" id="inputEmail3" placeholder="Note">
-          </div>
-          <div class="col-sm-2">
-      			<input type="text" name="q<?php echo $i; ?>_taxo" class="form-control" id="inputEmail3" placeholder="Taxo">
-      		</div>
-      	</div>
+      <div class="col-sm-8 questions">
 
-      	<div class="row" style="margin-top: 5px">
-      		<div class="col-sm-6">
-            <input type="text" name="q<?php echo $i; ?>_item1" class="typeahead form-control" placeholder="Item 1" />
-      		</div>
-      		<div class="col-sm-6">
-      			<input type="text" name="q<?php echo $i; ?>_item2" class="typeahead form-control" placeholder="Item 2" />
-      		</div>
-      	</div>
+        <div class="form-group">
+          <label for="firstname" class="col-md-3 control-label">Titre</label>
+          <div class="col-md-8">
+            <input type="text" name="q<?php echo $i; ?>_title" class="form-control" id="inputEmail3" placeholder="Titre" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="firstname" class="col-md-3 control-label">Niveau Taxonomique</label>
+          <div class="col-md-8">
+      			<select name="q<?php echo $i; ?>_taxo" class="form-control">
+              <option value="1">Connaissance</option>
+              <option value="2">Compréhension</option>
+              <option value="3">Application</option>
+              <option value="4">Analyse</option>
+              <option value="5">Synthèse</option>
+              <option value="6">Evaluation</option>
+            </select>
+          </div>
+        </div> 
+        <div class="form-group">
+          <label for="firstname" class="col-md-3 control-label">Note</label>
+          <div class="col-md-8">
+            <input type="text" name="q<?php echo $i; ?>_note" class="form-control" id="inputEmail3" placeholder="Note" />
+          </div>
+        </div>
+      
+        <div class="form-group">
+          <label for="firstname" class="col-md-3 control-label">Item 1</label>
+          <div class="col-md-8">
+            <div class="input-group">
+              <input value="" placeholder="Item 1" name="q<?php echo $i; ?>_item1" class="form-control" type="text">
+              <span class="input-group-btn">
+                <button class="button btn btn-default choose"><i class="fa fa-briefcase"></i></button>
+              </span>
+            </div>
+          </div>
+        </div> 
+
+        <div class="form-group">
+          <label for="firstname" class="col-md-3 control-label">Item 2</label>
+          <div class="col-md-8">
+            <div class="input-group">
+              <input value="" placeholder="Item 2" name="q<?php echo $i; ?>_item2" class="form-control" type="text">
+              <span class="input-group-btn">
+                <button class="button btn btn-default choose"><i class="fa fa-briefcase"></i></button>
+              </span>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
     <?php } ?>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">Choissiez une compétence</h4>
+      </div>
+      <div class="modal-body">
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs" role="tablist">
+          <?php foreach ($domain as $key => $value) { ?>
+            <li>
+              <a href="#<?php echo strtolower($value['domainValue']); ?>" role="tab" data-toggle="tab">
+                <?php echo ucfirst($value['domainValue']); ?>
+              </a>
+            </li>  
+          <?php } ?>
+        </ul>
+
+        <!-- Tab panes -->
+        <div class="tab-content">
+        <?php foreach ($domain as $key => $value) { ?>
+            <div class="tab-pane" id="<?php echo strtolower($value['domainValue']); ?>"></div>
+        <?php } ?>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
     <div class="btn-on-bottom">
       <button type="submit" class="btn btn-success">Create</button>

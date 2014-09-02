@@ -46,11 +46,15 @@
                 <li><a href="/domain/"><i class="fa fa-road"></i></a></li>
                 <li><a href="/know/"><i class="fa fa-paw"></i></a></li>
               </ul>
-              <?php } ?>
 
+              <?php } ?>
               <ul class="nav navbar-nav pull-right">
                 <li class="active"><a href="/user/<?php echo $loginId; ?>"><i class="fa fa-user"></i> <?php echo $loginUser; ?></a></li>
                 <li><a href="/user/"><i class="fa fa-users"></i></a></li>
+                <?php if (isset($loginIsAdmin) && $loginIsAdmin === true) { ?>
+                  <li><a href="/professor/<?php echo $loginId; ?>/evaluation/"><i class="fa fa-archive"></i></a></li>
+                  <li><a href="/professor/<?php echo $loginId; ?>/evaluation/new"><i class="fa fa-plus-circle"></i></a></li>
+                <?php } ?>
                 <li><a href="/logout"><i class="fa fa-sign-out"></i></a></li>
               </ul>
           </div><!--/.navbar-collapse -->

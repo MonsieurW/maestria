@@ -31,7 +31,7 @@ $this->get('/user/',                                        array('as' => 'profi
 $this->get('/user/(?<id>[^/]+)/?',                          array('as' => 'profiluser',     'to' => 'Main#Profil'));
 $this->get('/user/(?<id>[^/]+)/edit',                       array('as' => 'profiledit',     'to' => 'Main#Profiledit'));
 $this->post('/user/(?<id>[^/]+)/?',                         array('as' => 'profilupdate',   'to' => 'Main#Profilupdate'));
-$this->get('/api/cap',                                      array('as' => 'apicap',         'to' => 'Api#Cap'));
+$this->post('/api/know/?',                                  array('as' => 'apicap',         'to' => 'Api#Know'));
 $this->get('/api/domain/',                                  array('as' => 'apidomain',      'to' => 'Api#Domain'));
 $this->get('/api/class/',                                   array('as' => 'apiclasse',      'to' => 'Api#Classeall'));
 $this->get('/api/class/(?<classe>.*)',                      array('as' => 'apiclass',       'to' => 'Api#Classe'));

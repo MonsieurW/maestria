@@ -14,7 +14,7 @@ $this->block('container');
 				<p><?php echo substr($value['description'],0, 50); ?></p>
 				<div class="btn-group">
 					<a class="btn btn-mini btn-default" href="/professor/<?php echo $value['refUser']; ?>/evaluation/<?php echo $value['idEvaluation']; ?>" role="button"><i class="glyphicon glyphicon-eye-open"></i></a>
-		        	<a class="btn btn-mini btn-primary" href="" role="button"><i class="fa fa-file"></i></a>
+		        	<a class="btn btn-mini btn-primary" href="/evaluate/<?php echo $value['idEvaluation']; ?>" role="button"><i class="fa fa-file"></i></a>
 				</div>
 			</div>
 		</div>

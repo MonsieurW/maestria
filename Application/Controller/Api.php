@@ -57,6 +57,8 @@ namespace Application\Controller {
             $this->data->users = $eleve;
             $this->data->questions = $question->all();
 
+            // TODO : Add Theme Domain ItemText
+
             $this->greut->render('hoa://Application/View/Evaluate/Control.tpl.php');
         }
 
@@ -129,47 +131,25 @@ namespace Application\Controller {
 
         }
 
-        public function capActionAsync()
+        public function knowActionAsync()
         {
-            $this->capAction();
-        }
+          $domain   = (isset($_POST['domain'])) ? $_POST['domain'] : null;
+          $d        = new \Application\Model\Domain();
+          $idDomain = $d->getID(strtolower($domain));
+          $q        = new \Application\Model\Know();
 
-        public function capAction()
-        {
+          if ($domain === null) {
+            throw new \Exception("Domain not found in the request");
+          }
 
-           echo '[
-  {
-    "year": "1964",
-    "value": "My Fair Lady",
-    "tokens": [
-      "My",
-      "Fair",
-      "Lady"
-    ]
-  },
-  {
-    "year": "1965",
-    "value": "The Sound of Music",
-    "tokens": [
-      "The",
-      "Sound",
-      "of",
-      "Music"
-    ]
-  },
-  {
-    "year": "1966",
-    "value": "A Man for All Seasons",
-    "tokens": [
-      "A",
-      "Man",
-      "for",
-      "All",
-      "Seasons"
-    ]
-  }]';
+          if ($idDomain === null) {
+            throw new \Exception("Domain not found in database");
+          }
+
+          $know = $q->getWithDomain($idDomain);
+
+          echo json_encode($know);
 
         }
-
     }
 }

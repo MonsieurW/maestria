@@ -43,15 +43,27 @@ namespace Application\Model {
 
         public function update($id, $col, $value)
         {
-            var_dump($value, $col, $id);
             $sql = 'UPDATE connaissance SET '.$col.' = :d WHERE idConnaissance = :i';
             $this->sql($sql, array('d' => $value, 'i'=> $id));
+        }
 
+        public function getWithDomain($id)
+        {
+            return $this
+                        ->sql('SELECT * FROM connaissance AS c, theme AS t WHERE c.refTheme = t.idTheme AND c.refDomain = :r', ['r' => $id])
+                        ->fetchAll();
         }
 
         public function destroy($id)
         {
             $this->sql('DELETE FROM connaissance WHERE idConnaissance = :i', array('i' => $id));
+        }
+
+        public function get($id)
+        {
+            return $this
+                        ->sql('SELECT * FROM connaissance WHERE idConnaissance = :i', array('i' => $id))
+                        ->fetchAll();
         }
 
         public function all()

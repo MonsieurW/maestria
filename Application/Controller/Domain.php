@@ -6,9 +6,9 @@ namespace Application\Controller {
 
     class Domain extends Generic
     {
-    	public function check()
+        public function check()
         {
-            if($this->connected === false){
+            if ($this->connected === false) {
                 $this->redirector->redirect('mainlogin');
             }
             // TODO : Make ACL
@@ -18,7 +18,7 @@ namespace Application\Controller {
         {
             $classe             = new \Application\Model\Domain();
             $this->data->classe = $classe->all();
-
+// TODO : Make pages
             $this->greut->render();
         }
 
@@ -29,7 +29,7 @@ namespace Application\Controller {
             $mode   = (isset($_POST['mode']))   ? $_POST['mode']    : 'update';
             $classe = new \Application\Model\Domain();
 
-            switch($mode) {
+            switch ($mode) {
                 case 'delete';
                     $classe->destroy($id);
                     break;

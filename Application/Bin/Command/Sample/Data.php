@@ -74,7 +74,7 @@ namespace Application\Bin\Command\Sample {
                         $item2  = rand(0, $m_cap);
                         $title  = $faker->slug;
 
-                        $question->create($title, $note, $taxo, $capabilities[$item1]['item'], $capabilities[$item2]['item']);
+                        $question->create($title, $note, $taxo, $capabilities[$item1]['idConnaissance'], $capabilities[$item2]['idConnaissance']);
                         echo "\t".$title.' : '.$note."\n";
 
                     }

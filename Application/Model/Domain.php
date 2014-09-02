@@ -61,6 +61,19 @@ namespace Application\Model {
             return null;
         }
 
+        public function get($id)
+        {
+            $value = strtolower($id);
+            $sql = 'SELECT * FROM domain WHERE idDomain = :v';
+            $sql = $this->sql($sql, array('v' => $value))->fetchAll();
+
+            if(count($sql) === 1)
+
+                return $sql[0];
+
+            return null;
+        }
+
         public function all()
         {
            $sql = 'SELECT * FROM domain';

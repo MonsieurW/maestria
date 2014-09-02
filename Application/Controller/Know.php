@@ -32,6 +32,8 @@ namespace Application\Controller {
                 $t[$value['idTheme']] = $value['themeValue'];
             }
 
+            // TODO : Make pages
+
             $this->data->know   = $classe->all();
             $this->data->domain = $domain;
             $this->data->d      = $d;
