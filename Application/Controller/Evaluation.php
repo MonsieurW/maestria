@@ -6,13 +6,6 @@ namespace Application\Controller {
 
     class Evaluation extends Generic
     {
-        public function check()
-        {
-            if ($this->connected === false) {
-                $this->redirector->redirect('mainlogin');
-            }
-        }
-
         public function indexAction($professor_id)
         {
             $evaluation      = new \Application\Model\Evaluation($professor_id);

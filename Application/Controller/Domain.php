@@ -6,14 +6,6 @@ namespace Application\Controller {
 
     class Domain extends Generic
     {
-        public function check()
-        {
-            if ($this->connected === false) {
-                $this->redirector->redirect('mainlogin');
-            }
-            // TODO : Make ACL
-        }
-
         public function indexAction()
         {
             $classe             = new \Application\Model\Domain();
@@ -22,7 +14,7 @@ namespace Application\Controller {
             $this->greut->render();
         }
 
-        public function CreateActionAsync()
+        public function createActionAsync()
         {
             $id     = (isset($_POST['pk']))     ? $_POST['pk']      : null;
             $value  = (isset($_POST['value']))  ? $_POST['value']   : null;

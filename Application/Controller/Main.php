@@ -6,6 +6,11 @@ namespace Application\Controller {
 
     class Main extends Generic
     {
+        public function check()
+        {
+
+        }
+
         public function indexAction()
         {
 
@@ -118,6 +123,11 @@ namespace Application\Controller {
 
             $model->add($login, $password, $user);
             $this->redirector->redirect('profilall');
+        }
+
+        public function errorAction()
+        {
+            $this->greut->render();
         }
 
         public function profileditAction($id)

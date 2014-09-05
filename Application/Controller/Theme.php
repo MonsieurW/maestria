@@ -6,14 +6,6 @@ namespace Application\Controller {
 
     class Theme extends Generic
     {
-    	public function check()
-        {
-            if($this->connected === false){
-                $this->redirector->redirect('mainlogin');
-            }
-            // TODO : Make ACL
-        }
-
         public function indexAction()
         {
             $classe             = new \Application\Model\Theme();
@@ -22,15 +14,14 @@ namespace Application\Controller {
             $this->greut->render();
         }
 
-        public function CreateActionAsync()
+        public function createActionAsync()
         {
             $id     = (isset($_POST['pk']))     ? $_POST['pk']      : null;
             $value  = (isset($_POST['value']))  ? $_POST['value']   : null;
             $mode   = (isset($_POST['mode']))   ? $_POST['mode']    : 'update';
             $classe = new \Application\Model\Theme();
 
-            var_dump($mode, $value, $id);
-            switch($mode) {
+            switch ($mode) {
                 case 'delete';
                     $classe->destroy($id);
                     break;
@@ -45,7 +36,7 @@ namespace Application\Controller {
 
         public function createAction()
         {
-           
+
         }
     }
 }

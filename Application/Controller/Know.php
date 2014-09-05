@@ -6,14 +6,6 @@ namespace Application\Controller {
 
     class Know extends Generic
     {
-        public function check()
-        {
-            if ($this->connected === false) {
-                $this->redirector->redirect('mainlogin');
-            }
-            // TODO : Make ACL
-        }
-
         public function indexAction()
         {
             $classe             = new \Application\Model\Know();

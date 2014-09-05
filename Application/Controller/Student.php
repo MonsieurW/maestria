@@ -6,14 +6,6 @@ namespace Application\Controller {
 
     class Student extends Generic
     {
-        public function check()
-        {
-            if($this->connected === false){
-                $this->redirector->redirect('mainlogin');
-            }
-
-        }
-
         public function indexAction()
         {
             $this->redirector->redirect('profilall');
@@ -23,6 +15,6 @@ namespace Application\Controller {
         {
             $this->redirector->redirect('profiluser', array('id' => $student_id));
         }
-        
+
     }
 }

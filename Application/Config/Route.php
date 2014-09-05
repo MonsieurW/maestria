@@ -22,6 +22,7 @@ $this->resource('domain',                                   array('only' => arra
 $this->resource('know',                                     array('only' => array('index', 'create')));
 
 $this->get('/',                                             array('as' => 'mainindex',      'to' => 'Main#Index'));
+$this->get('/error',                                        array('as' => 'mainerror',      'to' => 'Main#Error'));
 $this->get('/login',                                        array('as' => 'mainconnect',    'to' => 'Main#Connect'));
 $this->post('/login',                                       array('as' => 'mainlogin',      'to' => 'Main#Login'));
 $this->get('/logout',                                       array('as' => 'mainlogout',     'to' => 'Main#Logout'));

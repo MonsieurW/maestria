@@ -6,13 +6,6 @@ namespace Application\Controller {
 
     class Classroom extends Generic
     {
-        public function check()
-        {
-            if ($this->connected === false) {
-                $this->redirector->redirect('mainlogin');
-            }
-            // TODO : Make ACL
-        }
 
         public function indexAction()
         {
@@ -24,7 +17,7 @@ namespace Application\Controller {
             // TODO : Make pages
         }
 
-        public function CreateActionAsync()
+        public function createActionAsync()
         {
             $id     = (isset($_POST['pk']))     ? $_POST['pk']      : null;
             $value  = (isset($_POST['value']))  ? $_POST['value']   : null;
@@ -65,7 +58,7 @@ namespace Application\Controller {
             }
         }
 
-        public function EditAction($classroom_id)
+        public function editAction($classroom_id)
         {
            $model   = new \Application\Model\UserClass();
            $users   = array();

@@ -13,11 +13,13 @@ namespace Application\Maestria {
 
             $admin        = new \Hoa\Acl\Group('admin');
             $professor    = new \Hoa\Acl\Group('professor');
+            $moderator    = new \Hoa\Acl\Group('moderator');
             $student      = new \Hoa\Acl\Group('student');
             $resource     = new \Hoa\Acl\Resource('foo');
 
             $this->_acl->addGroup($admin);
             $this->_acl->addGroup($professor);
+            $this->_acl->addGroup($moderator);
             $this->_acl->addGroup($student);
             $this->_acl->addResource($resource);
 
@@ -29,7 +31,7 @@ namespace Application\Maestria {
         {
             $router = $this->_framework->getRouter();
             $router->construct();
-            
+
             $rules = $router->getRules();
 
             foreach ($rules as $rule) {
@@ -60,8 +62,31 @@ namespace Application\Maestria {
             foreach ($this->_resource as $ressource) {
 
                 if (preg_match('#^'.$string.'$#', $ressource) !== 0) {
-                    echo $ressource.'<br />';
-                    $this->_acl->allow($gid, new \Hoa\Acl\Permission($ressource));
+                    if (is_array($gid)) {
+                        foreach ($gid as $g) {
+                            $this->_acl->allow($g, new \Hoa\Acl\Permission($ressource));
+                        }
+                    } else {
+                        $this->_acl->allow($gid, new \Hoa\Acl\Permission($ressource));
+                    }
+                }
+            }
+
+            return $this;
+
+        }
+        public function deny($string, $gid)
+        {
+            foreach ($this->_resource as $ressource) {
+
+                if (preg_match('#^'.$string.'$#', $ressource) !== 0) {
+                   if (is_array($gid)) {
+                        foreach ($gid as $g) {
+                            $this->_acl->deny($g, new \Hoa\Acl\Permission($ressource));
+                        }
+                    } else {
+                        $this->_acl->deny($gid, new \Hoa\Acl\Permission($ressource));
+                    }
                 }
             }
 
@@ -76,15 +101,17 @@ namespace Application\Maestria {
 
         public function getAcl()
         {
-        	return $this->_acl;
+            return $this->_acl;
         }
 
         public function addUser($label, $group)
         {
             $user = new \Hoa\Acl\User($label);
+            $resource = $this->_acl->getResource('foo');
             $user->addGroup($group);
 
             $this->_acl->addUser($user);
+            $resource->addUser($user);
 
             return $this;
         }
