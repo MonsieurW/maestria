@@ -41,8 +41,6 @@ $this->block('container');
               <option value="2">Compréhension</option>
               <option value="3">Application</option>
               <option value="4">Analyse</option>
-              <option value="5">Synthèse</option>
-              <option value="6">Evaluation</option>
             </select>
           </div>
         </div> 

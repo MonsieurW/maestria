@@ -6,9 +6,9 @@ namespace Application\Controller {
 
     class Evaluate extends Generic
     {
-    	public function check()
+        public function check()
         {
-            if($this->connected === false){
+            if ($this->connected === false) {
                 $this->redirector->redirect('mainlogin');
             }
             // TODO : Make ACL
@@ -24,8 +24,8 @@ namespace Application\Controller {
             $ev                      = new \Application\Model\Evaluation();
             $data                    = $ev->get($evaluate_id);
             $class                   = (new \Application\Model\Classe)->all();
-            
-            if(empty($data)) {
+
+            if (empty($data)) {
                 return $this->greut->render('hoa://Application/View/Main/NotFound.tpl.php');
             }
 

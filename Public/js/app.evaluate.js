@@ -15,6 +15,14 @@
         $('#fSend').click();
     })
 
+    $('body').delegate('button[data-toggle="popover"]', 'mouseenter', function(event) {
+        $(this).popover('show');
+    });
+
+    $('body').delegate('button[data-toggle="popover"]', 'mouseleave', function(event) {
+        $(this).popover('hide');
+    });
+
 
     $('form').submit(function(e) {
         e.preventDefault();

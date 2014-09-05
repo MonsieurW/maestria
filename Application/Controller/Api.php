@@ -15,7 +15,7 @@ namespace Application\Controller {
                 $api[] = $value['value'];
             }
 
-            echo '["Amsterdam","London","Paris","Washington","New York","Los Angeles","Sydney","Melbourne","Canberra","Beijing","New Delhi","Kathmandu","Cairo","Cape Town","Kinshasa"]';
+            echo json_encode($api);
 
         }
 
@@ -52,10 +52,37 @@ namespace Application\Controller {
 
             $eleve = new \Application\Model\UserClass();
             $eleve = $eleve->getEleves($clas);
-            $question = new \Application\Model\Questions($eval);
+            $item = new \Application\Model\Know();
+            $questions = new \Application\Model\Questions($eval);
+            $questions = $questions->all();
+
+            foreach ($questions as $key => $question) {
+                $questions[$key]['item1'] = $item->getText($question['refItem1']);
+                $questions[$key]['item2'] = $item->getText($question['refItem2']);
+
+                switch ($question['taxoPrincipal']) {
+                  case '1':
+                    $questions[$key]['taxoPrincipal'] = 'Connaissance';
+                    $questions[$key]['taxoPrincipal-c'] = 'success';
+                    break;
+                  case '2':
+                    $questions[$key]['taxoPrincipal'] = 'Compréhension';
+                    $questions[$key]['taxoPrincipal-c'] = 'info';
+                    break;
+                  case '3':
+                    $questions[$key]['taxoPrincipal'] = 'Application';
+                    $questions[$key]['taxoPrincipal-c'] = 'warning';
+                    break;
+                  case '4':
+                  default:
+                    $questions[$key]['taxoPrincipal'] = 'Analyse';
+                    $questions[$key]['taxoPrincipal-c'] = 'danger';
+                    break;
+                }
+            }
 
             $this->data->users = $eleve;
-            $this->data->questions = $question->all();
+            $this->data->questions = $questions;
 
             // TODO : Add Theme Domain ItemText
 

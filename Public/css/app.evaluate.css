@@ -20,6 +20,10 @@ input[type=radio] + label {
     user-select: none;
 }
 
+input[type=radio]:hover + label {
+    background-color: yellow; 
+}
+
 input[type=radio]:checked + label {
     background-color: #ff0000; 
 }

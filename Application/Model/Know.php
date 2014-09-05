@@ -66,6 +66,18 @@ namespace Application\Model {
                         ->fetchAll();
         }
 
+        public function getText($id)
+        {
+            $item = $this->get($id);
+            $elmt = '';
+
+            if (!empty($item) and isset($item[0])) {
+                $elmt = $item[0]['item'];
+            }
+
+            return $elmt;
+        }
+
         public function all()
         {
             return $this->sql('SELECT * FROM connaissance ORDER BY refDomain')->fetchAll();
