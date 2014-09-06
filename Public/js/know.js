@@ -38,8 +38,4 @@
     	
     });
 
-/* Table initialisation */
-    $('#example').dataTable();
-    alert('ro');
-
 })(jQuery);
