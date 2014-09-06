@@ -3,7 +3,6 @@ $this->inherits('hoa://Application/View/Layout/Base.tpl.php');
 $this->block('stylesheet');
 ?>
 	<link href="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/css/bootstrap-editable.css" rel="stylesheet"/>
-	<link href="/css/datatable.css" rel="stylesheet"/>
 <?php
 $this->endBlock();
 $this->block('container');
@@ -135,7 +134,6 @@ $this->endBlock();
 $this->block('script');
 ?>
 <script src="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/js/bootstrap-editable.min.js"></script>
-<script src="/js/jquery.datable.js"></script>
 <script src="/js/know.js"></script>
 <?php
 $this->endBlock();
