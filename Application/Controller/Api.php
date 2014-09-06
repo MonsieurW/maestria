@@ -50,13 +50,20 @@ namespace Application\Controller {
         public function controlActionAsync($clas, $eval)
         {
 
-            $eleve = new \Application\Model\UserClass();
-            $eleve = $eleve->getEleves($clas);
-            $item = new \Application\Model\Know();
-            $questions = new \Application\Model\Questions($eval);
-            $questions = $questions->all();
+            $eleve      = new \Application\Model\UserClass();
+            $eleve      = $eleve->getEleves($clas);
+            $item       = new \Application\Model\Know();
+            $questions  = new \Application\Model\Questions($eval);
+            $answer     = new \Application\Model\Answer();
+            $answers    = array();
+            $questions  = $questions->all();
+
+            foreach ($answer->getEvaluation($eval) as $key => $value) {
+              $answers[$value['refUser']] = json_decode($value['note'], true);
+            }
 
             foreach ($questions as $key => $question) {
+
                 $questions[$key]['item1'] = $item->getText($question['refItem1']);
                 $questions[$key]['item2'] = $item->getText($question['refItem2']);
 
@@ -83,6 +90,7 @@ namespace Application\Controller {
 
             $this->data->users = $eleve;
             $this->data->questions = $questions;
+            $this->data->answers = $answers;
 
             // TODO : Add Theme Domain ItemText
 

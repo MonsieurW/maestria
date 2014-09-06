@@ -92,11 +92,17 @@ namespace Application\Controller {
 
         public function profilallAction()
         {
-            $model              = new \Application\Model\User();
-            $model              = $model->all();
-            $this->data->all    = $model;
+            $query       = $this->router->getQuery();
+            $page        = isset($query['page']) ? $query['page'] : 1;
+            $nbPost      = 20;
+            $first_entry = ($page - 1) * $nbPost;
 
-// TODO : Make pages
+            $model                   = new \Application\Model\User();
+            $this->data->all         = $model->getAllWithPage($first_entry, $nbPost);
+            $this->data->pageCurrent = $page;
+            $this->data->pageTotal   = ceil($model->count() / $nbPost);
+
+            //TODO : Need to use classroom as page
 
             $this->greut->render();
         }
@@ -111,7 +117,7 @@ namespace Application\Controller {
                 return null;
             };
 
-              if ($this->connected === false) {
+            if ($this->connected === false) {
 
                 $this->redirector->redirect('mainlogin');
             }
@@ -198,14 +204,15 @@ namespace Application\Controller {
 
                 if ($opassword !== '' && $model->checkWithId($id, $opassword) === true) {
                     $model->updatePassword($id, $password);
-                    echo 'UPDATE password';
                 }
 
-                if($domain !== null)
+                if ($domain !== null) {
                     $domain = explode(',', $domain);
+                }
 
-                if($class !== null)
+                if ($class !== null) {
                     $class = explode(',', $class);
+                }
 
                 $model->update($id, 'login', $login);
                 $model->update($id, 'user', $user);

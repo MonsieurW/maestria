@@ -36,8 +36,8 @@ CREATE TABLE IF NOT EXISTS questions (
 CREATE TABLE IF NOT EXISTS answer (
 	idAnswer		INTEGER,
 	refUser			INTEGER,
-	refQuestion		INTEGER,
-	notation		VARCHAR(5),
+	refEvaluation   INTEGER,
+	note     		TEXT,
 
 	PRIMARY KEY (idAnswer)
 );

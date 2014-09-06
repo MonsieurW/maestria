@@ -31,8 +31,48 @@ namespace Application\Controller {
 
         public function createAction()
         {
-            echo '<pre>';
-            print_r($_POST); // TODO : Make
+            $idEvaluation = null;
+            $questions    = array();
+            $response     = array();
+            $answer       = new \Application\Model\Answer();
+            $user         = (isset($_POST['user'])) ? $_POST['user'] : '0';
+
+            if ($this->connected === false) {
+                $response = array(
+                    'status' => 500,
+                    'message' => 'Need to login'
+                );
+
+                echo json_encode($response);
+                exit;
+            }
+
+            foreach ($_POST as $key => $value) {
+                if ($key === 'evaluation') {
+                    $idEvaluation = $value;
+                } elseif ($key === 'user') {
+
+                } else {
+                    preg_match('#^u(.*)q(.*)$#', $key, $m);
+                    if (isset($m[1]) && isset($m[2]) && $m[1] === $user) {
+                        $questions[$m[1]][$m[2]] = $value;
+                    }
+                }
+            }
+
+            var_dump(count($questions));
+
+            foreach ($questions as $key => $value) {
+                $answer->value($key, $idEvaluation, $value);
+            }
+
+            $response = array(
+                    'status'    => 200,
+                    'message'   => 'Save'
+                );
+
+            echo json_encode($response);
+
         }
 
         public function createActionAsync()

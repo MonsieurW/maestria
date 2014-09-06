@@ -72,6 +72,14 @@ namespace Application\Controller {
 
         }
 
+        public function only($gid)
+        {
+            return $this
+                        ->_acl
+                        ->getUser($this->loginUser)
+                        ->groupExists($gid);
+        }
+
         public function check()
         {
             $this->isAvailable();

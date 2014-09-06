@@ -53,7 +53,11 @@ $group = function($bool , $label, $class) {
       <?php } ?>
     </tbody>
   </table>
-
+  <ul class="pagination">
+    <?php for($i = 1; $i <= $pageTotal; $i++) {
+      echo '<li'.(($i == $pageCurrent) ? ' class="active" ' : '').'><a href="?page='.$i.'">'.$i.'</a></li>';
+    }?>
+  </ul>
 </div>  
 <?php if( (isset($loginIsAdmin) and $loginIsAdmin === true) ) { ?>
 <div class="container">

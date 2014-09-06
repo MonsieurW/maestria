@@ -33,7 +33,7 @@ $this->endBlock();
 	<input type="hidden" id="profil" name="user" value="" />
 	<div class="container" id="output"></div>
   	<div class="btn-on-bottom">
-      <button type="submit" class="btn btn-success" id="fSend">Send</button>
+      <button type="submit" class="btn btn-success" id="fSend" data-id="">Send</button>
     </div>
 
 </form>

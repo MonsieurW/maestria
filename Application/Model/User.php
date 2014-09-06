@@ -118,6 +118,20 @@ namespace Application\Model {
             return false;
         }
 
+        public function getAllWithPage($start, $nb)
+        {
+            $class   = new \Application\Model\UserClass();
+            $domain  = new \Application\Model\UserDomain();
+            $st      = $this->sql('SELECT * FROM user LIMIT :start, :nb', array('start' => $start, 'nb' => $nb))->fetchAll();
+
+            foreach ($st as $i => $value) {
+                $st[$i]['class']    = $class->getClass($value['idProfil']);
+                $st[$i]['domain']   = $domain->getDomain($value['idProfil']);
+            }
+
+            return $st;
+        }
+
         public function all()
         {
             $class   = new \Application\Model\UserClass();
@@ -166,12 +180,10 @@ namespace Application\Model {
 
         public function count()
         {
-            $sql = 'SELECT COUNT(*) FROM domain';
-            $smt = $this
-                        ->sql($sql)
-                        ->fetchColumn(0);
+            $sql = 'SELECT COUNT(*) FROM user';
+            $smt = $this->sql($sql)->fetchColumn(0);
 
-            return $smt;
+            return intval($smt);
         }
     }
 }

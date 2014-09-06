@@ -8,7 +8,13 @@ namespace Application\Controller {
     {
         public function indexAction()
         {
-            $classe             = new \Application\Model\Know();
+
+            $query       = $this->router->getQuery();
+            $page        = isset($query['page']) ? $query['page'] : 1;
+            $nbPost      = 20;
+            $first_entry = ($page - 1) * $nbPost;
+
+            $know               = new \Application\Model\Know();
             $domain             = new \Application\Model\Domain();
             $domain             = $domain->all();
             $d                  = array();
@@ -24,18 +30,18 @@ namespace Application\Controller {
                 $t[$value['idTheme']] = $value['themeValue'];
             }
 
-            // TODO : Make pages
-
-            $this->data->know   = $classe->all();
-            $this->data->domain = $domain;
-            $this->data->d      = $d;
-            $this->data->t      = $t;
-            $this->data->theme  = $theme;
+            $this->data->know        = $know->all($first_entry, $nbPost);
+            $this->data->pageCurrent = $page;
+            $this->data->pageTotal   = ceil($know->count() / $nbPost);
+            $this->data->domain      = $domain;
+            $this->data->d           = $d;
+            $this->data->t           = $t;
+            $this->data->theme       = $theme;
 
             $this->greut->render();
         }
 
-        public function CreateActionAsync()
+        public function createActionAsync()
         {
             $id     = (isset($_POST['pk']))     ? $_POST['pk']     : null;
             $value  = (isset($_POST['value']))  ? $_POST['value']  : null;

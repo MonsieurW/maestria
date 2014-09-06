@@ -78,9 +78,22 @@ namespace Application\Model {
             return $elmt;
         }
 
-        public function all()
+        public function all($start, $nb)
+        {
+            return $this->sql('SELECT * FROM connaissance ORDER BY refDomain LIMIT :l, :n', array('l' => $start, 'n' => $nb))->fetchAll();
+        }
+
+        public function getAll()
         {
             return $this->sql('SELECT * FROM connaissance ORDER BY refDomain')->fetchAll();
+        }
+
+        public function count()
+        {
+            $sql = 'SELECT COUNT(*) FROM connaissance';
+            $smt = $this->sql($sql)->fetchColumn(0);
+
+            return intval($smt);
         }
     }
 }
