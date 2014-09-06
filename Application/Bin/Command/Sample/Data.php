@@ -53,7 +53,7 @@ namespace Application\Bin\Command\Sample {
         {
             $user           = new \Application\Model\User();
             $capabilities   = new \Application\Model\Know();
-            $capabilities   = $capabilities->getallheaders(oid)ll();
+            $capabilities   = $capabilities->getAll();
             $m_cap          = count($capabilities) - 1;
             $prof           = $user->getProfessor();
             $faker          = \Faker\Factory::create();
