@@ -41,8 +41,7 @@ namespace Application\Controller {
                     preg_match('#q([0-9]+)_(.*)#', $key, $m);
                     $i                  = intval($m[1]);
                     $t                  = $m[2];
-                    $k                  = explode('|', $value);
-                    $question[$i][$t]   = $k[0];
+                    $question[$i][$t]   = $value;
                 }
             }
 
@@ -88,8 +87,15 @@ namespace Application\Controller {
 
            foreach ($q as $i => $value) {
 
-                $item1                          = $know->get($value['refItem1'])[0];
-                $item2                          = $know->get($value['refItem2'])[0];
+                if(isset($know->get($value['refItem1'])[0]))
+                    $item1 = $know->get($value['refItem1'])[0];
+                else
+                    $item1 = 0;
+                if(isset($know->get($value['refItem2'])[0]))
+                    $item2 = $know->get($value['refItem2'])[0];
+                else
+                    $item2 = 0;
+
                 $q[$i]['item1']['themeValue']   = $theme->get($item1['refTheme'])['themeValue'];
                 $q[$i]['item1']['domainValue']  = $domain->get($item1['refDomain'])['domainValue'];
                 $q[$i]['item1']['item']         = $item1['item'];

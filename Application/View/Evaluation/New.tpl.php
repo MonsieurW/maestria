@@ -55,7 +55,8 @@ $this->block('container');
           <label for="firstname" class="col-md-3 control-label">Item 1</label>
           <div class="col-md-8">
             <div class="input-group">
-              <input value="" placeholder="Item 1" name="q<?php echo $i; ?>_item1" class="form-control" type="text">
+              <input value="" name="q<?php echo $i; ?>_item1" class="form-control" type="hidden">
+              <input value="" placeholder="Item 1" class="form-control" type="text">
               <span class="input-group-btn">
                 <button class="button btn btn-default choose"><i class="fa fa-briefcase"></i></button>
               </span>
@@ -67,7 +68,8 @@ $this->block('container');
           <label for="firstname" class="col-md-3 control-label">Item 2</label>
           <div class="col-md-8">
             <div class="input-group">
-              <input value="" placeholder="Item 2" name="q<?php echo $i; ?>_item2" class="form-control" type="text">
+              <input value="" name="q<?php echo $i; ?>_item2" class="form-control" type="hidden">
+              <input value="" placeholder="Item 2" class="form-control" type="text">
               <span class="input-group-btn">
                 <button class="button btn btn-default choose"><i class="fa fa-briefcase"></i></button>
               </span>

@@ -1,20 +1,22 @@
 (function($) {
 
     var input;
+    var text;
     $('.choose').click(function(e) {
         e.preventDefault();
 
         $('#myModal').modal('show');
-        input = $(this).parent().prev();
+        text = $(this).parent().prev();
+        input = text.prev();
     });
 
     $('body').delegate('.c', 'click', function(e) {
         e.preventDefault();
-        
         var id = $(this).attr('data-id');
         var co = $(this).children().last().html();
 
-        input.val(id+'|'+co);
+        input.val(id);
+        text.val(co);
         $('#myModal').modal('hide');
     });
 
