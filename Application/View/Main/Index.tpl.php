@@ -10,11 +10,12 @@ $this->block('container');
 				<?php echo $value['label']; ?><br />
 				<span class="label label-warning"><?php echo $value['login']; ?></span>
 			</h4>
-			<div>
-				<p><?php echo substr($value['description'],0, 50); ?></p>
+			<div style="text-align: center">
+				<p><?php echo substr($value['description'],0, 100); if(strlen($value['description'])) { echo '…'; }?></p>
 				<div class="btn-group">
 					<a class="btn btn-mini btn-default" href="/professor/<?php echo $value['refUser']; ?>/evaluation/<?php echo $value['idEvaluation']; ?>" role="button"><i class="glyphicon glyphicon-eye-open"></i></a>
 		        	<a class="btn btn-mini btn-primary" href="/evaluate/<?php echo $value['idEvaluation']; ?>" role="button"><i class="fa fa-file"></i></a>
+		        	<a class="btn btn-mini btn-success" href="/evaluate/<?php echo $value['idEvaluation']; ?>/resume/" role="button"><i class="fa fa-pie-chart"></i></a>
 				</div>
 			</div>
 		</div>

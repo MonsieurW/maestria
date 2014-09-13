@@ -42,8 +42,7 @@
     });
 
     function sendForm() {
-            $('#fSend').click();
-
+        $('#fSend').click(); // TODO : Make more visual on save (spinner)
     }
 
 

@@ -10,8 +10,9 @@ namespace Application\Maestria {
             $this->_acl = new Acl($this);
 
             $this->_acl
-                ->allow('app.(.*)', array('student', 'professor', 'moderator', 'admin')) //TODO : Make it :D
-                ->deny('app.evaluation.edit', array('student', 'professor', 'moderator', 'admin')); //TODO : Make it :D
+                ->allow('app.(.*)', array('student', 'professor', 'moderator', 'admin'))
+                ->deny('app.evaluation.edit', array('student', 'professor', 'moderator', 'admin'))
+            ; //TODO : Make it :D
         }
 
         public function getAcl()

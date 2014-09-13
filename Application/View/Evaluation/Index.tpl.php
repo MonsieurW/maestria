@@ -3,26 +3,34 @@ $this->inherits('hoa://Application/View/Layout/Base.tpl.php');
 $this->block('container');
 ?>
 <div class="container">
+	<div class="row">
+		<?php foreach ($eval as $value) { ?>
+		<div class="rowing well">
+			<h4>
+				<?php echo $value['label']; ?><br />
+				<span class="label label-warning"><?php echo $value['login']; ?></span>
+			</h4>
+			<div>
+				<p><?php echo substr($value['description'],0, 50); ?></p>
+				<div class="btn-group">
+					<a class="btn btn-mini btn-default" href="/professor/<?php echo $value['refUser']; ?>/evaluation/<?php echo $value['idEvaluation']; ?>" role="button"><i class="glyphicon glyphicon-eye-open"></i></a>
+		        	<a class="btn btn-mini btn-primary" href="/evaluate/<?php echo $value['idEvaluation']; ?>" role="button"><i class="fa fa-file"></i></a>
+				</div>
+			</div>
+		</div>
+		<?php } ?>
+	</div>
+</div>
+<div class="container">
 	<div class="col-md-4">
 		<a href="/professor/<?php echo $pr; ?>/evaluation/new" class="btn btn-success"><i class="glyphicon glyphicon-plus-sign"></i></a>
 	</div>
 </div>
-<div class="container">
-	<?php
-    if (isset($eval)) {
-        foreach ($eval as $e) {?>
-			<div class="col-md-4">
-		        <h2>Evaluation #<?php echo $e['idEvaluation']; ?> <span class="badge"><?php echo $e['nb']; ?></span></h2>
-		        <p style="word-wrap: auto"><?php echo $e['label']; ?></p>
-		        <p style="word-wrap: auto"><?php echo $e['description']; ?></p>
-		        <p>
-		        	<a class="btn btn-default" href="/professor/<?php echo $e['refUser']; ?>/evaluation/<?php echo $e['idEvaluation']; ?>" role="button"><i class="glyphicon glyphicon-eye-open"></i></a>
-		        	<a class="btn btn-primary" href="/evaluate/<?php echo $e['idEvaluation']; ?>" role="button"><i class="fa fa-file"></i></a>
-		        	<a class="btn btn-danger" href="/professor/<?php echo $e['refUser']; ?>/evaluation/<?php echo $e['idEvaluation']; ?>/destroy" role="button"><i class="glyphicon glyphicon-trash"></i></a>
-		        </p>
-		    </div>
-	<?php }
-    } ?>
-</div>
 <?php
 $this->endBlock();
+$this->block('stylesheet');
+?>
+<link href="/css/app.css" rel="stylesheet">
+<?php
+$this->endBlock();
+ ?>

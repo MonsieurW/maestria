@@ -47,7 +47,7 @@ $this->block('container');
                 </div>
             </div>
 
-            <?php if($isProfessor === true or $loginIsAdmin === true)   { ?>
+            <?php if($isProfessor === true or $loginIsAdmin === true) { ?>
 
             <div class="form-group">
                 <label for="classroom" class="col-md-3 control-label">Classroom</label>

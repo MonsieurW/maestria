@@ -49,7 +49,7 @@ namespace Application\Model {
             $a   = array();
 
             foreach ($sql as $key => $value) {
-                $a[] = $value['value'];
+                $a[$value['idClass']] = $value['value'];
             }
 
             return $a;
@@ -72,6 +72,13 @@ namespace Application\Model {
         public function remove($idUser, $idClass)
         {
             $this->sql('DELETE FROM user_class WHERE refUser = :i AND refClass = :c', array('i' => $idUser, 'c' => $idClass));
+        }
+
+        public function all()
+        {
+            return $this
+                        ->sql('SELECT * FROM user_class as c, user as u WHERE c.refUser = u.idProfil')
+                        ->fetchAll();
         }
 
         public function sync($id, $values)

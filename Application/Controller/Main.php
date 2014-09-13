@@ -30,6 +30,12 @@ namespace Application\Controller {
 
         public function connectAction()
         {
+            if ($this->connected === true) {
+               $this->redirector->redirect('mainindex');
+            }
+
+            $this->data->referer = (isset($_SERVER['HTTP_REFERER'])) ? $_SERVER['HTTP_REFERER'] : '';
+
             return $this->greut->render();
         }
 
@@ -37,8 +43,9 @@ namespace Application\Controller {
         {
             $user        = isset($_POST['user']) ? $_POST['user'] : '';
             $password    = isset($_POST['password']) ? $_POST['password'] : '';
-            $session    = new \Hoa\Session\Session('user');
-            $model      = new \Application\Model\User();
+            $session     = new \Hoa\Session\Session('user');
+            $model       = new \Application\Model\User();
+            $redirect    = isset($_POST['referer']) ? $_POST['referer'] : null;
 
             if ($user === '' or $password === '') {
                 $this->data->hasError = true;
@@ -55,7 +62,12 @@ namespace Application\Controller {
             $session['connect'] = true;
             $session['id']      = $model['idProfil'];
 
-            $this->redirector->redirect('mainindex');
+            if ($redirect === null) {
+               $this->redirector->redirect('mainindex');
+            } else {
+               $this->redirector->url($redirect);
+            }
+
         }
 
         public function logoutAction()

@@ -60,8 +60,6 @@ namespace Application\Controller {
                 }
             }
 
-            var_dump(count($questions));
-
             foreach ($questions as $key => $value) {
                 $answer->value($key, $idEvaluation, $value);
             }

@@ -32,7 +32,7 @@ namespace Application\Model {
         public function mine()
         {
             return $this
-                ->sql('SELECT * FROM evaluation WHERE refUser = :e', array('e' => $this->_prof))
+                ->sql('SELECT * FROM evaluation as e, user as u WHERE e.refUser = u.idProfil and u.idProfil = :e', array('e' => $this->_prof))
                 ->fetchAll();
         }
 

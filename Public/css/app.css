@@ -18,7 +18,7 @@
   margin-bottom: 10px;
   box-shadow: 1px 0px 3px 1px rgba(50, 50, 50, 0.75);
   margin: 5px;
-  width: 150px;
+  width: 200px;
   height: 250px;
 }
 .rowing > div {
@@ -41,6 +41,32 @@
   bottom: 0;
   left: 0;
   right:0;
+}
+
+.row_line > p {
+  width: 75px;
+  height: 75px;
+  float: left;
+  margin: 5px;
+}
+
+.answer {
+  height: 350px;
+}
+
+.answer > ul > li{
+  list-style: none;
+  float: left;
+  width: 50px;
+  height: 50px;
+  margin: 2px;
+  background-color: #eee;
+  border: 1px solid #888;
+  text-align: center;
+}
+
+.answer > p {
+  clear: both;
 }
 
 .tt-dropdown-menu,

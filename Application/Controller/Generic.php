@@ -17,7 +17,7 @@ namespace Application\Controller {
 
         public function construct()
         {
-            $session = new \Hoa\Session\Session('user');
+            $session = new \Hoa\Session\Session('user', null, 5);
             if (isset($session['connect']) and $session['connect'] === true) {
                 $this->connected                = true;
                 $model                          = new \Application\Model\User();
@@ -47,7 +47,6 @@ namespace Application\Controller {
                 }
 
                 $this->_acl->addUser($model['user'], $group);
-
             }
 
             $this->check();
@@ -84,5 +83,6 @@ namespace Application\Controller {
         {
             $this->isAvailable();
         }
+
     }
 }

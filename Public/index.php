@@ -6,6 +6,7 @@ namespace {
 
     try {
         $framework = new \Application\Maestria\Maestria();
+        $framework->kit('redirector', new \Application\Controller\Kit\Redirection());
         $framework->setAcl();
         $framework->run();
     } catch (\Hoa\Session\Exception\Expired $e) {

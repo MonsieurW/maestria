@@ -6,6 +6,7 @@ CREATE TABLE IF NOT EXISTS user (
 	isProfessor		BOOLEAN,
 	password		VARCHAR(255),
 	user			VARCHAR(255),
+	token			VARCHAR(255),
 	/* class cf user_class */
 	/* domaine cf user_domain */
 	PRIMARY KEY (idProfil)
@@ -97,11 +98,11 @@ CREATE TABLE IF NOT EXISTS user_domain (
 	PRIMARY KEY (idUserDomain)
 );
 
-INSERT INTO user VAlUES (null,'admin','1','1','0','d033e22ae348aeb5660fc2140aec35850c4da997','Administrateur');
-INSERT INTO user VAlUES (null,'mod','0','1','0','7dd30f0a95d522bfc058be4e75847f8b6df9f76b','Moderator');
-INSERT INTO user VAlUES (null,'prof','0','0','1','d9f02d46be016f1b301f7c02a4b9c4ebe0dde7ef','Professor');
-INSERT INTO user VAlUES (null,'eleve','0','0','0','0e9a7fdc4821370a252df21582a4a656e81e0687','Eleve');
-INSERT INTO user VAlUES (null,'thehawk','1','1','1','4438ce731657057ba02736526d2018bfac7d4971','Julien le meilleur prof du monde ;D');
+INSERT INTO user VAlUES (null,'admin','1','1','0','d033e22ae348aeb5660fc2140aec35850c4da997','Administrateur', '');
+INSERT INTO user VAlUES (null,'mod','0','1','0','7dd30f0a95d522bfc058be4e75847f8b6df9f76b','Moderator', '');
+INSERT INTO user VAlUES (null,'prof','0','0','1','d9f02d46be016f1b301f7c02a4b9c4ebe0dde7ef','Professor', '');
+INSERT INTO user VAlUES (null,'eleve','0','0','0','0e9a7fdc4821370a252df21582a4a656e81e0687','Eleve', '');
+INSERT INTO user VAlUES (null,'thehawk','1','1','1','4438ce731657057ba02736526d2018bfac7d4971','Julien le meilleur prof du monde ;D', '');
 
 INSERT INTO class VAlUES (null, '1°L');
 INSERT INTO class VAlUES (null, '1°S');

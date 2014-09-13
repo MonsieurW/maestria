@@ -52,7 +52,7 @@ namespace Application\Model {
 
         public function getByUser($user)
         {
-            $st             = $this->sql('SELECT * FROM user WHERE idProfil = :id' , array('id' => $id))->fetchAll();
+            $st             = $this->sql('SELECT * FROM user WHERE idProfil = :id' , array('id' => $user))->fetchAll();
 
             if (isset($st[0])) {
                 $item           = $st[0];
@@ -77,7 +77,7 @@ namespace Application\Model {
         public function add($login, $password, $user)
         {
 
-            $sql = "INSERT INTO user VAlUES (null,:l,'0','0','0',:p,:n);";
+            $sql = "INSERT INTO user VAlUES (null,:l,'0','0','0',:p,:n, '');";
             $this->sql($sql, array(
                 'l' => $login,
                 'p' => sha1($password),
