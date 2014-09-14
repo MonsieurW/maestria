@@ -51,13 +51,13 @@ $annotation = function ($co, $cp, $ap, $an) {
 		<div class="col-lg-3 questions answer">
 			<h4><?php echo $value['user']; ?>
 			<?php if($real[$value['refUser']] > 15) { ?>
-				<span class="label label-success pull-right"><?php echo $real[$value['refUser']]; ?>/<?php echo $note_max; ?></span></h4>
+				<span class="hidden label label-success pull-right"><?php echo $real[$value['refUser']]; ?>/<?php echo $note_max; ?></span></h4>
 			<?php } else if($real[$value['refUser']] > 10) {?>
-				<span class="label label-primary pull-right"><?php echo $real[$value['refUser']]; ?>/<?php echo $note_max; ?></span></h4>
+				<span class="hidden label label-primary pull-right"><?php echo $real[$value['refUser']]; ?>/<?php echo $note_max; ?></span></h4>
 			<?php } else if($real[$value['refUser']] > 5) {?>
-				<span class="label label-warning pull-right"><?php echo $real[$value['refUser']]; ?>/<?php echo $note_max; ?></span></h4>
+				<span class="hidden label label-warning pull-right"><?php echo $real[$value['refUser']]; ?>/<?php echo $note_max; ?></span></h4>
 			<?php } else { ?>
-				<span class="label label-danger pull-right"><?php echo $real[$value['refUser']]; ?>/<?php echo $note_max; ?></span></h4>
+				<span class="hidden label label-danger pull-right"><?php echo $real[$value['refUser']]; ?>/<?php echo $note_max; ?></span></h4>
 			<?php }?>
 			<ul>
 				<?php 
@@ -89,13 +89,21 @@ $annotation = function ($co, $cp, $ap, $an) {
 <?php } ?>
 </div>
 <div class="container">
-	<a href="#"
+	<div class="pull-right btn-group">
+  		<button type="button" class="btn btn-success" id="print"><i class="fa fa-print"></i></button>
+  		<button type="button" class="btn btn-info" id="control"><i class="fa fa-eye"></i></button>
+	</div>
 </div>
 <?php 
 $this->endBlock();
 $this->block('stylesheet');
 ?>
 <link href="/css/app.css" rel="stylesheet">
+<?php
+$this->endBlock();
+$this->block('script');
+?>
+<script src="/js/app.resume.js"></script>
 <?php
 $this->endBlock();
  ?>

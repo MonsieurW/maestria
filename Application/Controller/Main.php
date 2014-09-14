@@ -116,8 +116,6 @@ namespace Application\Controller {
             $this->data->pageCurrent = $page;
             $this->data->pageTotal   = ceil($model->count() / $nbPost);
 
-            //TODO : Need to use classroom as page
-
             $this->greut->render();
         }
 
