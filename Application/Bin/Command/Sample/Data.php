@@ -23,6 +23,9 @@ namespace Application\Bin\Command\Sample {
             array('help', \Hoa\Console\GetOption::NO_ARGUMENT, '?'),
         );
 
+        protected $maxEleve = 5;
+        protected $maxQuestion = 5;
+
         /**
          * The entry method.
          *
@@ -62,7 +65,7 @@ namespace Application\Bin\Command\Sample {
                 $minus      = $this->_minus($questions);
                 $prime      = $this->_prime($questions);
                 $unknow     = $this->_unknow($questions);
-                $random     = $this->_random($questions);
+                $medium     = $this->_medium($questions);
                 $eleves     = new \Application\Model\UserClass();
                 $eleves     = $eleves->getEleves(1);
 
@@ -79,8 +82,8 @@ namespace Application\Bin\Command\Sample {
                         $answer->value($eleve['idProfil'], $evaluation['idEvaluation'], $unknow);
                         echo $eleve['user'].' is unkown'."\n";
                     } else {
-                        $answer->value($eleve['idProfil'], $evaluation['idEvaluation'], $random);
-                        echo $eleve['user'].' has random answer'."\n";
+                        $answer->value($eleve['idProfil'], $evaluation['idEvaluation'], $medium);
+                        echo $eleve['user'].' has medium answer'."\n";
                     }
                 }
 
@@ -91,14 +94,8 @@ namespace Application\Bin\Command\Sample {
         protected function _question($questions, $value)
         {
             $out = array();
-            foreach ($questions as $question) {
-                if ($value === null) {
-                    $value = rand(0,2);
-                }
-
+            foreach ($questions as $question)
                 $out[$question['idQuestion']] = $value;
-
-            }
 
             return $out;
         }
@@ -113,14 +110,14 @@ namespace Application\Bin\Command\Sample {
             return $this->_question($questions, 2);
         }
 
+        protected function _medium($questions)
+        {
+            return $this->_question($questions, 1);
+        }
+
         protected function _unknow($questions)
         {
             return $this->_question($questions, -1);
-        }
-
-        protected function _random($questions)
-        {
-            return $this->_question($questions, null);
         }
 
         public function makeEvaluation()
@@ -141,7 +138,7 @@ namespace Application\Bin\Command\Sample {
 
                     echo 'Evaluation for '.$p['user'].' #'.$id.' : '.$label."\n";
 
-                    for ($j= 0; $j <= 30; $j++) {
+                    for ($j= 0; $j <= $this->maxQuestion; $j++) {
                         $note   = rand(1, 10);
                         $taxo   = rand(1, 4);
                         $item1  = rand(0, $m_cap);
@@ -175,7 +172,7 @@ namespace Application\Bin\Command\Sample {
             $faker      = \Faker\Factory::create();
 
             for ($i = 1; $i <= 6; $i++) {
-                for ($j = 0; $j <= 30; $j++) {
+                for ($j = 0; $j <= $this->maxEleve; $j++) {
 
                     $name       = $faker->name;
                     $username   = $faker->username;
