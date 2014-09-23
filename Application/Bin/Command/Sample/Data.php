@@ -47,6 +47,80 @@ namespace Application\Bin\Command\Sample {
             $this->readCapabilities();
             $this->makeSomeUser();
             $this->makeEvaluation();
+            $this->makeAnswer();
+        }
+
+        public function makeAnswer()
+        {
+            $evaluations = new \Application\Model\Evaluation();
+            $answer      = new \Application\Model\Answer();
+            $evaluations = $evaluations->all();
+
+            foreach ($evaluations as $evaluation) {
+                $questions  = new \Application\Model\Questions($evaluation['idEvaluation']);
+                $questions  = $questions->all();
+                $minus      = $this->_minus($questions);
+                $prime      = $this->_prime($questions);
+                $unknow     = $this->_unknow($questions);
+                $random     = $this->_random($questions);
+                $eleves     = new \Application\Model\UserClass();
+                $eleves     = $eleves->getEleves(1);
+
+                // TODO : Resume & Note are !== need check !
+
+                foreach ($eleves as $key => $eleve) {
+                    if ($key === 0) {
+                        $answer->value($eleve['idProfil'], $evaluation['idEvaluation'], $minus);
+                        echo $eleve['user'].' is minus'."\n";
+                    } elseif ($key === 1) {
+                        $answer->value($eleve['idProfil'], $evaluation['idEvaluation'], $prime);
+                        echo $eleve['user'].' is prime'."\n";
+                    } elseif ($key === 2) {
+                        $answer->value($eleve['idProfil'], $evaluation['idEvaluation'], $unknow);
+                        echo $eleve['user'].' is unkown'."\n";
+                    } else {
+                        $answer->value($eleve['idProfil'], $evaluation['idEvaluation'], $random);
+                        echo $eleve['user'].' has random answer'."\n";
+                    }
+                }
+
+            }
+
+        }
+
+        protected function _question($questions, $value)
+        {
+            $out = array();
+            foreach ($questions as $question) {
+                if ($value === null) {
+                    $value = rand(0,2);
+                }
+
+                $out[$question['idQuestion']] = $value;
+
+            }
+
+            return $out;
+        }
+
+        protected function _minus($questions)
+        {
+            return $this->_question($questions, 0);
+        }
+
+        protected function _prime($questions)
+        {
+            return $this->_question($questions, 2);
+        }
+
+        protected function _unknow($questions)
+        {
+            return $this->_question($questions, -1);
+        }
+
+        protected function _random($questions)
+        {
+            return $this->_question($questions, null);
         }
 
         public function makeEvaluation()

@@ -48,17 +48,18 @@ $annotation = function ($co, $cp, $ap, $an) {
 ?>
 <div class="container">
 <?php foreach ($answer as $key => $value) { ?>
-		<div class="col-lg-3 questions answer">
-			<h4><?php echo $value['user']; ?>
+		<div class="col-lg-2 questions answer">
+			<h5><?php echo $value['user']; ?>
 			<?php if($real[$value['refUser']] > 15) { ?>
-				<span class="hidden label label-success pull-right"><?php echo $real[$value['refUser']]; ?>/<?php echo $note_max; ?></span></h4>
+				<span class="hidden label label-success pull-right" data-toggle><?php echo $real[$value['refUser']]; ?>/<?php echo $note_max; ?></span>
 			<?php } else if($real[$value['refUser']] > 10) {?>
-				<span class="hidden label label-primary pull-right"><?php echo $real[$value['refUser']]; ?>/<?php echo $note_max; ?></span></h4>
+				<span class="hidden label label-primary pull-right"><?php echo $real[$value['refUser']]; ?>/<?php echo $note_max; ?></span>
 			<?php } else if($real[$value['refUser']] > 5) {?>
-				<span class="hidden label label-warning pull-right"><?php echo $real[$value['refUser']]; ?>/<?php echo $note_max; ?></span></h4>
+				<span class="hidden label label-warning pull-right"><?php echo $real[$value['refUser']]; ?>/<?php echo $note_max; ?></span>
 			<?php } else { ?>
-				<span class="hidden label label-danger pull-right"><?php echo $real[$value['refUser']]; ?>/<?php echo $note_max; ?></span></h4>
+				<span class="hidden label label-danger pull-right"><?php echo $real[$value['refUser']]; ?>/<?php echo $note_max; ?></span>
 			<?php }?>
+			</h5>
 			<ul>
 				<?php 
 					$result = $value['result'];
@@ -67,16 +68,16 @@ $annotation = function ($co, $cp, $ap, $an) {
 					foreach ($result as $key => $value) {
 						switch($key) {
 							case 1:
-								echo '<li>Cn <i class="fa fa-sort-desc"></i><br />'.round(($value*100)).'%</li>';
+								echo '<li data-toggle="tooltip" title="Connaissance">Cn <i class="fa fa-sort-desc"></i><br />'.round(($value*100)).'%</li>';
 								break;
 							case 2:
-								echo '<li>Cp <i class="fa fa-sort-desc"></i><br />'.round(($value*100)).'%</li>';
+								echo '<li data-toggle="tooltip" title="Compétence">Cp <i class="fa fa-sort-desc"></i><br />'.round(($value*100)).'%</li>';
 								break;
 							case 3:
-								echo '<li>Ap <i class="fa fa-sort-desc"></i><br />'.round(($value*100)).'%</li>';
+								echo '<li data-toggle="tooltip" title="Aptitude">Ap <i class="fa fa-sort-desc"></i><br />'.round(($value*100)).'%</li>';
 								break;
 							case 4:
-								echo '<li>An <i class="fa fa-sort-desc"></i><br />'.round(($value*100)).'%</li>';
+								echo '<li data-toggle="tooltip" title="Analyse">An <i class="fa fa-sort-desc"></i><br />'.round(($value*100)).'%</li>';
 								break;
 						}
 					}
