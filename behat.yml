@@ -2,3 +2,9 @@ default:
     paths:
         features: Tests/Functionnal
         bootstrap: %behat.paths.features%/bootstrap
+    extensions:
+        Behat\MinkExtension\Extension:
+            show_cmd: '"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe" %s'
+            base_url: http://127.0.0.1/
+            goutte: ~
+            selenium2: ~

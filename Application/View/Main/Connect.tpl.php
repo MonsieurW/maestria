@@ -21,13 +21,15 @@ $this->block('container');
             <form action="/login" method="post">
                 <input name="user" type="text" placeholder="username" tabindex="1" autofocus="autofocus">
                 <input name="password" type="password" placeholder="password" tabindex="2">
-                <input name="referer" type="hidden" value="<?php echo $referer; ?>" >
-                <button class="btn btn-info btn-block login" type="submit">Login</button>
+                <input name="referer" type="hidden" value="<?php echo (isset($referer) === true)? $referer: ''; ?>" >
+                <button class="btn btn-info btn-block login" id="login" type="submit">Login</button>
                 <!--a href="/register" class="btn btn-success btn-block">Sign-in</a-->
                 <p>Ask an administrator for register into the application thank you.</p>
             </form>
         </div>
-        <h3><?php echo $referer; ?></h3>
+        <?php if(isset($referer)) { ?>
+            <h3><?php echo $referer; ?></h3>
+        <?php } ?>
      </div>
 </div>
 <?php $this->endBlock(); ?>
