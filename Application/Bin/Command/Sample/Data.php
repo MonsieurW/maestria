@@ -25,6 +25,7 @@ namespace Application\Bin\Command\Sample {
 
         protected $maxEleve = 5;
         protected $maxQuestion = 5;
+        protected $defaultPassword = 'sample';
 
         /**
          * The entry method.
@@ -193,14 +194,15 @@ namespace Application\Bin\Command\Sample {
             $con            = new \Application\Model\Know();
             $domaine        = new \Application\Model\Domain();
             $ty             = 0;
+
 /*
-INSERT INTO domain VAlUES (1, 'electricte');
-INSERT INTO domain VAlUES (2, 'physique');
-INSERT INTO domain VAlUES (3, 'optique');
-INSERT INTO domain VAlUES (4, 'chimie');
-INSERT INTO domain VAlUES (5, 'thermo-dynamique');
-INSERT INTO domain VAlUES (6, 'mathematique');
-INSERT INTO domain VAlUES (7, 'general');
+    INSERT INTO domain VAlUES (1, 'electricte');
+    INSERT INTO domain VAlUES (2, 'physique');
+    INSERT INTO domain VAlUES (3, 'optique');
+    INSERT INTO domain VAlUES (4, 'chimie');
+    INSERT INTO domain VAlUES (5, 'thermo-dynamique');
+    INSERT INTO domain VAlUES (6, 'mathematique');
+    INSERT INTO domain VAlUES (7, 'general');
 */
 
             while ($connaissance->eof() !== true) {

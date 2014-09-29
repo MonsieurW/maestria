@@ -7,7 +7,7 @@
     ],
     "name": "sohoa/sohoa",
     "require": {
-        "sohoa/framework": "dev-f/generate_controller",
+        "sohoa/framework": "f/generate_controller",
         "hoa/database": "*",
         "hoa/acl" : "*",
         "fzaninotto/faker": "1.5.*@dev"
@@ -21,6 +21,5 @@
     },
     "config": {
         "bin-dir": "Binaries"
-    },
-    "minimum-stability": "dev"
+    }
 }
