@@ -15,7 +15,7 @@
 		$rep = '-1';
 		if(isset($answers[$value['idProfil']]) and isset($answers[$value['idProfil']][$q['idQuestion']]))
 		{
-			$rep = $answers[$value['idProfil']][$q['idQuestion']];
+			$rep = strval($answers[$value['idProfil']][$q['idQuestion']]);
 		}
 		
         echo '<div class="col-md-2 borde" style="margin-top: 10px;"><h4>'.$q['title'].'</h4>

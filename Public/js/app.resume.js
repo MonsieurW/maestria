@@ -16,14 +16,14 @@
 
     function hideNote() 
     {
-        $('.answer > h4 > span').each(function(index, el) {
+        $('.answer > h5 > span').each(function(index, el) {
             $(this).addClass('hidden');
         });
     }
 
     function showNote()
     {
-        $('.answer > h4 > span').each(function(index, el) {
+        $('.answer > h5 > span').each(function(index, el) {
            $(this).removeClass('hidden');
         });
     }

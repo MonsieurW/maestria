@@ -114,8 +114,6 @@ namespace Application\Controller {
             $this->data->real      = $real_note;
             $this->data->answer    = $answer;
             $this->greut->render();
-
-            //TODO : Make sample data for answer whith random , prime , medium and minus user !
         }
     }
 }

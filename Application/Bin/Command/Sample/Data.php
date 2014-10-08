@@ -23,6 +23,10 @@ namespace Application\Bin\Command\Sample {
             array('help', \Hoa\Console\GetOption::NO_ARGUMENT, '?'),
         );
 
+        protected $maxEleve = 5;
+        protected $maxQuestion = 5;
+        protected $defaultPassword = 'sample';
+
         /**
          * The entry method.
          *
@@ -47,6 +51,74 @@ namespace Application\Bin\Command\Sample {
             $this->readCapabilities();
             $this->makeSomeUser();
             $this->makeEvaluation();
+            $this->makeAnswer();
+        }
+
+        public function makeAnswer()
+        {
+            $evaluations = new \Application\Model\Evaluation();
+            $answer      = new \Application\Model\Answer();
+            $evaluations = $evaluations->all();
+
+            foreach ($evaluations as $evaluation) {
+                $questions  = new \Application\Model\Questions($evaluation['idEvaluation']);
+                $questions  = $questions->all();
+                $minus      = $this->_minus($questions);
+                $prime      = $this->_prime($questions);
+                $unknow     = $this->_unknow($questions);
+                $medium     = $this->_medium($questions);
+                $eleves     = new \Application\Model\UserClass();
+                $eleves     = $eleves->getEleves(1);
+
+                // TODO : Resume & Note are !== need check !
+
+                foreach ($eleves as $key => $eleve) {
+                    if ($key === 0) {
+                        $answer->value($eleve['idProfil'], $evaluation['idEvaluation'], $minus);
+                        echo $eleve['user'].' is minus'."\n";
+                    } elseif ($key === 1) {
+                        $answer->value($eleve['idProfil'], $evaluation['idEvaluation'], $prime);
+                        echo $eleve['user'].' is prime'."\n";
+                    } elseif ($key === 2) {
+                        $answer->value($eleve['idProfil'], $evaluation['idEvaluation'], $unknow);
+                        echo $eleve['user'].' is unkown'."\n";
+                    } else {
+                        $answer->value($eleve['idProfil'], $evaluation['idEvaluation'], $medium);
+                        echo $eleve['user'].' has medium answer'."\n";
+                    }
+                }
+
+            }
+
+        }
+
+        protected function _question($questions, $value)
+        {
+            $out = array();
+            foreach ($questions as $question)
+                $out[$question['idQuestion']] = $value;
+
+            return $out;
+        }
+
+        protected function _minus($questions)
+        {
+            return $this->_question($questions, 0);
+        }
+
+        protected function _prime($questions)
+        {
+            return $this->_question($questions, 2);
+        }
+
+        protected function _medium($questions)
+        {
+            return $this->_question($questions, 1);
+        }
+
+        protected function _unknow($questions)
+        {
+            return $this->_question($questions, -1);
         }
 
         public function makeEvaluation()
@@ -67,7 +139,7 @@ namespace Application\Bin\Command\Sample {
 
                     echo 'Evaluation for '.$p['user'].' #'.$id.' : '.$label."\n";
 
-                    for ($j= 0; $j <= 30; $j++) {
+                    for ($j= 0; $j <= $this->maxQuestion; $j++) {
                         $note   = rand(1, 10);
                         $taxo   = rand(1, 4);
                         $item1  = rand(0, $m_cap);
@@ -101,7 +173,7 @@ namespace Application\Bin\Command\Sample {
             $faker      = \Faker\Factory::create();
 
             for ($i = 1; $i <= 6; $i++) {
-                for ($j = 0; $j <= 30; $j++) {
+                for ($j = 0; $j <= $this->maxEleve; $j++) {
 
                     $name       = $faker->name;
                     $username   = $faker->username;
@@ -122,14 +194,15 @@ namespace Application\Bin\Command\Sample {
             $con            = new \Application\Model\Know();
             $domaine        = new \Application\Model\Domain();
             $ty             = 0;
+
 /*
-INSERT INTO domain VAlUES (1, 'electricte');
-INSERT INTO domain VAlUES (2, 'physique');
-INSERT INTO domain VAlUES (3, 'optique');
-INSERT INTO domain VAlUES (4, 'chimie');
-INSERT INTO domain VAlUES (5, 'thermo-dynamique');
-INSERT INTO domain VAlUES (6, 'mathematique');
-INSERT INTO domain VAlUES (7, 'general');
+    INSERT INTO domain VAlUES (1, 'electricte');
+    INSERT INTO domain VAlUES (2, 'physique');
+    INSERT INTO domain VAlUES (3, 'optique');
+    INSERT INTO domain VAlUES (4, 'chimie');
+    INSERT INTO domain VAlUES (5, 'thermo-dynamique');
+    INSERT INTO domain VAlUES (6, 'mathematique');
+    INSERT INTO domain VAlUES (7, 'general');
 */
 
             while ($connaissance->eof() !== true) {

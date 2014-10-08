@@ -1,6 +1,7 @@
 DB := 'Application/Database/Maestria.db'
 DBD := 'Application/Database'
 SQL := 'Application/Database/maestria.sql'
+VENDOR := 'vendor'
 COMPOSER := $(shell if [ `which composer` ]; then echo 'composer'; else curl -sS https://getcomposer.org/installer | php > /dev/null 2>&1 ; echo './composer.phar'; fi;)
 
 db-reset:
@@ -25,3 +26,4 @@ update:
 
 install:
 	$(COMPOSER) install --no-dev
+
