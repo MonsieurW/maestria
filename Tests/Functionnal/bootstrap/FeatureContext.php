@@ -23,24 +23,24 @@ class FeatureContext extends MinkContext
     /**
      * @When /^I am login with user "([^"]*)" password "([^"]*)"$/
      */
-    public function iAmLoginWithUserPassword($arg1, $arg2)
+    public function iAmLoginWithUserPassword($user, $password)
     {
         // User : Arg1
         // Password : Arg2
-        $this->fillField('user', $arg1);
-        $this->fillField('password', $arg2);
+        $this->fillField('user', $user);
+        $this->fillField('password', $password);
         $this->pressButton('login');
     }
 
-/**
- * @When /^I follow the redirection$/
- * @Then /^I should be redirected$/
- */
-public function iFollowTheRedirection()
-{
-    $client = $this->getSession()->getDriver()->getClient();
-    $client->followRedirects(true);
-    $client->followRedirect();
-}
+    /**
+     * @When /^I follow the redirection$/
+     * @Then /^I should be redirected$/
+     */
+    public function iFollowTheRedirection()
+    {
+        $client = $this->getSession()->getDriver()->getClient();
+        $client->followRedirects(true);
+        $client->followRedirect();
+    }
 
 }
