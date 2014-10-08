@@ -25,11 +25,20 @@ class FeatureContext extends MinkContext
      */
     public function iAmLoginWithUserPassword($user, $password)
     {
-        // User : Arg1
-        // Password : Arg2
         $this->fillField('user', $user);
         $this->fillField('password', $password);
         $this->pressButton('login');
+    }
+
+
+    /**
+     * @When /^I login as admin$/
+     */
+    public function iLoginAsAdmin()
+    {
+        $this->visit('/');
+        $this->iAmLoginWithUserPassword('admin', 'admin');
+        $this->visit('/');
     }
 
     /**
@@ -38,7 +47,7 @@ class FeatureContext extends MinkContext
      */
     public function iFollowTheRedirection()
     {
-        $client = $this->getSession()->getDriver()->getClient();
+        $client     = $this->getSession()->getDriver()->getClient();
         $client->followRedirects(true);
         $client->followRedirect();
     }

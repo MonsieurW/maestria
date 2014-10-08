@@ -15,7 +15,7 @@ namespace Application\Controller {
         {
             $ev                      = new \Application\Model\Evaluation();
             $data                    = $ev->get($evaluate_id);
-            $class                   = (new \Application\Model\Classe)->all();
+            $class                   = (new \Application\Model\Classe())->all();
 
             if (empty($data)) {
                 return $this->greut->render('hoa://Application/View/Main/NotFound.tpl.php');

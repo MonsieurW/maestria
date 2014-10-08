@@ -62,7 +62,7 @@ namespace Application\Controller {
             $session['connect'] = true;
             $session['id']      = $model['idProfil'];
 
-
+            echo 'TEST';
 
             if ($redirect === null) {
                $this->redirector->redirect('mainindex');
