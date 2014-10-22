@@ -36,6 +36,16 @@ namespace Application\Model {
                 ->fetchAll();
         }
 
+        public function update($id, $label, $description)
+        {
+             $this->sql('UPDATE evaluation SET label = :l, description = :d WHERE idEvaluation = :i', array(
+                'i' => $id,
+                'l' => $label,
+                'd' => $description
+            ));
+
+        }
+
         public function get($id)
         {
             $all = $this

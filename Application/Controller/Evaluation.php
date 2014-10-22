@@ -66,9 +66,9 @@ namespace Application\Controller {
                     && isset($item['note'])  === true && $item['note']  !== ''
                     && isset($item['item1']) === true && $item['item1'] !== ''
                     && isset($item['item2']) === true && $item['item2'] !== ''
-                    && isset($item['taxo'])  === true && $item['taxo']  !== ''
                 )
 
+            
                     $return[$i] = $item;
             }
 
@@ -114,8 +114,85 @@ namespace Application\Controller {
 
         public function editAction($professor_id, $evaluation_id)
         {
-            // TODO : Make and edit ? or an error here
-            var_dump($professor_id, $evaluation_id);
+            $evaluation = new \Application\Model\Evaluation($professor_id);
+            $questions  = new \Application\Model\Questions($evaluation_id);
+            $know       = new \Application\Model\Know();
+            $domain     = new \Application\Model\Domain();            
+            $evaluation = $evaluation->get($evaluation_id);
+            $questions  = $questions->get();
+            $new        = false;
+
+
+            for($i = 0; $i <= 30; $i++){
+                if(isset($questions[$i])) {
+                    $questions[$i]['item1Label'] = $know->get($questions[$i]['refItem1'])[0]['item'];
+                    $questions[$i]['item2Label'] = $know->get($questions[$i]['refItem2'])[0]['item'];
+                }
+                else {
+                    if($new === false){
+                        $new = true;
+                        $i  += 1;
+                    }
+                    $questions[$i] = array(
+                        'idQuestion'    => 'n'.$i,
+                        'title'         => '',
+                        'taxoPrincipal' => '',
+                        'note'          => '',
+                        'refItem1'      => '',
+                        'item1Label'    => '',
+                        'refItem2'      => '',
+                        'item2Label'    => '',
+                    );
+                }
+            }
+
+
+            $this->data->pid        = $professor_id;
+            $this->data->eid        = $evaluation_id;
+            $this->data->evaluation = $evaluation;
+            $this->data->questions  = $questions;
+            $this->data->domain     = $domain->all();
+            
+            // TODO : Add question on edit
+            
+            $this->greut->render();
+        }
+
+        public function updateAction($professor_id, $evaluation_id)
+        {
+
+            $title          = $_POST['title'];
+            $description    = $_POST['description'];
+            $question       = array();
+            $evaluation     = new \Application\Model\Evaluation($professor_id);
+            $new            = array();
+
+            foreach ($_POST as $key => $value) {
+                if ($key[0] === 'q') {
+                    preg_match('#qn?([0-9]+)_(.*)#', $key, $m);
+                    $i                  = intval($m[1]);
+                    $t                  = $m[2];
+                    $question[$i][$t]   = $value;
+                }
+            }
+
+            $question = $this->filter($question);
+            $ques     = new \Application\Model\Questions($evaluation_id);
+
+            $evaluation->update($evaluation_id, $title, $description);
+
+            foreach ($question as $i => $q) {
+                $title = $q['title'];
+                $taxo  = $q['taxo'];
+                $note  = $q['note'];
+                $i1    = $q['item1'];
+                $i2    = $q['item2'];
+
+                $ques->update($i, $title, $note, $taxo, $i1, $i2);
+            }
+
+            $this->redirector->redirect('showEvaluation', array('evaluation_id' => $evaluation_id, 'professor_id' => $professor_id));
+
         }
 
         public function destroyAction($evaluation_id, $professor_id)

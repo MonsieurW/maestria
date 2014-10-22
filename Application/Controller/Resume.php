@@ -69,15 +69,18 @@ namespace Application\Controller {
                         return 1;
                         break;
                     case 1:
-                        return 0.66;
+                        return 0.5;
                         break;
                     case 0:
-                        return 0.33;
-                        break;
                     case -1:
                     default:
                         return 0;
                 }
+            };
+
+            $n = function ($note) {
+
+                return round($note * 2) / 2;
             };
 
             foreach ($answer as $i => $eleve) {
@@ -103,8 +106,7 @@ namespace Application\Controller {
                             $cur += intval($value[1]);
                         }
                     }
-
-                    $real_note[$idUser] = ceil(($notation * $cur) / $max);
+                    $real_note[$idUser] = $n(($notation * $cur) / $max);
                 }
 
                 $answer[$i]['result'] = $moyen;

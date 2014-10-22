@@ -35,6 +35,21 @@ namespace Application\Model {
 
         }
 
+        public function update($id, $title, $note, $taxo, $i1, $i2)
+        {
+            $update = 'UPDATE questions SET title = :t, note  = :n, taxoPrincipal = :p, refItem1 = :r1, refItem2 = :r2 WHERE idQuestion = :id';
+
+            $this->sql($update, array(
+                'id' => $id,
+                't'  => $title,
+                'n'  => $note,
+                'p'  => $taxo,
+                'r1' => $i1,
+                'r2' => $i2
+            ));
+    
+        }
+
         public function get()
         {
             return $this
