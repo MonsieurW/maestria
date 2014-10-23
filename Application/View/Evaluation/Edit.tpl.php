@@ -55,7 +55,7 @@ $this->block('container');
           <label for="firstname" class="col-md-3 control-label">Item 1</label>
           <div class="col-md-8">
             <div class="input-group">
-              <input value="<?php echo $question['refItem1']; ?>" name="q<?php echo $question['idQuestion']; ?>_item1" class="form-control" type="text">
+              <input value="<?php echo $question['refItem1']; ?>" name="q<?php echo $question['idQuestion']; ?>_item1" class="form-control" type="hidden">
               <input value="<?php echo $question['item1Label']; ?>" placeholder="Item 1" class="form-control" type="text">
               <span class="input-group-btn">
                 <button class="button btn btn-default choose"><i class="fa fa-briefcase"></i></button>
@@ -66,17 +66,15 @@ $this->block('container');
 
         <div class="form-group">
           <label for="firstname" class="col-md-3 control-label">Item 2</label>
-          <div class="col-md-8">
-            <div class="input-group">
-            
-              <span class="input-group-btn">
-                <input value="<?php echo $question['refItem2']; ?>" name="q<?php echo $question['idQuestion']; ?>_item2" class="form-control" type="text">
-                <input value="<?php echo $question['item2Label']; ?>" placeholder="Item 2" class="form-control" type="text"> 
-              <span class="input-group-btn">
-                <button class="button btn btn-default choose"><i class="fa fa-briefcase"></i></button>
-              </span>
+            <div class="col-md-8">
+              <div class="input-group">
+                <input value="<?php echo $question['refItem2']; ?>" name="q<?php echo $question['idQuestion']; ?>_item2" class="form-control" type="hidden">
+                <input value="<?php echo $question['item2Label']; ?>" placeholder="Item 2" class="form-control" type="text">
+                <span class="input-group-btn">
+                  <button class="button btn btn-default choose"><i class="fa fa-briefcase"></i></button>
+                </span>
+              </div>
             </div>
-          </div>
         </div>
 
       </div>

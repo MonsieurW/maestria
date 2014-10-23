@@ -170,9 +170,9 @@ namespace Application\Controller {
             foreach ($_POST as $key => $value) {
                 if ($key[0] === 'q') {
                     preg_match('#qn?([0-9]+)_(.*)#', $key, $m);
-                    $i                  = intval($m[1]);
+                    $i                  = ($key[1] === 'n') ? 'n'.intval($m[1]) : intval($m[1]);
                     $t                  = $m[2];
-                    $question[$i][$t]   = $value;
+                    $question[$i][$t]   = $value;                    
                 }
             }
 
@@ -188,7 +188,12 @@ namespace Application\Controller {
                 $i1    = $q['item1'];
                 $i2    = $q['item2'];
 
-                $ques->update($i, $title, $note, $taxo, $i1, $i2);
+                if(is_string($i) && $i[0] === 'n') {
+                    $ques->create($title, $note, $taxo, $i1, $i2);
+                }
+                else {
+                    $ques->update($i, $title, $note, $taxo, $i1, $i2);
+                }
             }
 
             $this->redirector->redirect('showEvaluation', array('evaluation_id' => $evaluation_id, 'professor_id' => $professor_id));
