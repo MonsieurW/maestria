@@ -18,10 +18,10 @@ namespace Application\Model {
             $this->sql($sql, array(
                 'eval'  => $this->_eval,
                 'title' => $title,
-                'note'  => $note,
-                'taxo'  => $taxo,
-                'i1'    => $item1,
-                'i2'    => $item2
+                'note'  => intval($note),
+                'taxo'  => intval($taxo),
+                'i1'    => intval($item1),
+                'i2'    => intval($item2)
             ));
 
             return $this->_layer->lastInsertId();
@@ -42,16 +42,17 @@ namespace Application\Model {
             $this->sql($update, array(
                 'id' => $id,
                 't'  => $title,
-                'n'  => $note,
-                'p'  => $taxo,
-                'r1' => $i1,
-                'r2' => $i2
+                'n'  => intval($note),
+                'p'  => intval($taxo),
+                'r1' => intval($i1),
+                'r2' => intval($i2)
             ));
     
         }
 
         public function get()
         {
+
             return $this
                         ->sql('SELECT * FROM questions WHERE refEvaluation = :e', array('e' => $this->_eval))
                         ->fetchAll();

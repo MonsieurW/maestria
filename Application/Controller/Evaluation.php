@@ -61,14 +61,7 @@ namespace Application\Controller {
         {
             $return = array();
             foreach ($array as $i => $item) {
-                $valid = false;
-                if(    isset($item['title']) === true && $item['title'] !== ''
-                    && isset($item['note'])  === true && $item['note']  !== ''
-                    && isset($item['item1']) === true && $item['item1'] !== ''
-                    && isset($item['item2']) === true && $item['item2'] !== ''
-                )
-
-            
+                if(isset($item['title']) === true && $item['title'] !== '')
                     $return[$i] = $item;
             }
 

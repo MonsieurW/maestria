@@ -45,6 +45,7 @@ namespace Application\Controller {
 
         public function showAction($evaluate_id, $resume_id)
         {
+
             $classroom_id   = $resume_id;
             $evaluation     = new \Application\Model\Evaluation();
             $evaluation     = $evaluation->get($evaluate_id);
@@ -89,8 +90,13 @@ namespace Application\Controller {
                 $moyen  = array();
                 foreach ($all as $taxo => $qs)
                     foreach ($qs as $q) {
+                        if(isset($note[$q['idQuestion']]) === false){
+                            $note[$q['idQuestion']] = -1;
+                        }
+ 
                         $re[$taxo][]                                = $convertNote($note[$q['idQuestion']]);
                         $notes[$eleve['refUser']][$q['idQuestion']] = array($q['note'], ceil($q['note'] * $convertNote($note[$q['idQuestion']]))); // TODO : Revoir algo !
+                        
                     }
 
                 foreach ($re as $key => $v)

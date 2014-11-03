@@ -1,4 +1,4 @@
-<?php
+	<?php
 $this->inherits('hoa://Application/View/Layout/Base.tpl.php');
 $this->block('container');
 
@@ -63,6 +63,12 @@ $annotation = function ($co, $cp, $ap, $an) {
 			<ul>
 				<?php 
 					$result = $value['result'];
+
+					$result[1] = (isset($result[1])) ? $result[1] : 0;
+					$result[2] = (isset($result[2])) ? $result[2] : 0;
+					$result[3] = (isset($result[3])) ? $result[3] : 0;
+					$result[4] = (isset($result[4])) ? $result[4] : 0; // TODO : Bug find a fix
+
 					ksort($result);
 
 					foreach ($result as $key => $value) {
