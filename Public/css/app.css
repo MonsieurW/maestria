@@ -65,6 +65,11 @@
   text-align: center;
 }
 
+ul.big {
+  height: 150px;
+  overflow-y: auto;
+}
+
 ul.big > li{
   list-style: none;
   float: left;
@@ -72,6 +77,7 @@ ul.big > li{
   height: auto;
   margin: 2px;
   background-color: #eee;
+  font-size: 0.7em;
   border: 1px solid #888;
   text-align: center;
 }

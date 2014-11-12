@@ -27,3 +27,6 @@ update:
 install:
 	$(COMPOSER) install --no-dev
 
+deploy:
+	cap staging deploy deploy:all
+
