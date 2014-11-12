@@ -1,12 +1,12 @@
 <?php
 $this->inherits('hoa://Application/View/Layout/Base.tpl.php');
-$this->block('container');
 $this->block('stylesheet');
 ?>
 <link href="/css/app.css" rel="stylesheet">
 <link href="/css/app.evaluate.css" rel="stylesheet">
 <?php
 $this->endBlock();
+$this->block('container');
 ?>
 <div class="container">
 	<div class="well">
@@ -33,7 +33,12 @@ $this->endBlock();
 	<input type="hidden" id="profil" name="user" value="" />
 	<div class="container" id="output"></div>
   	<div class="btn-on-bottom">
-      <button type="submit" class="btn btn-success" id="fSend" data-id="">Send</button>
+  		<div class="btn-group">
+			<a class="btn btn-mini btn-default" href="/professor/<?php echo $pr; ?>/evaluation/<?php echo $id; ?>" role="button"><i class="glyphicon glyphicon-eye-open"></i></a>
+			<a class="btn btn-mini btn-primary" href="/evaluate/<?php echo $id; ?>" role="button"><i class="fa fa-file"></i></a>
+			<a class="btn btn-mini btn-success" href="/evaluate/<?php echo $id; ?>/resume/" role="button"><i class="fa fa-pie-chart"></i></a>
+		</div>
+      	<button type="submit" class="btn btn-success" id="fSend" data-id="">Send</button>
     </div>
 
 </form>

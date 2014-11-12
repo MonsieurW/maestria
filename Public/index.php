@@ -3,6 +3,9 @@ namespace {
     require_once __DIR__ . '/../vendor/autoload.php';
     require_once __DIR__ .'/../Application/Maestria/Maestria.php'; // Need to use autoload xD
 
+
+    session_set_cookie_params(3600 , '/');
+
     try {
         $framework = new \Application\Maestria\Maestria();
         $framework->kit('redirector', new \Application\Controller\Kit\Redirection());

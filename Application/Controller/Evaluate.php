@@ -22,6 +22,7 @@ namespace Application\Controller {
             }
 
             $this->data->id          = $data['idEvaluation'];
+            $this->data->pr          = $data['refUser'];
             $this->data->titre       = $data['label'];
             $this->data->description = $data['description'];
             $this->data->class       = $class;

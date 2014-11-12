@@ -25,7 +25,14 @@ $this->block('container');
 	}
 ?>
 </div>
-<?php 
+<div class="btn-on-bottom">
+	<div class="btn-group">
+		<a class="btn btn-mini btn-default" href="/professor/<?php echo  $evaluate['refUser']; ?>/evaluation/<?php echo $evaluate_id; ?>" role="button"><i class="glyphicon glyphicon-eye-open"></i></a>
+		<a class="btn btn-mini btn-primary" href="/evaluate/<?php echo $evaluate_id; ?>" role="button"><i class="fa fa-file"></i></a>
+		<a class="btn btn-mini btn-success" href="/evaluate/<?php echo $evaluate_id; ?>/resume/" role="button"><i class="fa fa-pie-chart"></i></a>
+	</div>
+</div>
+<?php
 $this->endBlock();
 $this->block('stylesheet');
 ?>

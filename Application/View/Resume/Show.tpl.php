@@ -48,7 +48,7 @@ $annotation = function ($co, $cp, $ap, $an) {
 ?>
 <div class="container">
 <?php foreach ($answer as $key => $value) { ?>
-		<div class="col-lg-4 questions answer">
+		<div class="col-lg-3 questions answer">
 			<h5><?php echo $value['user']; ?>
 			<?php if($real[$value['refUser']] > 15) { ?>
 				<span class="hidden label label-success pull-right" data-toggle><?php echo $real[$value['refUser']]; ?>/<?php echo $note_max; ?></span>

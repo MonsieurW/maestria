@@ -1,5 +1,10 @@
 <?php
 $this->inherits('hoa://Application/View/Layout/Base.tpl.php');
+$this->block('stylesheet');
+?>
+<link href="/css/app.css" rel="stylesheet">
+<?php
+$this->endBlock();
 $this->block('container');
 ?>
 <div class="container">
@@ -50,5 +55,13 @@ $this->block('container');
 	</form>
 	<a href="/evaluate/<?php echo $id; ?>" class=" btn btn-success"><i class="glyphicon glyphicon-ok-circle"></i> Evaluate classroom</a>
 </div>
+<div class="btn-on-bottom">
+	<div class="btn-group">
+		<a class="btn btn-mini btn-default" href="#" role="button"><i class="glyphicon glyphicon-eye-open"></i></a>
+		<a class="btn btn-mini btn-primary" href="/evaluate/<?php echo $id; ?>" role="button"><i class="fa fa-file"></i></a>
+		<a class="btn btn-mini btn-success" href="/evaluate/<?php echo $id; ?>/resume/" role="button"><i class="fa fa-pie-chart"></i></a>
+	</div>
+</div>
+
 <?php
 $this->endBlock();
