@@ -13,8 +13,6 @@ namespace Application\Controller {
             $this->data->classe = $classe->all();
 
             $this->greut->render();
-
-            // TODO : Make pages
         }
 
         public function createActionAsync()

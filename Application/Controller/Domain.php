@@ -10,7 +10,7 @@ namespace Application\Controller {
         {
             $classe             = new \Application\Model\Domain();
             $this->data->classe = $classe->all();
-// TODO : Make pages
+
             $this->greut->render();
         }
 

@@ -25,9 +25,9 @@ namespace Application\Controller {
                 $this->data->isConnect          = true;
                 $this->loginUser                = $model['user'];
                 $this->data->loginUser          = $this->loginUser;
-                $this->isAdmin                  = ($model['isAdmin'] === '1') ? true : false; // TODO : Make it global !
-                $this->isProfessor              = ($model['isProfessor'] === '1') ? true : false; // TODO : Make it global !
-                $this->isModerator              = ($model['isModerator'] === '1') ? true : false; // TODO : Make it global !
+                $this->isAdmin                  = ($model['isAdmin'] === '1') ? true : false;
+                $this->isProfessor              = ($model['isProfessor'] === '1') ? true : false;
+                $this->isModerator              = ($model['isModerator'] === '1') ? true : false;
                 $this->data->loginIsModerator   = $this->isModerator;
                 $this->data->loginIsProfessor   = $this->isProfessor;
                 $this->data->loginIsAdmin       = $this->isAdmin;

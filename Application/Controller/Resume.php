@@ -52,15 +52,26 @@ namespace Application\Controller {
             $questions      = new \Application\Model\Questions($evaluate_id);
             $questions      = $questions->get();
             $answer         = new \Application\Model\Answer();
+            $know           = new \Application\Model\Know();
+            $know           = $know->getAll();
             $answer         = $answer->getEvaluation($evaluate_id);
             $all            = array();
             $notes          = array();
             $real_note      = array();
             $notation       = 20;
+            $linkQuestionKn = array();
+            $knowSorted     = array();
+
+            foreach ($know as $key => $value) {
+                $knowSorted[intval($value['idConnaissance'])] = $value['item'];
+            }
 
             foreach ($questions as $question) {
-                $all[$question['taxoPrincipal']][] = $question;
+                $all[$question['taxoPrincipal']][]  = $question;
+                $linkQuestionKn[intval($question['idQuestion'])] = array($question['refItem1'] , $question['refItem2']);
             }
+
+
 
             $convertNote = function ($note) {
                 $note = intval($note);
@@ -88,6 +99,8 @@ namespace Application\Controller {
                 $re     = array();
                 $note   = json_decode($eleve['note'], true);
                 $moyen  = array();
+                $resutlKn  = array();
+
                 foreach ($all as $taxo => $qs)
                     foreach ($qs as $q) {
                         if(isset($note[$q['idQuestion']]) === false){
@@ -95,7 +108,7 @@ namespace Application\Controller {
                         }
  
                         $re[$taxo][]                                = $convertNote($note[$q['idQuestion']]);
-                        $notes[$eleve['refUser']][$q['idQuestion']] = array($q['note'], ceil($q['note'] * $convertNote($note[$q['idQuestion']]))); // TODO : Revoir algo !
+                        $notes[$eleve['refUser']][$q['idQuestion']] = array($q['note'], ceil($q['note'] * $convertNote($note[$q['idQuestion']])));
                         
                     }
 
@@ -106,21 +119,52 @@ namespace Application\Controller {
                     $max = 0;
                     $cur = 0;
 
-                    foreach ($note_question as $key => $value) {
-                        if ($value[1] !== null and $value[0] !== null) {
-                            $max += intval($value[0]);
-                            $cur += intval($value[1]);
+
+                    if(is_array($note_question))
+                        foreach ($note_question as $key => $value) {
+                            if ($value[1] !== null and $value[0] !== null) {
+                                $max += intval($value[0]);
+                                $cur += intval($value[1]);
+
+                                $i1 = $linkQuestionKn[$key][0];
+                                $i2 = $linkQuestionKn[$key][1];
+                                $no = intval($value[1]) / intval($value[0]);
+
+                                $resutlKn[$i1][] = $no;
+                                $resutlKn[$i2][] = $no;
+                               
+                                
+                            }
+
                         }
-                    }
-                    $real_note[$idUser] = $n(($notation * $cur) / $max);
+
+                    if($max !== 0)
+                        $real_note[$idUser] = $n(($notation * $cur) / $max);
+                    else
+                        $real_note[$idUser] = 0;
                 }
 
                 $answer[$i]['result'] = $moyen;
+
+        
+
+                foreach ($resutlKn as $item => $notes) {
+                    $total = count($notes);
+                    $sum   = array_sum($notes);
+                    $moy   = 0;
+
+                    if($total !== 0)
+                        $moy = ($sum / $total);
+
+                    $answer[$i]['annot'][$knowSorted[$item]] = $moy;
+                }
+
             }
 
             $this->data->note_max  = $notation;
             $this->data->real      = $real_note;
             $this->data->answer    = $answer;
+
             $this->greut->render();
         }
     }
