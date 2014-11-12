@@ -30,3 +30,9 @@ install:
 deploy:
 	cap staging deploy deploy:all
 
+push:
+	git add --all
+	git commit -a -m "Update for push"
+	git push
+	make deploy
+
