@@ -6,7 +6,7 @@ x 	Page edition des eval
 	Les sticker pour savoir les capacité dans un domaine, 
 	Page plan de classe  
 x	Manque un switch entre Resume/Evaluation/Resultat
-	Regler la deco automatique => 1h
+x	Regler la deco automatique => 1h
 	Page résultat de ts les controles
 	Information sur l'eleve : Lunette, bavardage etc ...
 	Page tableau de bord
