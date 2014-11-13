@@ -249,7 +249,7 @@ namespace Application\Bin\Command\Sample {
 
                             if ($line[$i] !== '') {
                                 echo 'Add '.$id.' > '.$th.':'.$line[$i]."\n";
-                                $con->add($do, $idTheme, $ty, $lvl, $line[$i]);
+                                $con->add($do, $idTheme, $line[$i]);
                             }
 
                             $lvl++;

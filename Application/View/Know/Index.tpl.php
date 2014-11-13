@@ -13,7 +13,6 @@ $this->block('container');
 			<tr>
 				<th>Domain</th>
 				<th>Theme</th>
-				<th>Type</th>
 				<th>Level</th>
 				<th class="col-lg-5">Item</th>
 				<th></th>
@@ -39,7 +38,6 @@ $this->block('container');
                 echo '<tr>'.
                         '<td><a href="#" id="domain" data-source="/api/domaine" data-type="select" data-pk="'.$value['idConnaissance'].'"  class="editable label label-success">'.$do($value['refDomain']).'</a></td>'.
                         '<td><a href="#" id="theme" data-source="/api/theme" data-type="select" data-pk="'.$value['idConnaissance'].'"  class="editable label label-info">'.$th($value['refTheme']).'</a></td>'.
-                        '<td><a href="#" id="type" data-source="/api/type" data-type="select" data-pk="'.$value['idConnaissance'].'" class="editable">'.(($value['type'] === '0') ? 'Connaissance' :'Compétence').'</a></td>'.
                         '<td><a href="#" id="level" data-source="/api/level" data-type="select" data-pk="'.$value['idConnaissance'].'" class="editable">'.$value['lvl'].'</a></td>'.
                         '<td><a href="#" id="item" data-type="textarea" data-pk="'.$value['idConnaissance'].'" class="editable">'.$value['item'].'</a></td>'.
                         '<td><a href="#" class="trash btn btn-danger" data-id="'.$value['idConnaissance'].'"><i class="glyphicon glyphicon-trash"></i></a>'.
@@ -90,37 +88,11 @@ $this->block('container');
 		    </div>
 		  </div>
 		  <div class="form-group">
-		    <label for="inputPassword3" class="col-sm-2 control-label">Type</label>
-		    <div class="col-sm-10">
-		      <select id="Qtype">
-		      	<option value="0">Connaissance</option>
-		      	<option value="1">Compétence</option>
-		      </select>
-		    </div>
-		  </div>
-		  <div class="form-group">
-		    <label for="inputPassword3" class="col-sm-2 control-label">Level</label>
-		    <div class="col-sm-10">
-		 		<select id="Qlevel">
-		      	<option>1</option>
-		      	<option>2</option>
-		      	<option>3</option>
-		      	<option>4</option>
-		      	<option>5</option>
-		      	<option>6</option>
-		      	<option>7</option>
-		      	<option>8</option>
-		      	<option>9</option>
-		      </select>
-		    </div>
-		  </div>
-		  <div class="form-group">
 		    <label for="inputPassword3" class="col-sm-2 control-label">Item</label>
 		    <div class="col-sm-10">
 		      <textarea id="Qitem" class="form-control"></textarea>
 		    </div>
 		  </div>
-
       </div>
       <div class="modal-footer">
         <input type="submit" class="btn btn-primary" id="save" data-dismiss="modal" />

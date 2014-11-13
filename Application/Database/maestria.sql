@@ -50,31 +50,30 @@ CREATE TABLE IF NOT EXISTS connaissance (
 	idConnaissance 	INTEGER,
 	refDomain		INTEGER,
 	refTheme		INTEGER,
-	type			INTEGER, 	/* Connaissance | Compétence */
 	lvl				INTEGER, 	/* lvl 9 */
 	item		 	TEXT,		/* Les conducteurs sont parcourus par un courant sans avoir de tension à leurs bornes car les conducteurs ne consomment pas d'énergie électrique. */
-	
+
 	PRIMARY KEY (idConnaissance)
 );
 
 CREATE TABLE IF NOT EXISTS class (
 	idClass	    	INTEGER,
 	value		 	VARCHAR(10), /* 2nd5 , TBTS STI, ... */
-	
+
 	PRIMARY KEY (idClass)
 );
 
 CREATE TABLE IF NOT EXISTS domain (
 	idDomain    	INTEGER,
 	domainValue		VARCHAR(50), /* Math, Physique, Chimie, SVT */
-	
+
 	PRIMARY KEY (idDomain)
 );
 
 CREATE TABLE IF NOT EXISTS theme (
 	idTheme     	INTEGER,
 	themeValue		VARCHAR(50), /* Electricité statique, Circuit électrique */
-	
+
 	PRIMARY KEY (idTheme)
 );
 /**

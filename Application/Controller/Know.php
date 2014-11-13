@@ -49,15 +49,13 @@ namespace Application\Controller {
             $mode   = (isset($_POST['mode']))   ? $_POST['mode']   : 'update';
             $theme  = (isset($_POST['theme']))  ? $_POST['theme']  : null;
             $domain = (isset($_POST['domain'])) ? $_POST['domain'] : null;
-            $type   = (isset($_POST['type']))   ? $_POST['type']   : null;
-            $level  = (isset($_POST['level']))  ? $_POST['level']  : null;
             $item   = (isset($_POST['item']))   ? $_POST['item']   : null;
 
             $connaissance = new \Application\Model\Know();
 
             switch ($mode) {
                 case 'new':
-                    $connaissance->add($domain, $theme, $type, $level, $item);
+                    $connaissance->add($domain, $theme, $item);
                     break;
                 case 'delete':
                     $connaissance->destroy($id);
@@ -70,9 +68,6 @@ namespace Application\Controller {
                             break;
                         case 'item':
                             $connaissance->update($id, 'item', $value);
-                            break;
-                        case 'type':
-                            $connaissance->update($id, 'type', $value);
                             break;
                         case 'domain':
                             $connaissance->update($id, 'refDomain', $value);
