@@ -66,6 +66,8 @@ namespace Application\Controller {
 
                 $questions[$key]['item1'] = $item->getText($question['refItem1']);
                 $questions[$key]['item2'] = $item->getText($question['refItem2']);
+                $questions[$key]['theme1'] = $item->getTheme($question['refItem1']);
+                $questions[$key]['theme2'] = $item->getTheme($question['refItem2']);
 
                 switch ($question['taxoPrincipal']) {
                   case '1':
@@ -88,11 +90,33 @@ namespace Application\Controller {
                 }
             }
 
-            $this->data->users = $eleve;
-            $this->data->questions = $questions;
-            $this->data->answers = $answers;
+            $sticker = array();
+            foreach ($answers as $idProfil => $value) {
+                $stats = new \Application\Model\DomainStats();
+                $stats = $stats->getDomainStatistic($idProfil);
 
-            // TODO : Add Theme Domain ItemText
+                foreach ($questions as $key => $question) {
+                    $t1 = $question['theme1'];
+                    $t2 = $question['theme2'];
+
+                    if(isset($stats[$t1])){
+                        $t1 = $stats[$t1];
+                        $sticker[$idProfil][$question['idQuestion']]['t1'] = array_sum($t1) / count($t1);
+                    }
+                    if(isset($stats[$t2])){
+                        $t2 = $stats[$t2];
+                        $sticker[$idProfil][$question['idQuestion']]['t2'] = array_sum($t2) / count($t2);
+                    }
+                }
+
+
+            }
+
+
+            $this->data->sticker    = $sticker;
+            $this->data->users      = $eleve;
+            $this->data->questions  = $questions;
+            $this->data->answers    = $answers;
 
             $this->greut->render('hoa://Application/View/Evaluate/Control.tpl.php');
         }
