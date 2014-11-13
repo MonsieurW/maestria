@@ -80,6 +80,18 @@ namespace Application\Model {
             return $elmt;
         }
 
+        public function getTheme($id)
+        {
+            $item = $this->get($id);
+            $elmt = '';
+
+            if (!empty($item) and isset($item[0])) {
+                $elmt = $item[0]['refTheme'];
+            }
+
+            return $elmt;
+        }
+
         public function all($start, $nb)
         {
             return $this->sql('SELECT * FROM connaissance ORDER BY refDomain LIMIT :l, :n', array('l' => $start, 'n' => $nb))->fetchAll();
