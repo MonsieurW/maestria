@@ -3,7 +3,8 @@
 x 	Page edition des eval
 	Page visaluation pour les éleves
 	Messagerie Eleve => Prof
-	Les sticker pour savoir les capacité dans un domaine,
+x	Les sticker pour savoir les capacité dans un domaine,
+	Verification algo (Sticker, Notation)
 	Page plan de classe
 x	Manque un switch entre Resume/Evaluation/Resultat
 x	Regler la deco automatique => 1h
