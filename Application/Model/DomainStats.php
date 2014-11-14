@@ -55,6 +55,8 @@ namespace Application\Model {
             foreach ($notes as $id => $note) {
                 if(isset($questByTheme[$id])) {
                     foreach ($questByTheme[$id] as $idTheme) {
+                        if($note < 0)
+                            $note = 0;
                         $domainNotes[$idTheme][] = $note;
                     }
                 }

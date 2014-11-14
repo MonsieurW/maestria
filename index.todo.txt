@@ -8,6 +8,8 @@ x	Les sticker pour savoir les capacité dans un domaine,
 	Page plan de classe
 x	Manque un switch entre Resume/Evaluation/Resultat
 x	Regler la deco automatique => 1h
+	Pas de typage sur les connaissances
+	Level automatique des connaissances
 	Ajouter un système de notification quand les appel ajax sont fini & good
 	Quand on send en ajax, reload page after
 	Page résultat de ts les controles
