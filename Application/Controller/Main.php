@@ -61,8 +61,13 @@ namespace Application\Controller {
             $model              = $model->getByUser($user);
             $session['connect'] = true;
             $session['id']      = $model['idProfil'];
+            $hoa                = $_SESSION['__Hoa__']['user'][0];
 
             echo 'TEST';
+            \Application\Maestria\Log::info('Connect : '.$user);
+            \Application\Maestria\Log::info('Cache Expire : '.session_cache_expire());
+            \Application\Maestria\Log::info('Start : '.$hoa['started']->format('d-m-Y H:i:s'));
+            \Application\Maestria\Log::info('Lifetime : '.$hoa['lifetime']->format('d-m-Y H:i:s'));
 
             if ($redirect === null) {
                $this->redirector->redirect('mainindex');
@@ -79,7 +84,7 @@ namespace Application\Controller {
             $session['id']      = null;
 
             \Hoa\Session\Session::destroy();
-
+            \Application\Maestria\Log::info('Logout');
             $this->redirector->redirect('mainindex');
         }
 

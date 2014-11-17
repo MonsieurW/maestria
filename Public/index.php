@@ -5,15 +5,19 @@ namespace {
 
 
     session_set_cookie_params(3600 , '/');
+    session_cache_expire(3600);
 
     try {
         $framework = new \Application\Maestria\Maestria();
         $framework->kit('redirector', new \Application\Controller\Kit\Redirection());
         $framework->setAcl();
+
+        \Application\Maestria\Log::info('GET : /'.$framework->getRouter()->getURI());
+
         $framework->run();
     } catch (\Hoa\Session\Exception\Expired $e) {
-        $router = $framework->getRouter();
-        $router->route('/');
+        \Application\Maestria\Log::info('Expired');
+        $framework->getRouter()->route('/');
         $framework->run();
     } catch (\Exception $e) {
         echo '<p>'.$e->getMessage().'</p>';

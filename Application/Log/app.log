@@ -1,0 +1,11 @@
+[17-11-2014 10:50:27]	info	Connect : admin
+[17-11-2014 10:50:27]	info	Cache Expire : 3600
+[17-11-2014 10:50:27]	info	Start : 17-11-2014 10:50:13
+[17-11-2014 10:50:27]	info	Start : 17-11-2014 11:14:13
+[17-11-2014 12:10:08]	info	Expired : /classroom/
+[17-11-2014 12:10:29]	info	GET : /classroom/
+[17-11-2014 12:10:34]	info	GET : /
+[17-11-2014 12:10:39]	info	GET : /evaluate/1
+[17-11-2014 12:10:40]	info	GET : /api/control/1/eval/1
+[17-11-2014 12:10:42]	info	GET : /evaluate/
+[17-11-2014 12:10:43]	info	GET : /evaluate/
