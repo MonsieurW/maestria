@@ -1,11 +1,39 @@
-[17-11-2014 10:50:27]	info	Connect : admin
-[17-11-2014 10:50:27]	info	Cache Expire : 3600
-[17-11-2014 10:50:27]	info	Start : 17-11-2014 10:50:13
-[17-11-2014 10:50:27]	info	Start : 17-11-2014 11:14:13
-[17-11-2014 12:10:08]	info	Expired : /classroom/
-[17-11-2014 12:10:29]	info	GET : /classroom/
-[17-11-2014 12:10:34]	info	GET : /
-[17-11-2014 12:10:39]	info	GET : /evaluate/1
-[17-11-2014 12:10:40]	info	GET : /api/control/1/eval/1
-[17-11-2014 12:10:42]	info	GET : /evaluate/
-[17-11-2014 12:10:43]	info	GET : /evaluate/
+[17-11-2014 14:58:35]	info	GET : /login
+[17-11-2014 14:58:41]	info	GET : /login
+[17-11-2014 14:58:41]	info	Connect : admin
+[17-11-2014 14:58:41]	info	Cache Expire : 60
+[17-11-2014 14:58:41]	info	Start : 17-11-2014 14:58:28
+[17-11-2014 14:58:41]	info	Lifetime : 17-11-2014 15:58:28
+[17-11-2014 14:58:41]	info	GET : /
+[17-11-2014 15:43:51]	info	GET : /
+[17-11-2014 15:43:52]	info	GET : /login
+[17-11-2014 15:44:03]	info	GET : /login
+[17-11-2014 15:44:03]	info	Connect : admin
+[17-11-2014 15:44:03]	info	Cache Expire : 60
+[17-11-2014 15:44:03]	info	Start : 17-11-2014 15:43:52
+[17-11-2014 15:44:03]	info	Lifetime : 17-11-2014 16:43:52
+[17-11-2014 15:44:03]	info	GET : /
+[17-11-2014 15:44:06]	info	GET : /theme/
+[17-11-2014 15:44:14]	info	GET : /know/
+[17-11-2014 15:44:17]	info	GET : /user/
+[17-11-2014 15:44:21]	info	GET : /user/1
+[17-11-2014 15:44:24]	info	GET : /user/1/edit
+[17-11-2014 15:44:25]	info	GET : /api/class/
+[17-11-2014 15:44:26]	info	GET : /api/domain/
+[17-11-2014 15:44:56]	info	GET : /
+[17-11-2014 15:51:37]	info	GET : /
+[17-11-2014 15:51:41]	info	GET : /evaluate/1
+[17-11-2014 15:51:42]	info	GET : /api/control/1/eval/1
+[17-11-2014 15:51:46]	info	GET : /evaluate/
+[17-11-2014 15:51:47]	info	GET : /evaluate/
+[17-11-2014 16:17:25]	info	GET : /
+[17-11-2014 16:20:28]	info	GET : /professor/1/evaluation/
+[17-11-2014 16:20:33]	info	GET : /professor/3/evaluation/
+[17-11-2014 16:20:37]	info	GET : /evaluate/1
+[17-11-2014 16:20:38]	info	GET : /api/control/1/eval/1
+[17-11-2014 16:20:42]	info	GET : /professor/3/evaluation/
+[17-11-2014 16:20:46]	info	GET : /evaluate/4
+[17-11-2014 16:20:47]	info	GET : /api/control/1/eval/4
+[17-11-2014 16:20:49]	info	GET : /evaluate/4/resume/
+[17-11-2014 16:20:52]	info	GET : /
+[17-11-2014 16:27:17]	info	GET : /

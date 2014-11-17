@@ -17,7 +17,7 @@ namespace Application\Controller {
 
         public function construct()
         {
-            $session = new \Hoa\Session\Session('user', null, 5);
+            $session = new \Hoa\Session\Session('user');
             if (isset($session['connect']) and $session['connect'] === true) {
                 $this->connected                = true;
                 $model                          = new \Application\Model\User();

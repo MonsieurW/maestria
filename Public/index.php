@@ -3,9 +3,10 @@ namespace {
     require_once __DIR__ . '/../vendor/autoload.php';
     require_once __DIR__ .'/../Application/Maestria/Maestria.php'; // Need to use autoload xD
 
-
-    session_set_cookie_params(3600 , '/');
-    session_cache_expire(3600);
+    $minutes = 60;
+    session_set_cookie_params($minutes * 60 , '/');
+    session_cache_expire($minutes);
+    ini_set('session.gc_maxlifetime' , $minutes*60);
 
     try {
         $framework = new \Application\Maestria\Maestria();
