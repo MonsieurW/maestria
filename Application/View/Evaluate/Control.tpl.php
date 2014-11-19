@@ -46,9 +46,8 @@
 		    	return $item('danger', $title, $data, $align);
 	    };
 
-
-	    echo $btn($t1, $q['item1'], 'left');
-	    echo $btn($t2, $q['item2'], 'right');
+	    echo $btn($t1, $q['item1'], $q['theme1-c'], 'left');
+	    echo $btn($t2, $q['item2'], $q['theme2-c'], 'right');
 
 		echo '<p class="options">
 			<input type="radio" id="u'.$value['idProfil'].'q1_'.$q['idQuestion'].'" name="u'.$value['idProfil'].'q'.$q['idQuestion'].'" value="2" '.(($rep === '2') ? 'checked' : '').'/>

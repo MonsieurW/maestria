@@ -23,6 +23,7 @@ db:
 update:
 	git pull -u origin master
 	$(COMPOSER) update --no-dev
+	make log
 
 install:
 	$(COMPOSER) install --no-dev
@@ -35,4 +36,8 @@ push:
 	git commit -a -m "Update for push"
 	git push
 	make deploy
+
+log:
+	touch Application/Log/app.log
+	chmod 0777 Application/Log/app.log
 
