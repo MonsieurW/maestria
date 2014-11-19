@@ -27,6 +27,7 @@ update:
 
 install:
 	$(COMPOSER) install --no-dev
+	make log
 
 deploy:
 	cap staging deploy deploy:all
