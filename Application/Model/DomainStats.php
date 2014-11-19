@@ -21,7 +21,7 @@ namespace Application\Model {
             return  $this->_layer->query($statement);
         }
 
-        public function getDomainStatistic($uid, $tid)
+        public function getDomainStatistic($uid)
         {
             // 1. Get All question
             $this->sql('CREATE TEMPORARY TABLE IF NOT EXISTS TempTable(id INTEGER, item TEXT, idItem);');
@@ -34,7 +34,7 @@ namespace Application\Model {
 
             foreach ($questions as $value) {
                 $questByTheme[intval($value['id'])][] = $value['idItem'];
-                $r[intval($value['idTem'])][] = $value['item'];
+                $r[intval($value['idItem'])][] = $value['item'];
 
             }
 

@@ -18,14 +18,39 @@
 			$rep = strval($answers[$value['idProfil']][$q['idQuestion']]);
 		}
 
-		$t1 = $sticker[$value['idProfil']][$q['idQuestion']]['t1'];
-		$t2 = $sticker[$value['idProfil']][$q['idQuestion']]['t2'];
+
+		$t1 = 0;
+		$t2 = 0;
+
+		if(isset($sticker[$value['idProfil']]) and isset($sticker[$value['idProfil']][$q['idQuestion']])) {
+			$t1 = $sticker[$value['idProfil']][$q['idQuestion']]['t1'];
+			$t2 = $sticker[$value['idProfil']][$q['idQuestion']]['t2'];
+		}
 
         echo '<div class="col-md-2 borde" style="margin-top: 10px;"><h4>'.$q['title'].'</h4>
-	    <p><span class="label label-default">'.$q['note'].'</span><span class="label label-'.$q['taxoPrincipal-c'].' pull-right">'.$q['taxoPrincipal'].'</span></p>
-	    <button type="button" class="btn btn-danger pull-left" data-toggle="popover" data-content="'.$q['item1'].'"><i class="glyphicon glyphicon-indent-left"></i>'.$t1.'</button>
-	    <button type="button" class="btn btn-danger pull-right" data-toggle="popover" data-content="'.$q['item2'].'"><i class="glyphicon glyphicon-indent-right"></i>'.$t2.'</button>
-		<p class="options">
+	    <p><span class="label label-default">'.$q['note'].'</span><span class="label label-'.$q['taxoPrincipal-c'].' pull-right">'.$q['taxoPrincipal'].'</span></p>';
+	    
+	    $item = function($css, $content, $align = 'left') {
+	    	return '<button type="button" class="btn btn-'.$css.' pull-'.$align.'" data-toggle="popover" data-content="'.$content.'">
+	    	<i class="glyphicon glyphicon-indent-left"></i></button>';
+	    };
+
+	    $btn = function($note, $data, $align = 'left') use ($item) {
+	  		if($note >= 0.75)
+		    	return $item('success', $data, $align);
+		    else if($note < 0.75 and $note >= 0.5)
+		    	return $item('info', $data, $align);
+		    else if($note > 0.50 and $note >= 0.25)
+		    	return $item('warning', $data, $align);
+		    else
+		    	return $item('danger', $data, $align);
+	    };
+
+
+	    echo $btn($t1, $q['item1'], 'left');
+	    echo $btn($t2, $q['item2'], 'right');
+
+		echo '<p class="options">
 			<input type="radio" id="u'.$value['idProfil'].'q1_'.$q['idQuestion'].'" name="u'.$value['idProfil'].'q'.$q['idQuestion'].'" value="2" '.(($rep === '2') ? 'checked' : '').'/>
 			<label class="top" for="u'.$value['idProfil'].'q1_'.$q['idQuestion'].'">A</label><br />
 
