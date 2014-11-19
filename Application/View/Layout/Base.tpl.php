@@ -69,7 +69,7 @@
     ?>
 
       <footer>
-        <p>&copy; Metaphysik.fr 2014</p>
+        <p>&copy; Metaphysik.fr 2014 <!--button onclick="TogetherJS(this); return false;">Start TogetherJS</button--></p>
       </footer>
     </div> <!-- /container -->
 
@@ -87,5 +87,6 @@
     $this->block('script');
     $this->endBlock();
     ?>
+    <!--script src="https://togetherjs.com/togetherjs-min.js"></script-->
   </body>
 </html>

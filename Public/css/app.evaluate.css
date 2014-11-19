@@ -3,14 +3,14 @@ input[type=radio], input[type=checkbox] {
 }
 
 input[type=radio] + label {
-    content: "";  
-    display: inline-block;  
-    width: 50px;  
-    height: 50px;  
+    content: "";
+    display: inline-block;
+    width: 50px;
+    height: 50px;
     line-height: 50px;
     text-align: center;
-    background-color: #aaa;  
-    border-radius: 50px;  
+    background-color: #aaa;
+    border-radius: 50px;
 
     -webkit-touch-callout: none;
     -webkit-user-select: none;
@@ -21,18 +21,18 @@ input[type=radio] + label {
 }
 
 input[type=radio]:hover + label {
-    background-color: yellow; 
+    background-color: yellow;
 }
 
 input[type=radio]:checked + label {
-    background-color: #ff0000; 
+    background-color: #ff0000;
 }
 input[type=radio]:checked + label.top {
-    background-color: green; 
+    background-color: green;
 }
 input[type=radio]:checked + label.mid {
-    background-color: orange; 
+    background-color: orange;
 }
 input[type=radio]:checked + label.min {
-    background-color: red; 
+    background-color: red;
 }

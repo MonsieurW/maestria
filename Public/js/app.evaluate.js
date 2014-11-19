@@ -1,14 +1,21 @@
 (function($) {
     var cuser = '';
+    var d = false;
 
     $("select").change(function(e) {
         e.preventDefault();
+        if(d === false) {
+            d = true;
+        }
+        else {
+            sendForm();
+        }
+
         $("select option:selected").each(function() {
             str = $(this).val().trim();
         });
 
         $.get('/api/control/' + str + '/eval/' + $('#f').attr('data-id'), function(data) {
-            sendForm();
             $('#output').html(data);
         });
     }).change();
@@ -27,6 +34,9 @@
         $(this).popover('hide');
     });
 
+    $('body').delegate('input[type=radio]', 'click', function(event) {
+        sendForm();
+    });
 
     $('form').submit(function(e) {
         e.preventDefault();
@@ -34,17 +44,15 @@
             type: 'POST',
             cache: false,
             url: $(this).attr('action'),
-            data: $(this).serialize(),
-            success: function(msg) {
-                console.log(msg);
-            }
+            data: $(this).serialize()
+            //,success: function(msg) {
+            //    console.log(msg);
+            //}
         });
     });
 
     function sendForm() {
         $('#fSend').click(); // TODO : Make more visual on save (spinner)
     }
-
-
 
 })(jQuery);

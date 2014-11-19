@@ -53,6 +53,7 @@ namespace Application\Controller {
             $eleve      = new \Application\Model\UserClass();
             $eleve      = $eleve->getEleves($clas);
             $item       = new \Application\Model\Know();
+            $themex     = new \Application\Model\Theme();
             $questions  = new \Application\Model\Questions($eval);
             $answer     = new \Application\Model\Answer();
             $answers    = array();
@@ -63,11 +64,12 @@ namespace Application\Controller {
             }
 
             foreach ($questions as $key => $question) {
-
-                $questions[$key]['item1'] = $item->getText($question['refItem1']);
-                $questions[$key]['item2'] = $item->getText($question['refItem2']);
-                $questions[$key]['theme1'] = $item->getTheme($question['refItem1']);
-                $questions[$key]['theme2'] = $item->getTheme($question['refItem2']);
+                $questions[$key]['item1']     = $item->getText($question['refItem1']);
+                $questions[$key]['item2']     = $item->getText($question['refItem2']);
+                $questions[$key]['theme1']    = $item->getTheme($question['refItem1']);
+                $questions[$key]['theme1-c']  = $themex->getValue($item->getTheme($question['refItem1']));
+                $questions[$key]['theme2']    = $item->getTheme($question['refItem2']);
+                $questions[$key]['theme2-c']  = $themex->getValue($item->getTheme($question['refItem2']));
 
                 switch ($question['taxoPrincipal']) {
                   case '1':

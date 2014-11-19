@@ -84,5 +84,11 @@ namespace Application\Model {
 
            return $this->sql($sql)->fetchAll();
         }
+
+        public function getValue($id)
+        {
+            $item = $this->get($id);
+            return ucwords($item['themeValue']);
+        }
     }
 }

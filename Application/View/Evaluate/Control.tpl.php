@@ -30,20 +30,20 @@
         echo '<div class="col-md-2 borde" style="margin-top: 10px;"><h4>'.$q['title'].'</h4>
 	    <p><span class="label label-default">'.$q['note'].'</span><span class="label label-'.$q['taxoPrincipal-c'].' pull-right">'.$q['taxoPrincipal'].'</span></p>';
 	    
-	    $item = function($css, $content, $align = 'left') {
-	    	return '<button type="button" class="btn btn-'.$css.' pull-'.$align.'" data-toggle="popover" data-content="'.$content.'">
+	    $item = function($css, $title, $content, $align = 'left') {
+	    	return '<button type="button" class="btn btn-'.$css.' pull-'.$align.'" data-title="'.$title.'" data-toggle="popover" data-content="'.$content.'">
 	    	<i class="glyphicon glyphicon-indent-left"></i></button>';
 	    };
 
-	    $btn = function($note, $data, $align = 'left') use ($item) {
+	    $btn = function($note, $data, $title, $align = 'left') use ($item) {
 	  		if($note >= 0.75)
-		    	return $item('success', $data, $align);
+		    	return $item('success', $title, $data, $align);
 		    else if($note < 0.75 and $note >= 0.5)
-		    	return $item('info', $data, $align);
+		    	return $item('info', $title, $data, $align);
 		    else if($note > 0.50 and $note >= 0.25)
-		    	return $item('warning', $data, $align);
+		    	return $item('warning', $title, $data, $align);
 		    else
-		    	return $item('danger', $data, $align);
+		    	return $item('danger', $title, $data, $align);
 	    };
 
 

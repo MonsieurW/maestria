@@ -22,13 +22,15 @@ namespace Application\Model {
             return  $this->_layer->query($statement);
         }
 
-        public function add($domain, $theme, $type, $lvl, $item)
+        public function add($domain, $theme, $item)
         {
-            $lvl = intval($lvl);
-            $this->sql('INSERT INTO connaissance VALUES(null, :d, :t, :type, :lvl, :item);', array(
+            $lvl = rand(0,10);
+            // TODO make here
+
+
+            $this->sql('INSERT INTO connaissance VALUES(null, :d, :t, :lvl, :item);', array(
                 'd' => $domain,
                 't' => $theme,
-                'type' => $type,
                 'lvl' => $lvl,
                 'item' => $item
                 ));
@@ -85,6 +87,18 @@ namespace Application\Model {
 
             if (!empty($item) and isset($item[0])) {
                 $elmt = $item[0]['refTheme'];
+            }
+
+            return $elmt;
+        }
+
+        public function getThemeItem($id)
+        {
+            $item = $this->get($id);
+            $elmt = '';
+
+            if (!empty($item) and isset($item[0])) {
+                $elmt = $item[0]['item'];
             }
 
             return $elmt;

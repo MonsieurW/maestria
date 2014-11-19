@@ -71,6 +71,7 @@ ul.big {
 }
 
 ul.big > li{
+  display: inline-block;
   list-style: none;
   float: left;
   width: 150px;
@@ -142,5 +143,5 @@ ul.big > li{
   position: fixed;
   bottom: 5px;
   right: 25px;
-  z-index: 999;  
+  z-index: 999;
 }
