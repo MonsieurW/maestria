@@ -16,3 +16,6 @@
 [19-11-2014 21:46:29]	info	GET : /evaluate/13
 [19-11-2014 21:46:29]	info	GET : /api/control/1/eval/13
 [19-11-2014 21:46:32]	info	GET : /evaluate/
+[19-11-2014 21:59:36]	info	GET : /evaluate/13
+[19-11-2014 21:59:36]	info	Expired
+[19-11-2014 21:59:36]	info	GET : /login

@@ -8,7 +8,7 @@ set :repo_url, 'git@github.com:camael24/maestria.git'
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }.call
 
 # Default deploy_to directory is /var/www/my_app
-set :deploy_to, '/tmp/maestria'
+set :deploy_to, '/var/www/maestria'
 
 # Default value for :scm is :git
 set :scm, :git
@@ -40,27 +40,27 @@ namespace :deploy do
   task :install do
     on roles(:app) do
       # Your restart mechanism here, for example:
-      execute "cd /tmp/maestria/current; make install"
+      execute "cd /var/www/maestria/current; make install"
     end
   end
   task :db do
     on roles(:app) do
       # Your restart mechanism here, for example:
-      execute "cd /tmp/maestria/current; make db-install"
+      execute "cd /var/www/maestria/current; make db-install"
     end
   end
   
   task :data do
     on roles(:app) do
       # Your restart mechanism here, for example:
-      execute "cd /tmp/maestria/current; make db-peuplate"
+      execute "cd /var/www/maestria/current; make db-peuplate"
     end
   end
 
   task :all do
      on roles(:app) do
       # Your restart mechanism here, for example:
-      execute "cd /tmp/maestria/current; make install; make db-install; make db-peuplate"
+      execute "cd /var/www/maestria/current; make install; make db-install; make db-peuplate"
     end
   end
 
