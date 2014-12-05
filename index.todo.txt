@@ -2,8 +2,10 @@
 
 x 	Page edition des eval
 x	Les sticker pour savoir les capacité dans un domaine,
+		=>Allan:Cool les stickers, je vais bosser sur le design!!.
 x	Manque un switch entre Resume/Evaluation/Resultat
-x	Regler la deco automatique => 1h
+		=>Je like
+x	Regler la deco automatique => 1h : ca marche!!
 
 x   15:47:44  Monsieur | Su cette page ,il manque les pourcentages aux items histoire de dire aux gamin comment s'améliorer
 x   15:47:45  Monsieur | http://metaphysik.fr/commun/institutum-bilan.php?cn=1&classe=2K&url=https://docs.google.com/spreadsheet/pub?key=0AiLqRPkYo7F_dGl4cU5MVzVyUWlnR29Xamg0QmVfSUE&nt=1&devoir=PROPA%20LUM
