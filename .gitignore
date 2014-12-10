@@ -4,3 +4,4 @@ Binaries/*
 composer.lock
 *.sqlite
 *.db
+.capistrano

@@ -30,7 +30,7 @@ install:
 	make log
 
 deploy:
-	cap staging deploy deploy:all
+	cap nightly deploy deploy:all
 
 push:
 	git add --all
