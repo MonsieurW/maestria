@@ -116,12 +116,12 @@ namespace Application\Model {
 
         public function all($start, $nb)
         {
-            return $this->sql('SELECT * FROM connaissance ORDER BY refDomain LIMIT :l, :n', array('l' => $start, 'n' => $nb))->fetchAll();
+            return $this->sql('SELECT * FROM connaissance ORDER BY refDomain, refTheme, lvl LIMIT :l, :n', array('l' => $start, 'n' => $nb))->fetchAll();
         }
 
         public function getAll()
         {
-            return $this->sql('SELECT * FROM connaissance ORDER BY refDomain')->fetchAll();
+            return $this->sql('SELECT * FROM connaissance ORDER BY refDomain, refTheme, lvl')->fetchAll();
         }
 
         public function count()
