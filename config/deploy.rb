@@ -35,7 +35,7 @@ namespace :deploy do
   task :all do
      on roles(:app) do
       # Your restart mechanism here, for example:
-      execute "cd #{deploy_to}/current; make install; make db-install; make db-peuplate"
+      execute "cd #{deploy_to}/current; make install; make db-install; make db-update; make db-peuplate"
     end
   end
 
