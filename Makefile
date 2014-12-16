@@ -14,12 +14,19 @@ db-install:
 	chmod +x Binaries/hoa
 	
 db-peuplate:
+	make db-data
+	make db-sample
+
+db-data:
 	sqlite3 $(DB) < Application/Database/data.sql
+
+db-sample:
 	Binaries/sohoa application sample:data
 
 db:
 	make db-reset
 	make db-install
+	make db-data
 
 db-update:
 	sqlite3 $(DB) < Application/Database/update.1.sql

@@ -130,26 +130,6 @@ namespace Application\Controller {
             echo json_encode($domaine->all());
         }
 
-        public function levelActionAsync()
-        {
-          $lvl = array();
-
-          for($i = 1; $i <= 15; $i++)
-            $lvl[] = array('value' => $i, 'text' => $i);
-
-          echo json_encode($lvl);
-        }
-
-        public function typeActionAsync()
-        {
-          $type = array(
-            array('value' => 0, 'text' => 'Connaissance'),
-            array('value' => 1, 'text' => 'Compétence')
-          );
-
-          echo json_encode($type);
-        }
-
         public function domaineActionAsync()
         {
 
