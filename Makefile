@@ -8,12 +8,13 @@ db-reset:
 	if [ -f $(DB) ]; then rm -f $(DB); else echo "Database not exist yet"; fi;
 
 db-install:
-	if [ -f $(DB) ]; then echo "Hello"; else sqlite3 $(DB) < $(SQL); fi;
+	sqlite3 $(DB) < $(SQL)
 	chmod 0777 -R $(DBD)
 	chmod +x Binaries/sohoa
 	chmod +x Binaries/hoa
 	
 db-peuplate:
+	sqlite3 $(DB) < Application/Database/data.sql
 	Binaries/sohoa application sample:data
 
 db:
