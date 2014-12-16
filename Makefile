@@ -21,6 +21,9 @@ db:
 	make db-reset
 	make db-install
 
+db-update:
+	sqlite3 $(DB) < Application/Database/update.1.sql
+
 update:
 	git pull -u origin master
 	$(COMPOSER) update --no-dev
