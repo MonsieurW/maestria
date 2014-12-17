@@ -26,5 +26,6 @@ x	Level automatique des connaissances
 	Page tableau de bord
 	Personnalisation maestria pour groupe de prof ou lycée            =>  // Une instance par lycée ou groupes avec des nom de domaine
 	Information d'installation de maestria
+	Intégration de monolog en lieu et place de Application/Maestria/Log
 
 	15:49:23  Monsieur | Et la page résultats, C la plus interessante pr le prof,la plus chaude à designer:http://metaphysik.fr/commun/institutum-resultat.php?classe=2K&url=https://docs.google.com/spreadsheet/pub?key=0AiLqRPkYo7F_dGl4cU5MVzVyUWlnR29Xamg0QmVfSUE
