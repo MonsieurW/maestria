@@ -5,7 +5,7 @@ set :application, 'maestria'
 set :repo_url, 'git@github.com:camael24/maestria.git'
 
 set :scm, :git
-set :format, :pretty
+
 set :log_level, :debug
 set :keep_releases, 5
 
