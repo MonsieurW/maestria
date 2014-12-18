@@ -14,6 +14,12 @@ class Log
     protected static function init()
     {
         if(static::$_instance === null) {
+            static::$_logFile = resolve(static::$_logFile, false);
+            
+            if(file_exists(static::$_logFile) === false){
+                touch(static::$_logFile);
+            }
+
             $dateFormat     = "Y-m-d H:i:s";
             $output         = "[%datetime%] [%channel%] [%level_name%] %message% %context%\n";
             $formatter      = new LineFormatter($output, $dateFormat);
