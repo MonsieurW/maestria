@@ -1,21 +1,12 @@
-[19-11-2014 21:38:03]	info	GET : /evaluate/1
-[19-11-2014 21:38:03]	info	GET : /api/control/1/eval/1
-[19-11-2014 21:39:58]	info	GET : /evaluate/1
-[19-11-2014 21:39:58]	info	GET : /api/control/1/eval/1
-[19-11-2014 21:40:02]	info	GET : /evaluate/
-[19-11-2014 21:44:32]	info	GET : /
-[19-11-2014 21:45:08]	info	GET : /evaluate/13
-[19-11-2014 21:45:08]	info	GET : /api/control/1/eval/13
-[19-11-2014 21:45:10]	info	GET : /evaluate/
-[19-11-2014 21:45:11]	info	GET : /evaluate/
-[19-11-2014 21:45:12]	info	GET : /evaluate/
-[19-11-2014 21:45:13]	info	GET : /evaluate/
-[19-11-2014 21:45:49]	info	GET : /evaluate/13
-[19-11-2014 21:45:49]	info	GET : /api/control/1/eval/13
-[19-11-2014 21:45:51]	info	GET : /evaluate/
-[19-11-2014 21:46:29]	info	GET : /evaluate/13
-[19-11-2014 21:46:29]	info	GET : /api/control/1/eval/13
-[19-11-2014 21:46:32]	info	GET : /evaluate/
-[19-11-2014 21:59:36]	info	GET : /evaluate/13
-[19-11-2014 21:59:36]	info	Expired
-[19-11-2014 21:59:36]	info	GET : /login
+[2014-12-18 22:40:05] [maestria] [DEBUG] GET : /
+[2014-12-18 22:40:13] [maestria] [DEBUG] GET : /
+[2014-12-18 22:40:19] [maestria] [DEBUG] GET : /logout
+[2014-12-18 22:40:19] [maestria] [DEBUG] Logout
+[2014-12-18 22:40:19] [maestria] [DEBUG] GET : /
+[2014-12-18 22:40:19] [maestria] [DEBUG] GET : /login
+[2014-12-18 22:40:23] [maestria] [DEBUG] GET : /login
+[2014-12-18 22:40:23] [maestria] [DEBUG] Connect : admin
+[2014-12-18 22:40:23] [maestria] [DEBUG] Cache Expire : 60
+[2014-12-18 22:40:23] [maestria] [DEBUG] Start : 18-12-2014 22:40:19
+[2014-12-18 22:40:23] [maestria] [DEBUG] Lifetime : 18-12-2014 23:40:19
+[2014-12-18 22:40:23] [maestria] [DEBUG] GET : /

@@ -10,7 +10,8 @@
         "sohoa/framework": "dev-f/generate_controller",
         "hoa/database": "*",
         "hoa/acl" : "*",
-        "fzaninotto/faker": "1.5.*@dev"
+        "fzaninotto/faker": "1.5.*@dev",
+        "monolog/monolog": "~1.11"
     },
     "require-dev": {
         "behat/behat": "2.4.*@stable",

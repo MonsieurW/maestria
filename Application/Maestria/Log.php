@@ -1,19 +1,32 @@
 <?php
-namespace Application\Maestria {
+namespace Application\Maestria;
 
-    class Log
+use Monolog\Logger;
+use Monolog\Handler\StreamHandler;
+use Monolog\Formatter\LineFormatter;
+    
+class Log
+{
+    
+    protected static $_instance = null;
+    protected static $_logFile  = 'hoa://Application/Log/app.log';
+
+    public static function info($msg)
     {
-        private static $_log = 'hoa://Application/Log/app.log';
-        private static $_instance = null;
 
-        protected static function _msg($lvl, $message)
-        {
-            file_put_contents(static::$_log, implode("\t", ['['.date('d-m-Y H:i:s').']', $lvl, $message])."\n", FILE_APPEND);
-        }
+        if(static::$_instance === null) {
+            $dateFormat     = "Y-m-d H:i:s";
+            $output         = "[%datetime%] [%channel%] [%level_name%] %message%\n";
+            $formatter      = new LineFormatter($output, $dateFormat);
+            $streamHandler  = new StreamHandler(static::$_logFile, Logger::DEBUG);
+            $log            = new Logger('maestria');
 
-        public static function info($msg)
-        {
-            static::_msg('info', $msg);
+            $streamHandler->setFormatter($formatter);
+            $log->pushHandler($streamHandler);
+
+            static::$_instance = $log;
         }
+        static::$_instance->addDebug($msg);
     }
+
 }
