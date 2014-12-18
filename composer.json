@@ -20,6 +20,11 @@
         "behat/mink-goutte-driver": "*",
         "behat/mink-selenium2-driver": "*"
     },
+    "autoload": {
+        "psr-4": {
+            "Application\\": "Application/"
+        }
+    },
     "config": {
         "bin-dir": "Binaries"
     }

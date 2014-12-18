@@ -1,7 +1,6 @@
 <?php
 namespace {
     require_once __DIR__ . '/../vendor/autoload.php';
-    require_once __DIR__ .'/../Application/Maestria/Maestria.php'; // Need to use autoload xD
 
     $minutes = 60;
     session_set_cookie_params($minutes * 60 , '/');
@@ -34,9 +33,9 @@ namespace {
         
         \Application\Maestria\Log::error(
             $e->getMessage(),
-            array($e->getFile().':'.$e->getLine().'#'.$e->getCode()));
+            array($e->getFile().':'.$e->getLine().'#'.$e->getCode())
+        );
         echo '<p>'.$e->getMessage().'</p>';
-
     }
 
 }
