@@ -1,19 +1,54 @@
 <?php
-namespace Application\Maestria {
+namespace Application\Maestria;
 
-    class Log
+use Monolog\Logger;
+use Monolog\Handler\StreamHandler;
+use Monolog\Formatter\LineFormatter;
+    
+class Log
+{
+    
+    protected static $_instance = null;
+    protected static $_logFile  = 'hoa://Application/Log/app.log';
+
+    protected static function init()
     {
-        private static $_log = 'hoa://Application/Log/app.log';
-        private static $_instance = null;
+        if(static::$_instance === null) {
+            static::$_logFile = resolve(static::$_logFile, false);
+            
+            if(file_exists(static::$_logFile) === false){
+                touch(static::$_logFile);
+            }
 
-        protected static function _msg($lvl, $message)
-        {
-            file_put_contents(static::$_log, implode("\t", ['['.date('d-m-Y H:i:s').']', $lvl, $message])."\n", FILE_APPEND);
-        }
+            $dateFormat     = "Y-m-d H:i:s";
+            $output         = "[%datetime%] [%channel%] [%level_name%] %message% %context%\n";
+            $formatter      = new LineFormatter($output, $dateFormat);
+            $streamHandler  = new StreamHandler(static::$_logFile, Logger::INFO);
+            $log            = new Logger('maestria');
 
-        public static function info($msg)
-        {
-            static::_msg('info', $msg);
+            $streamHandler->setFormatter($formatter);
+            $log->pushHandler($streamHandler);
+
+            static::$_instance = $log;
         }
+    }
+
+    public static function debug($msg, $data = array())
+    {
+        static::init();
+        static::$_instance->addDebug($msg, $data);
+    }
+
+
+    public static function info($msg, $data = array())
+    {
+        static::init();
+        static::$_instance->addInfo($msg, $data);
+    }
+
+    public static function error($msg, $data = array())
+    {
+        static::init();
+        static::$_instance->addError($msg, $data);   
     }
 }

@@ -22,16 +22,23 @@ namespace Application\Model {
             return  $this->_layer->query($statement);
         }
 
+        protected function getMax($domain, $theme)
+        {
+            $sql  = 'SELECT MAX(lvl) AS max FROM connaissance WHERE refTheme = :t AND refDomain = :d;';
+            $data = $this->sql($sql, ['t' => $theme, 'd' => $domain])->fetchAll();
+            $max  = intval($data[0]['max']);
+
+            return $max;
+        }
+
         public function add($domain, $theme, $item)
         {
-            $lvl = rand(0,10);
-            // TODO make here
-
+            $lvl = $this->getMax($domain, $theme);
 
             $this->sql('INSERT INTO connaissance VALUES(null, :d, :t, :lvl, :item);', array(
                 'd' => $domain,
                 't' => $theme,
-                'lvl' => $lvl,
+                'lvl' => ($lvl +1),
                 'item' => $item
                 ));
 
@@ -45,6 +52,9 @@ namespace Application\Model {
 
         public function update($id, $col, $value)
         {
+            if($col == 'lvl')
+                throw new Exception("Error API VERSION", 0);
+                
             $sql = 'UPDATE connaissance SET '.$col.' = :d WHERE idConnaissance = :i';
             $this->sql($sql, array('d' => $value, 'i'=> $id));
         }
@@ -106,12 +116,12 @@ namespace Application\Model {
 
         public function all($start, $nb)
         {
-            return $this->sql('SELECT * FROM connaissance ORDER BY refDomain LIMIT :l, :n', array('l' => $start, 'n' => $nb))->fetchAll();
+            return $this->sql('SELECT * FROM connaissance ORDER BY refDomain, refTheme, lvl LIMIT :l, :n', array('l' => $start, 'n' => $nb))->fetchAll();
         }
 
         public function getAll()
         {
-            return $this->sql('SELECT * FROM connaissance ORDER BY refDomain')->fetchAll();
+            return $this->sql('SELECT * FROM connaissance ORDER BY refDomain, refTheme, lvl')->fetchAll();
         }
 
         public function count()

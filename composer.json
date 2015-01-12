@@ -4,7 +4,8 @@
         "sohoa/framework": "*@dev",
         "hoa/database": "*",
         "hoa/acl" : "*",
-        "fzaninotto/faker": "1.5.*@dev"
+        "fzaninotto/faker": "1.5.*@dev",
+        "monolog/monolog": "~1.11"
     },
     "require-dev": {
         "behat/behat": "2.4.*@stable",
@@ -12,6 +13,11 @@
         "behat/mink-extension": "*",
         "behat/mink-goutte-driver": "*",
         "behat/mink-selenium2-driver": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Application\\": "Application/"
+        }
     },
     "config": {
         "bin-dir": "Binaries"

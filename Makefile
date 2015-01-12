@@ -8,31 +8,49 @@ db-reset:
 	if [ -f $(DB) ]; then rm -f $(DB); else echo "Database not exist yet"; fi;
 
 db-install:
-	if [ -f $(DB) ]; then echo "Hello"; else sqlite3 $(DB) < $(SQL); fi;
+	sqlite3 $(DB) < $(SQL)
 	chmod 0777 -R $(DBD)
 	chmod +x Binaries/sohoa
 	chmod +x Binaries/hoa
 	
 db-peuplate:
+	make db-data
+	make db-sample
+
+db-data:
+	sqlite3 $(DB) < Application/Database/data.sql
+
+db-sample:
 	Binaries/sohoa application sample:data
 
 db:
 	make db-reset
 	make db-install
+	make db-data
+
+db-update:
+	sqlite3 $(DB) < Application/Database/update.1.sql
 
 update:
 	git pull -u origin master
 	$(COMPOSER) update --no-dev
+	make log
 
 install:
 	$(COMPOSER) install --no-dev
+	make log
 
 deploy:
-	cap staging deploy deploy:all
+	cap nightly deploy deploy:all
 
 push:
 	git add --all
 	git commit -a -m "Update for push"
 	git push
 	make deploy
+
+log:
+	chmod 0777 Application/Log
+	touch Application/Log/app.log
+	chmod 0777 Application/Log/app.log
 

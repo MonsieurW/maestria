@@ -63,9 +63,6 @@ namespace Application\Controller {
                 case 'update':
                 default:
                     switch ($col) {
-                        case 'level':
-                            $connaissance->update($id, 'lvl', $value);
-                            break;
                         case 'item':
                             $connaissance->update($id, 'item', $value);
                             break;

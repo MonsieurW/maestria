@@ -5,7 +5,7 @@
 # property set.  Don't declare `role :all`, it's a meta role.
 
 role :app, %w{camael@ark.im}
-set :deploy_to, '/var/www/maestria'
+set :deploy_to, '/var/www/maestria-nightly'
 
 server 'ark.im',
   user: 'camael',

@@ -13,7 +13,6 @@ $this->block('container');
 			<tr>
 				<th>Domain</th>
 				<th>Theme</th>
-				<th>Level</th>
 				<th class="col-lg-5">Item</th>
 				<th></th>
 			</tr>
@@ -38,7 +37,6 @@ $this->block('container');
                 echo '<tr>'.
                         '<td><a href="#" id="domain" data-source="/api/domaine" data-type="select" data-pk="'.$value['idConnaissance'].'"  class="editable label label-success">'.$do($value['refDomain']).'</a></td>'.
                         '<td><a href="#" id="theme" data-source="/api/theme" data-type="select" data-pk="'.$value['idConnaissance'].'"  class="editable label label-info">'.$th($value['refTheme']).'</a></td>'.
-                        '<td><a href="#" id="level" data-source="/api/level" data-type="select" data-pk="'.$value['idConnaissance'].'" class="editable">'.$value['lvl'].'</a></td>'.
                         '<td><a href="#" id="item" data-type="textarea" data-pk="'.$value['idConnaissance'].'" class="editable">'.$value['item'].'</a></td>'.
                         '<td><a href="#" class="trash btn btn-danger" data-id="'.$value['idConnaissance'].'"><i class="glyphicon glyphicon-trash"></i></a>'.
                     '</tr>';
