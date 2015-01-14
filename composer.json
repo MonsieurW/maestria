@@ -1,13 +1,7 @@
 {
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/camael24/framework"
-        }
-    ],
     "name": "sohoa/sohoa",
     "require": {
-        "sohoa/framework": "dev-f/generate_controller",
+        "sohoa/framework": "*@dev",
         "hoa/database": "*",
         "hoa/acl" : "*",
         "fzaninotto/faker": "1.5.*@dev",
