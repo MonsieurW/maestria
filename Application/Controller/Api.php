@@ -94,8 +94,8 @@ namespace Application\Controller {
 
             $sticker = array();
             foreach ($answers as $idProfil => $value) {
-                $stats = new \Application\Model\DomainStats();
-                $stats = $stats->getDomainStatistic($idProfil);
+                $stats = new \Application\Model\ThemeStats();
+                $stats = $stats->getThemeStatistic($idProfil);
 
                 foreach ($questions as $key => $question) {
                     $t1 = $question['theme1'];

@@ -1,7 +1,7 @@
 <?php
 namespace Application\Model {
 
-    class DomainStats
+    class ThemeStats
     {
         private $_layer = null;
 
@@ -21,7 +21,7 @@ namespace Application\Model {
             return  $this->_layer->query($statement);
         }
 
-        public function getDomainStatistic($uid)
+        public function getThemeStatistic($uid)
         {
             // 1. Get All question
             $this->sql('CREATE TEMPORARY TABLE IF NOT EXISTS TempTable(id INTEGER, item TEXT, idItem);');
@@ -50,19 +50,19 @@ namespace Application\Model {
                 }
             }
 
-            $domainNotes = array();
+            $themeNotes = array();
 
             foreach ($notes as $id => $note) {
                 if(isset($questByTheme[$id])) {
                     foreach ($questByTheme[$id] as $idTheme) {
                         if($note < 0)
                             $note = 0;
-                        $domainNotes[$idTheme][] = $note;
+                        $themeNotes[$idTheme][] = $note;
                     }
                 }
             }
 
-            return $domainNotes;
+            return $themeNotes;
         }
     }
 }

@@ -1,22 +1,24 @@
 <?php
-/* @var $framework \Sohoa\Framework\Framework */
+
 $this->setRessource(\Sohoa\Framework\Router::REST_SHOW, null, null, '/(?<%s>[^/]+)');
 $this->setRessource(\Sohoa\Framework\Router::REST_EDIT, null, null, '/(?<%s>[^/]+)/edit');
 $this->setRessource(\Sohoa\Framework\Router::REST_UPDATE, null, 'post', '/(?<%s>[^/]+)/update');
 $this->setRessource(\Sohoa\Framework\Router::REST_DESTROY, null, 'get', '/(?<%s>[^/]+)/destroy');
 
 $this
-    ->resource('professor',                                array('only' => array('index' , 'show'))) //professor_id = user_id with option professor
+    ->resource('professor',                                array('only' => array('index' , 'show')))
     ->resource('evaluation');
 
 $this
     ->resource('evaluate')
     ->resource('resume',                                   array('only' => array('index', 'show')));
 
-$this->resource('student');
+$this
+	->resource('classroom',                                array('only' => array('index', 'create', 'edit', 'update', 'show')))
+	->resource('dashboard',								   array('only' => array('index')));
 
-$this->resource('theme',                                   array('only' => array('index', 'create')));
-$this->resource('classroom',                               array('only' => array('index', 'create', 'edit', 'update')));
+$this->resource('student');
+$this->resource('theme',                                   array('only' => array('index', 'create')));	
 $this->resource('domain',                                  array('only' => array('index', 'create')));
 $this->resource('know',                                    array('only' => array('index', 'create')));
 
