@@ -50,11 +50,23 @@ namespace Application\Model {
     
         }
 
-        public function get()
+        public function get($e = null)
         {
 
+            if($e === null){
+                $e = $this->_eval;
+            }
+
+
             return $this
-                        ->sql('SELECT * FROM questions WHERE refEvaluation = :e', array('e' => $this->_eval))
+                        ->sql('SELECT * FROM questions WHERE refEvaluation = :e', array('e' => $e))
+                        ->fetchAll();
+        }
+
+        public function getID($idQuestion) {
+            
+            return $this
+                        ->sql('SELECT * FROM questions WHERE idQuestion = :e', array('e' => $idQuestion))
                         ->fetchAll();
         }
 

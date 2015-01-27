@@ -60,7 +60,7 @@ CREATE TABLE IF NOT EXISTS answer (
 
         public function getStudentEvaluation($id)
         {
-            return $this->sql('SELECT * FROM answer WHERE refUser = :id', array('id' => $id))->fetchAll();
+            return $this->sql('SELECT * FROM answer as a, evaluation as e WHERE e.idEvaluation =  a.refEvaluation AND a.refUser = :id', array('id' => $id))->fetchAll();
         }
 
         public function destroy($id)

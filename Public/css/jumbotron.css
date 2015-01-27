@@ -13,3 +13,12 @@ footer {
 	line-height: 40px;
 	background-color: #fff;
 }
+
+.raphy p {
+	position: absolute;
+	vertical-align: middle;
+	text-align: center;
+	line-height: 50px;
+	height: 50px;
+	width: 100px;p
+}
