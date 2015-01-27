@@ -66,37 +66,40 @@ function Color(_r, _g, _b) {
         }
       }
 
+      // TODO : error sur la largeur des colonnes
+
       for (var i = o ; i <= data.length -1; i++) {
         
         u++;
         var d       = data[i];
 
-        if(d == undefined)
-          d = -1;
+        if(d != undefined) {
+          if(d > maxNote)
+            d = maxNote;
 
-        if(d > maxNote)
-          d = maxNote;
+          var cuHei   = (d * height) / maxNote;
 
-        var cuHei   = (d * height) / maxNote;
+          if(isNaN(cuHei))
+            cuHei = height;
 
-        if(isNaN(cuHei))
-          cuHei = height;
+          var x       = u * (largeur + span);
+          var y       = (height - cuHei);
 
-        var x       = u * (largeur + span);
-        var y       = (height - cuHei);
+          if(d == 0)
+            y = height - 1;
 
-        if(d == 0)
-          y = height - 1;
+          console.log(u);
 
-        var rect    = $('<rect>')
-                      .attr('x', x)
-                      .attr('y', y)
-                      .attr('width', largeur)
-                      .attr('height', height)
-                      .css('fill', scaleColor(d * 100 / maxNote));
+          var rect    = $('<rect>')
+                        .attr('x', x)
+                        .attr('y', y)
+                        .attr('width', largeur)
+                        .attr('height', height)
+                        .css('fill', scaleColor(d * 100 / maxNote));
 
 
-        svg.append(rect);
+          svg.append(rect);
+        }
       };
 //
 //      var text = $('')

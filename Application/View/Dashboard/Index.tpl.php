@@ -31,7 +31,7 @@ $this->block('container');
               $evaluation[] = $ec; 
             }
             
-            echo '<td class="raphy" data-value="'.json_encode($evaluation).'"><p>'.(array_sum($evaluation) / count($evaluation)).'</p></td>';
+            echo '<td class="raphy" data-value="'.json_encode($evaluation).'"><p>'.((round(array_sum($evaluation) / count($evaluation)) * 2) / 2).'</p></td>';
           }
           else {
             echo '<td>Empty</td>';
@@ -51,3 +51,4 @@ $this->block('script');
 <script src="/js/dashboard.js"></script>
 <?php
 $this->endBlock();
+ ?>

@@ -2,9 +2,7 @@
 
 namespace Application\Controller {
 
-    use Sohoa\Framework\Kit;
-
-    class Dashboard extends Kit
+    class Dashboard extends Generic
     {
 
         public function indexAction($classroom_id) {
