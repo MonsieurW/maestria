@@ -45,7 +45,7 @@ namespace Application\Controller {
 
         public function showAction($evaluate_id, $resume_id)
         {
-
+            // TODO : $resume_id are not used, etles users sont mal filtré ici !
             $classroom_id   = $resume_id;
             $evaluation     = new \Application\Model\Evaluation();
             $evaluation     = $evaluation->get($evaluate_id);

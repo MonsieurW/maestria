@@ -102,6 +102,18 @@ namespace Application\Model {
             return $elmt;
         }
 
+        public function getDomain($id)
+        {
+            $item = $this->get($id);
+            $elmt = '';
+
+            if (!empty($item) and isset($item[0])) {
+                $elmt = $item[0]['refDomain'];
+            }
+
+            return $elmt;
+        }
+
         public function getThemeItem($id)
         {
             $item = $this->get($id);

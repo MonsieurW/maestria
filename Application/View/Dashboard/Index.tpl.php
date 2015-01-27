@@ -1,42 +1,44 @@
-<?php
+ <?php
 $this->inherits('hoa://Application/View/Layout/Base.tpl.php');
 $this->block('container');
-
-$eleve = [
-  1  => 'Patrick',
-  8  => 'Suzanne',
-  12 => 'Mélanie'
-];
-
-$data = [
-  'Physique' => [1 => [1,2,3,4,5,6,7,20],           8 => [1,2,3,4,5,6,7], 12 => [1,2,3,4,5,6,7]],
-  'Chimie'   => [1 => [8,9,10,11,12,13],            8 => [1,2,3,4,5,6,7], 12 => [1,2,3,4,5,6,7]],
-  'Optique'  => [1 => [14,15,16,17,18,19,20,0,1,2], 8 => [1,2,3,4,5,6,7], 12 => [1,2,3,4,5,6,7]],
-];
-
-$domain = array_keys($data);
 ?>
-<div id="holder"></div>
 <table>
   <thead>
     <tr>
       <th>Eleves</th>
-      <?php foreach ($domain as $value) {
-        echo '<th>'.$value.'</th>';
+      <?php foreach ($data_d as $id) {
+        echo '<th>'.ucfirst($domain[$id]).'</th>';
       }
       ?>
     </tr>
   </thead>
   <tbody>
       <?php
-      foreach ($eleve as $uid => $name) {
+      foreach ($x as $uid => $e) {
         echo '<tr>';
-        echo '<td>'.$name.'</td>';
-        foreach ($domain as $value) {
-          $note = $data[$value][$uid];
-          echo '<td class="raphy" data-value="'.json_encode($note).'"><p>'.(array_sum($note)/count($note)).'</p></td>';
+        echo '<td>'.((isset($data_e[$uid])) ? $data_e[$uid] : $uid).'</td>';
+
+        foreach ($data_d as $id) {
+          if(isset($e[$id])){
+            $eval       = $e[$id];
+            $evaluation = [];
+
+            foreach ($eval as $key => $value) {
+
+              $ec = (array_sum($value) / count($value)) * 100 ;
+              $ec = ($ec * 20) / 100;
+              //var_dump(implode(',', $value), $ec); echo '<br />';
+              $evaluation[] = $ec; 
+            }
+            
+            echo '<td class="raphy" data-value="'.json_encode($evaluation).'"><p>'.(array_sum($evaluation) / count($evaluation)).'</p></td>';
+          }
+          else {
+            echo '<td>Empty</td>';
+          }
         }
-        echo '</tr>';
+      
+        echo '</tr>'."\n";
 
       }
       ?>

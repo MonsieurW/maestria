@@ -41,10 +41,16 @@ namespace Application\Controller {
 			* Read evaluation
         	*/
 
+//            echo '<pre>';   
+
 			$answer = new \Application\Model\Answer();
 			$q      = new \Application\Model\Questions();
+            $ddddd  = new \Application\Model\Domain();
+            $know   = new \Application\Model\Know();
 			$max    = 20;
-			$data   = []; 
+			$x      = []; 
+            $data_d = [];
+            $data_e = [];
 
    			$convertNote = function ($note) {
                 $note = intval($note);
@@ -63,40 +69,60 @@ namespace Application\Controller {
                 }
             };
 
-            $n = function ($note) {
-
-                return round($note * 2) / 2;
+            $store = function ($value) use (&$data_d) {
+                if(!in_array($value, $data_d)){
+                    $data_d[] = intval($value);
+                }
             };
 
+            $x         = [];
+
 			foreach ($user as $key => $value) {
-				$id        = $value['idProfil'];
-				$answers   = $answer->getStudentEvaluation($id);
-				$selfNote  = [];
-				$total     = [];
+				$id          = $value['idProfil'];
+				$answers     = $answer->getStudentEvaluation($id);
+				$selfNote    = [];
+				$total       = [];
+                $data_e[$id] = $value['user'];
 
 				foreach ($answers as $key => $reponse) {
-					$questions = json_decode($reponse['note'], true);
+//                    echo $id.': '.$reponse['note']."\n";
+					$ans       = json_decode($reponse['note'], true);
 					$eval      = $reponse['refEvaluation'];
-					foreach ($questions as $id => $v) {
-						$currentQuestion 		= $q->getID($id)[0];
-						$total[$eval][]         = intval($currentQuestion['note']);
-						$selfNote[$eval][]      = $convertNote($v); // * intval($currentQuestion['note']); Note non coeffiencté
+                    
+					foreach ($ans as $i => $v) {
+						$currentQuestion        = $q->getID($i)[0];
+                        $i1                     = $know->getDomain($currentQuestion['refItem1']);
+                        $i2                     = $know->getDomain($currentQuestion['refItem2']);
+                        $x[$id][$i1][$eval][]   = $convertNote($v);
+                        
+                        if($i1 !== $i2) {
+                            $x[$id][$i2][$eval][]   = $convertNote($v);
+                            
+                        }
+                        
+                        $store($i1);
+                        $store($i2);
 					}
 
 				}
-
-				$note = [];
-				foreach ($selfNote as $eval => $n) {
-					$sN 	= array_sum($n);	
-					$tN 	= array_sum($total[$eval]);
-					$note[] = $sN * $max / $tN;
-				}
-
-				$data[$id]['eval'] = json_encode($note);
-				$data[$id]['moy']  = array_sum($note) / count($note);
 			}
 			
-			$this->data->data = $data;
+//            foreach ($x as $uid => $value) {
+//                echo $uid.': '.implode(',',$value[1][1])."\n";
+//            }
+//            exit;
+
+			$this->data->x      = $x;
+            $this->data->data_d = $data_d;
+            $this->data->data_e = $data_e;
+
+            $domain = [];
+
+            foreach ($ddddd->all() as $key => $value) {
+                $domain[$value['idDomain']] = $value['domainValue'];
+            }
+
+            $this->data->domain = $domain;
             
             $this->greut->render();
         }
