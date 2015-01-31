@@ -50,24 +50,19 @@ function Color(_r, _g, _b) {
       var data    = jQuery.parseJSON(data);
       var height  = 50;
       var width   = 100;
-      var svg     = $('<svg>').attr('width', width).attr('height', height);
+
+      var svg= jQuery('<svg/>', {
+        height: height,
+        width: width
+      });
+      
       var length  = 6
       var o       = data.length - length;
       var u       = 0;
       var largeur = 10;
       var span    = 1;
       var maxNote = 20;
-
-      if(data.length < length)
-      {
-        var a = length - data.length -2;
-        for(var j = 0; j < a; j++) {
-          data.unshift(0);
-        }
-      }
-
-      // TODO : error sur la largeur des colonnes
-
+      
       for (var i = o ; i <= data.length -1; i++) {
         
         u++;
@@ -88,8 +83,6 @@ function Color(_r, _g, _b) {
           if(d == 0)
             y = height - 1;
 
-          console.log(u);
-
           var rect    = $('<rect>')
                         .attr('x', x)
                         .attr('y', y)
@@ -100,20 +93,11 @@ function Color(_r, _g, _b) {
 
           svg.append(rect);
         }
+
       };
-//
-//      var text = $('')
-//                    .attr('x', width /2)
-//                    .attr('y', height / 2)
-//                    .css('fill', '#000')
-//                    .css('text-anchor', 'middle');
-//          text.text(note);
 
 
-  //    svg.append('<text x="'+(width / 2)+'" y="'+(height / 2)+'" style="fill: #000; text-anchor: middle">'+note+'</text>');
-
-
-      return $('div').html(svg);
+      return $('<div>').html(svg);
     }
 
     window.onload = function () {

@@ -17,6 +17,9 @@ $this->block('container');
 				echo '<tr><td>
 				<a class="editable editable-click" data-type="text" data-pk="'.$value['idClass'].'">'.$value['value'].'</a>
 				<span class="pull-right">
+					<a href="/classroom/'.$value['idClass'].'/dashboard/" class="btn btn-mini btn-warning" >
+						<i class="fa fa-bar-chart"></i>
+					</a>
 					<a href="/classroom/'.$value['idClass'].'/edit" class="btn btn-mini btn-info" >
 						<i class="fa fa-edit"></i>
 					</a>
