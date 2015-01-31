@@ -5,7 +5,7 @@
  * Date: 16/01/14
  * Time: 17:22
  */
-namespace Application\Bin\Command\Sample {
+namespace Application\Bin\Command\Sample;
 
     use Hoa\Console\Chrome\Text;
     use Hoa\File\Finder;
@@ -281,7 +281,5 @@ namespace Application\Bin\Command\Sample {
             return;
         }
     }
-}
-
 __halt_compiler();
 Sample command
