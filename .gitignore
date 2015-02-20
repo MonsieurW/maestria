@@ -6,3 +6,4 @@ composer.lock
 *.db
 .capistrano
 *.log
+*.phar
