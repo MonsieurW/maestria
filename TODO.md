@@ -1,3 +1,5 @@
+Bug
+---
 - [x] 	Page edition des eval
 - [x]	Les sticker pour savoir les capacité dans un domaine =>Allan:Cool les stickers, je vais bosser sur le design!!.
 - [x]	Manque un switch entre Resume/Evaluation/Resultat =>Je like
@@ -9,8 +11,6 @@
 - [x]	Level automatique des connaissances
 - [x]	Intégration de monolog en lieu et place de Application/Maestria/Log
 - [x]   Page tableau de bord
-
-
 - [ ]	Couleur des stickers
 - [ ]	Ajouter un système de notification quand les appel ajax sont fini & good
 - [ ]	Quand on send en ajax, reload page after
@@ -20,7 +20,7 @@
 - [ ]	Console d'administration des lycées
 
 
-Feature :
+Feature
 ---
 - [ ]	Page visaluation pour les éleves
 - [ ]	Messagerie Eleve => Prof
@@ -28,12 +28,12 @@ Feature :
 - [ ]	Système de recherche de connaissance pour allez plus vite
 - [ ]	Page résultat de ts les controles http://metaphysik.fr/commun/institutum-resultat.php?classe=2K&url=https://docs.google.com/spreadsheet/pub?key=0AiLqRPkYo7F_dGl4cU5MVzVyUWlnR29Xamg0QmVfSUE
 
-Test :
+Test
 ---
 - [ ]	Verification algo (Sticker, Notation)
 - [ ]	Vérification ACL
 
-Refactoring :
+Refactoring
 ---
 - [ ]	URI vraiment dynamique (unroute au lieu des routes en dur)
 - [ ]	URI plus simple
@@ -43,6 +43,6 @@ Refactoring :
 - [ ]	Simplification des algorithmes dans des classes a par
 
 Information
----
+-----
 	Alpha : Push automatique + regénération de la base de donnée
 	Beta  : Push manuel + migration database manuel
