@@ -76,6 +76,15 @@ namespace Application\Model {
             return $item;
         }
 
+        public function getByUsername($username) {
+             $st = $this->sql('SELECT * FROM user WHERE login = :id' , array('id' => $username))->fetchAll();
+
+             if(isset($st[0]) === true)
+                return $st[0];
+
+            return null;
+        }
+
         public function add($login, $password, $user)
         {
 
