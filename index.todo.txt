@@ -20,7 +20,7 @@ x   Page tableau de bord
 	Personnalisation maestria pour groupe de prof ou lycée =>  // Identifiant par lycée au niveau de la base de donnée
 	Information d'installation de maestria
 
-Note :
+Note 	:
 	Alpha : Push automatique + regénération de la base de donnée
 	Beta  : Push manuel + migration database manuel
 
@@ -39,4 +39,4 @@ Test :
 Refactoring :
 	URI vraiment dynamique
 	URI plus simple
-	Simplification des algorithmes dans des classes a par
+	Simplification des algorithmes dans des classes a par entière

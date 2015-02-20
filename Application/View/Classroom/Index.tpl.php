@@ -10,13 +10,16 @@ $this->block('container');
 <div class="container">
 	<table class="table">
 		<tr>
-			<th>Classse</th>
+			<th>Classe</th>
 		</tr>
 		<?php if(isset($classe)){
 			foreach ($classe as $key => $value) {
 				echo '<tr><td>
 				<a class="editable editable-click" data-type="text" data-pk="'.$value['idClass'].'">'.$value['value'].'</a>
 				<span class="pull-right">
+					<a href="/classroom/'.$value['idClass'].'/result/" class="btn btn-mini btn-primary" >
+						<i class="fa fa-calculator"></i>
+					</a>
 					<a href="/classroom/'.$value['idClass'].'/dashboard/" class="btn btn-mini btn-warning" >
 						<i class="fa fa-bar-chart"></i>
 					</a>

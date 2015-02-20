@@ -6,16 +6,20 @@ $this->setResource(\Sohoa\Framework\Router::REST_UPDATE, null, 'post', '/(?<%s>[
 $this->setResource(\Sohoa\Framework\Router::REST_DESTROY, null, 'get', '/(?<%s>[^/]+)/destroy');
 
  $this
-     ->resource('professor',                                array('only' => array('index' , 'show')))
+     ->resource('professor',                               array('only' => array('index' , 'show')))
      ->resource('evaluation');
 
 $this
     ->resource('evaluate')
     ->resource('resume',                                   array('only' => array('index', 'show')));
 
-$this
-	->resource('classroom',                                array('only' => array('index', 'create', 'edit', 'update', 'show')))
-	->resource('dashboard',								   array('only' => array('index')));
+$class = $this
+	->resource('classroom',                                array('only' => array('index', 'create', 'edit', 'update', 'show')));
+
+$c = clone $class;
+
+$class->resource('dashboard',						       array('only' => array('index')));
+$c    ->resource('result',	     						   array('only' => array('index')));
 
 $this->resource('student');
 $this->resource('theme',                                   array('only' => array('index', 'create')));	

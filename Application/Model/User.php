@@ -30,11 +30,13 @@ namespace Application\Model {
             return (intval($smt) > 0);
         }
 
-        public function check($login, $password)
+        public function check($login, $password, $secured = false)
         {
+
+            $password = ($secured === false) ? sha1($password) : $password;
             $sqt = $this->sql('SELECT * FROM user WHERE login = :login AND password = :password ', array(
                 'login' => $login,
-                'password' => sha1($password)
+                'password' => $password
             ))->fetchAll();
 
             return !empty($sqt);
