@@ -54,3 +54,8 @@ log:
 	touch Application/Log/app.log
 	chmod 0777 Application/Log/app.log
 
+test:
+	sqlite3 Application/Database/Maestria-test.db < $(SQL)
+	sqlite3 Application/Database/Maestria-test.db < Application/Database/data.sql
+	sqlite3 Application/Database/Maestria-test.db < Application/Database/update.1.sql
+	Binaries/sohoa application sample:data --test

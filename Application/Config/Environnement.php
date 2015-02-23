@@ -6,7 +6,9 @@
 Hoa\Database\Dal::initializeParameters(array(
 	'connection.list.default.dal' => Hoa\Database\Dal::PDO,
 	'connection.list.default.dsn' => 'sqlite:hoa://Application/Database/Maestria.db',
-	'connection.autoload' => 'default'
+	'connection.list.test.dal' => Hoa\Database\Dal::PDO,
+	'connection.list.test.dsn' => 'sqlite:hoa://Application/Database/Maestria-test.db',
+	'connection.autoload' => 'default',
 ));
 
 return array();
