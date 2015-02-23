@@ -30,11 +30,12 @@ namespace Application\Model {
             return (intval($smt) > 0);
         }
 
-        public function check($login, $password)
+        public function check($login, $password, $secured = false)
         {
+            $password = ($secured === false) ? sha1($password) : $password;
             $sqt = $this->sql('SELECT * FROM user WHERE login = :login AND password = :password ', array(
                 'login' => $login,
-                'password' => sha1($password)
+                'password' => $password
             ))->fetchAll();
 
             return !empty($sqt);
@@ -53,17 +54,16 @@ namespace Application\Model {
         public function getByUser($user)
         {
             $st             = $this->sql('SELECT * FROM user WHERE idProfil = :id' , array('id' => $user))->fetchAll();
+            $class          = new \Application\Model\UserClass();
+            $domain         = new \Application\Model\UserDomain();
 
             if (isset($st[0])) {
                 $item           = $st[0];
-                $item['class']  = $class->getClass($id);
-                $item['domain'] = $domain->getDomain($id);
+                $item['class']  = $class->getClass($user);
+                $item['domain'] = $domain->getDomain($user);
 
                 return $item;
             }
-
-            $class          = new \Application\Model\UserClass();
-            $domain         = new \Application\Model\UserDomain();
             $st             = $this
                                 ->sql('SELECT * FROM user WHERE login = :id' , array('id' => $user))
                                 ->fetchAll();
