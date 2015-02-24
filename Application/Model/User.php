@@ -54,18 +54,18 @@ namespace Application\Model {
 
         public function getByUser($user)
         {
+            $class          = new \Application\Model\UserClass();
+            $domain         = new \Application\Model\UserDomain();
             $st             = $this->sql('SELECT * FROM user WHERE idProfil = :id' , array('id' => $user))->fetchAll();
 
             if (isset($st[0])) {
                 $item           = $st[0];
-                $item['class']  = $class->getClass($id);
-                $item['domain'] = $domain->getDomain($id);
+                $item['class']  = $class->getClass($item['idProfil']);
+                $item['domain'] = $domain->getDomain($item['idProfil']);
 
                 return $item;
             }
 
-            $class          = new \Application\Model\UserClass();
-            $domain         = new \Application\Model\UserDomain();
             $st             = $this
                                 ->sql('SELECT * FROM user WHERE login = :id' , array('id' => $user))
                                 ->fetchAll();
