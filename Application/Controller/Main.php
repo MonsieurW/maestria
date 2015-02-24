@@ -15,7 +15,6 @@ namespace Application\Controller {
 
         public function indexAction()
         {
-
             if ($this->connected === false) {
                $this->redirector->redirect('mainlogin');
             }

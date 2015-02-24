@@ -4,18 +4,13 @@
         "sohoa/framework": "*@dev",
         "hoa/database": "*",
         "hoa/acl" : "*",
-        "fzaninotto/faker": "1.5.*@dev",
         "monolog/monolog": "~1.11",
         "graylog2/gelf-php": "~1.1",
-        "mlehner/gelf-php": "~1.1.0",
-        "atoum/atoum": "*@dev"
+        "mlehner/gelf-php": "~1.1.0"
     },
     "require-dev": {
-        "behat/behat": "2.4.*@stable",
-        "behat/mink": "1.4.*@stable",
-        "behat/mink-extension": "*",
-        "behat/mink-goutte-driver": "*",
-        "behat/mink-selenium2-driver": "*"
+        "fzaninotto/faker": "1.5.*@dev",
+        "atoum/atoum": "*@dev"
     },
     "autoload": {
         "psr-4": {

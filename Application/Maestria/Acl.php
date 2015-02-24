@@ -31,8 +31,8 @@ namespace Application\Maestria {
         {
             $router = $this->_framework->getRouter();
             $router->construct();
-
             $rules = $router->getRules();
+
 
             foreach ($rules as $rule) {
                 $call = null;
@@ -55,6 +55,7 @@ namespace Application\Maestria {
                     }
                 }
             }
+
         }
 
         public function allow($string, $gid)

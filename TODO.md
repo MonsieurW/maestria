@@ -32,6 +32,8 @@ Test
 ---
 - [ ]	Verification algo (Sticker, Notation)
 - [ ]	Vérification ACL
+- [ ]	Test Unitaire
+- [ ]	Test Fonctionnel
 
 Refactoring
 ---
