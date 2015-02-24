@@ -42,6 +42,14 @@ namespace Application\Model {
             return (intval($smt) > 0);
         }
 
+        public function hasUsers($idClass)
+        {
+            $sql = 'SELECT COUNT(*) FROM user_class WHERE refClass = :c';
+            $smt = $this->sql($sql, array('c' => $idClass))->fetchColumn(0);
+
+            return (intval($smt) > 0);
+        }
+
         public function getClass($idUser)
         {
             $sql = 'SELECT * FROM user_class as uc, class as c WHERE uc.refClass = c.idClass AND uc.refUser = :i';

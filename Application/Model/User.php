@@ -32,7 +32,6 @@ namespace Application\Model {
 
         public function check($login, $password, $secured = false)
         {
-
             $password = ($secured === false) ? sha1($password) : $password;
             $sqt = $this->sql('SELECT * FROM user WHERE login = :login AND password = :password ', array(
                 'login' => $login,
@@ -57,6 +56,8 @@ namespace Application\Model {
             $class          = new \Application\Model\UserClass();
             $domain         = new \Application\Model\UserDomain();
             $st             = $this->sql('SELECT * FROM user WHERE idProfil = :id' , array('id' => $user))->fetchAll();
+            $class          = new \Application\Model\UserClass();
+            $domain         = new \Application\Model\UserDomain();
 
             if (isset($st[0])) {
                 $item           = $st[0];
@@ -65,7 +66,6 @@ namespace Application\Model {
 
                 return $item;
             }
-
             $st             = $this
                                 ->sql('SELECT * FROM user WHERE login = :id' , array('id' => $user))
                                 ->fetchAll();

@@ -21,6 +21,7 @@ namespace Application\Bin\Command\Sample;
         protected $options = array(
             array('help', \Hoa\Console\GetOption::NO_ARGUMENT, 'h'),
             array('help', \Hoa\Console\GetOption::NO_ARGUMENT, '?'),
+            array('test', \Hoa\Console\GetOption::NO_ARGUMENT, 't'),
         );
 
         protected $maxEleve = 5;
@@ -37,9 +38,12 @@ namespace Application\Bin\Command\Sample;
         {
 
             $command = null;
+            $test    = false;
 
             while (false !== $c = $this->getOption($v)) switch ($c) {
-
+                case 't':
+                    $test = true;
+                    break;
                 case 'h':
                 case '?':
                     return $this->usage();
@@ -47,6 +51,9 @@ namespace Application\Bin\Command\Sample;
             }
 
             require 'hoa://Application/Config/Environnement.php';
+
+            if($test === true)
+                \Hoa\Database\Dal::getInstance('test');
 
             $this->readCapabilities();
             $this->makeSomeUser();

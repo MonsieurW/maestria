@@ -74,6 +74,13 @@ CREATE TABLE IF NOT EXISTS answer (
             $smt = $this->sql($sql, array('user' => $user, 'evaluation' => $evaluation))->fetchColumn(0);
 
             return (intval($smt) > 0);
+        } 
+        public function existsEval($evaluation)
+        {
+            $sql = 'SELECT COUNT(*) FROM answer WHERE refEvaluation = :evaluation';
+            $smt = $this->sql($sql, array('evaluation' => $evaluation))->fetchColumn(0);
+
+            return (intval($smt) > 0);
         }
 
         public function update($user, $evaluation, $value)
