@@ -45,6 +45,14 @@ namespace Application\Model {
             return (intval($smt) > 0);
         }
 
+        public function idExists($id)
+        {
+            $sql = 'SELECT COUNT(*) FROM theme WHERE idTheme = :id';
+            $smt = $this->sql($sql, array('id' => $id))->fetchColumn(0);
+
+            return (intval($smt) > 0);   
+        }
+
         public function update($id, $value)
         {
             $value = strtolower($value);
