@@ -58,32 +58,51 @@ class Request extends \atoum\asserters\variable
 
         ob_start();
         $this->_dispatcher->dispatch($this->_router, $this->_view, $this->_framework);
-        $this->_request = ob_get_contents();
+        $request = ob_get_contents();
         ob_end_clean();
 
+        $this->setWith($request);
         return $this;
     }
 
     public function echoBody()
     {
-        return $this->_request."\n";
+        return $this->value."\n";
     }
 
     public function __get($key)
     {
         switch ($key) {
             case 'body':
-                return $this->generator->__call('string', array($this->_request));
+                return $this->generator->__call('string', [$this->getValue()]);
                 break;
             case 'json':
-                return $this->generator->__call('array', array(json_decode($this->_request, true)));
+                $json = json_decode($this->getValue(), true);
+                if($json === null)
+                    return $this->fail('Request body are not valid json');
+                else{
+                    $this->pass();
+                    return $this->generator->__call('array', [$json]);
+                }
                 break;
             case 'request':
-                return $this->_request;
+                return $this->getValue();
+                break;
             case 'data':
-                $json = json_decode($this->_request, true);
-                return $this->generator->__call('array', [$json['data']]);
+                $json = json_decode($this->getValue(), true);
+                if($json === null)
+                    return $this->fail('Request body are not valid json');
+                else{
+                    $this->pass();
+                    return $this->generator->__call('array', [$json['data']]);
+                }
+                break;
+            case 'html':
+            case 'xml':
+                return $this->generator->getAsserterInstance('\Camael\Api\Tests\Unit\Asserters\\'.ucfirst($key), [$this]);
+                break;
             default:
+
                 break;
         }
 
