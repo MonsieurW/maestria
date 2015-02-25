@@ -9,6 +9,7 @@ class Html extends asserters\variable
 {
 
     protected $_errors = [];
+    protected $_xpath  = null;
 
     public function setWith($request)
     {
@@ -41,11 +42,22 @@ class Html extends asserters\variable
         parent::setWith($dom);
     }
 
-    public function name($name)
+    public function xquery($query)
     {
+        if($this->_xpath === null) {
+            $this->_xpath = new \DOMXPath($this->getValue());
+        }
+
+        $return = $this->_xpath->query($query);
+
+        if($return === false){
+            $this->fail('Query ('.$query.') has an error');
+        }
      
-        return $this;   
+        return $this->generator->__call('object', [$return]);   
     }
+
+
 
     public function hasError()
     {
