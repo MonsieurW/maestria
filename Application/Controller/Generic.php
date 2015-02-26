@@ -14,6 +14,7 @@ namespace Application\Controller {
         protected $isModerator = false;
         protected $loginUser = '';
         protected $_acl = null;
+        protected $_allIsGood = false;
 
         public function construct()
         {
@@ -62,11 +63,11 @@ namespace Application\Controller {
             $app = 'app.'.$call.'.'.$action;
 
             if ($this->connected === false) {
-               $this->redirector->redirect('mainlogin');
+               return $this->redirector->redirect('mainlogin');
             }
 
             if ($this->_acl->isAllow($this->loginUser, $app) === false) {
-                $this->redirector->redirect('mainerror');
+                return $this->redirector->redirect('mainerror');
             }
 
         }

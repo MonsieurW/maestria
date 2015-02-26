@@ -6,7 +6,10 @@ namespace Application\Controller {
     {
 
         public function indexAction($classroom_id) {
-            var_dump($classroom_id);
+           
+            if($this->_allIsGood === false)
+                return;
+            
 
             $this->greut->render();
         }

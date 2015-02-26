@@ -8,6 +8,10 @@ namespace Application\Controller {
     {
         public function indexAction()
         {
+            
+            if($this->_allIsGood === false)
+                return;
+            
             $classe             = new \Application\Model\Domain();
             $this->data->classe = $classe->all();
 
@@ -16,6 +20,9 @@ namespace Application\Controller {
 
         public function createActionAsync()
         {
+            if($this->_allIsGood === false)
+                return;
+            
             $id     = (isset($_POST['pk']))     ? $_POST['pk']      : null;
             $value  = (isset($_POST['value']))  ? $_POST['value']   : null;
             $mode   = (isset($_POST['mode']))   ? $_POST['mode']    : 'update';

@@ -8,12 +8,18 @@ namespace Application\Controller {
     {
         public function indexAction()
         {
-            $this->redirector->redirect('profilall');
+            if($this->_allIsGood === false)
+                return;
+            
+            return $this->redirector->redirect('profilall');
         }
 
         public function showAction($professor_id)
         {
-            $this->redirector->redirect('profiluser', array('id' => $professor_id));
+            if($this->_allIsGood === false)
+                return;
+            
+            return $this->redirector->redirect('profiluser', array('id' => $professor_id));
         }
 
     }

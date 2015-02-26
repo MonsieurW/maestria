@@ -8,11 +8,17 @@ namespace Application\Controller {
     {
         public function indexAction()
         {
-            $this->redirector->redirect('mainindex');
+            if($this->_allIsGood === false)
+                return;
+            
+            return $this->redirector->redirect('mainindex');
         }
 
         public function showAction($evaluate_id)
         {
+            if($this->_allIsGood === false)
+                return;
+            
             $ev                      = new \Application\Model\Evaluation();
             $data                    = $ev->get($evaluate_id);
             $class                   = (new \Application\Model\Classe())->all();
@@ -32,6 +38,9 @@ namespace Application\Controller {
 
         public function createAction()
         {
+            if($this->_allIsGood === false)
+                return;
+            
             $idEvaluation = null;
             $questions    = array();
             $response     = array();

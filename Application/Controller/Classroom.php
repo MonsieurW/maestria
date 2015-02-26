@@ -9,6 +9,10 @@ namespace Application\Controller {
 
         public function indexAction()
         {
+            
+            if($this->_allIsGood === false)
+                return;
+            
             $classe             = new \Application\Model\Classe();
             $this->data->classe = $classe->all();
 
@@ -17,6 +21,9 @@ namespace Application\Controller {
 
         public function createActionAsync()
         {
+            if($this->_allIsGood === false)
+                return;
+            
             $id     = (isset($_POST['pk']))     ? $_POST['pk']      : null;
             $value  = (isset($_POST['value']))  ? $_POST['value']   : null;
             $mode   = (isset($_POST['mode']))   ? $_POST['mode']    : 'update';
@@ -38,6 +45,9 @@ namespace Application\Controller {
         public function updateActionAsync($classroom_id)
         {
 
+            if($this->_allIsGood === false)
+                return;
+            
             $mode   = (isset($_POST['mode']))   ? $_POST['mode']    : 'nothing';
             $id     = (isset($_POST['id']))     ? $_POST['id']      : 'nothing';
             $model  = new \Application\Model\UserClass();
@@ -58,6 +68,9 @@ namespace Application\Controller {
 
         public function editAction($classroom_id)
         {
+            if($this->_allIsGood === false)
+                return;
+            
            $model   = new \Application\Model\UserClass();
            $users   = array();
            $model   = $model->getUsers($classroom_id);

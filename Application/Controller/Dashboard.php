@@ -7,6 +7,9 @@ namespace Application\Controller {
 
         public function indexAction($classroom_id) {
             
+            if($this->_allIsGood === false)
+                return;
+            
             /**
 			* Read User
             */

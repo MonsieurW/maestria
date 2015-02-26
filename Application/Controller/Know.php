@@ -8,7 +8,9 @@ namespace Application\Controller {
     {
         public function indexAction()
         {
-
+            if($this->_allIsGood === false)
+                return;
+            
             $query       = $this->router->getQuery();
             $page        = isset($query['page']) ? $query['page'] : 1;
             $nbPost      = 20;
@@ -43,6 +45,9 @@ namespace Application\Controller {
 
         public function createActionAsync()
         {
+            if($this->_allIsGood === false)
+                return;
+            
             $id     = (isset($_POST['pk']))     ? $_POST['pk']     : null;
             $value  = (isset($_POST['value']))  ? $_POST['value']  : null;
             $col    = (isset($_POST['name']))   ? $_POST['name']   : null;

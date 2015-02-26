@@ -8,6 +8,9 @@ namespace Application\Controller {
     {
         public function indexAction($professor_id)
         {
+            if($this->_allIsGood === false)
+                return;
+            
             $evaluation      = new \Application\Model\Evaluation($professor_id);
             $mine            = $evaluation->mine();
 
@@ -23,6 +26,9 @@ namespace Application\Controller {
 
         public function newAction($professor_id)
         {
+            if($this->_allIsGood === false)
+                return;
+            
             $dom                = new \Application\Model\Domain();
             $this->data->pr     = $professor_id;
             $this->data->domain = $dom->all();
@@ -32,6 +38,9 @@ namespace Application\Controller {
 
         public function createAction($professor_id)
         {
+            if($this->_allIsGood === false)
+                return;
+            
             $title          = $_POST['title'];
             $description    = $_POST['description'];
             $question       = array();
@@ -54,7 +63,7 @@ namespace Application\Controller {
                 $ques->create($q['title'], $q['note'], $q['taxo'], $q['item1'], $q['item2']);
             }
 
-           $this->redirector->redirect('showEvaluation', array('evaluation_id' => $evId, 'professor_id' => $professor_id));
+           return $this->redirector->redirect('showEvaluation', array('evaluation_id' => $evId, 'professor_id' => $professor_id));
         }
 
         protected function filter($array)
@@ -70,6 +79,9 @@ namespace Application\Controller {
 
         public function showAction($professor_id, $evaluation_id)
         {
+            if($this->_allIsGood === false)
+                return;
+            
             $evaluation = new \Application\Model\Evaluation($professor_id);
             $question   = new \Application\Model\Questions($evaluation_id);
             $theme      = new \Application\Model\Theme();
@@ -107,6 +119,9 @@ namespace Application\Controller {
 
         public function editAction($professor_id, $evaluation_id)
         {
+            if($this->_allIsGood === false)
+                return;
+            
             $evaluation = new \Application\Model\Evaluation($professor_id);
             $questions  = new \Application\Model\Questions($evaluation_id);
             $know       = new \Application\Model\Know();
@@ -153,6 +168,9 @@ namespace Application\Controller {
 
         public function updateAction($professor_id, $evaluation_id)
         {
+            if($this->_allIsGood === false)
+                return;
+            
 
             $title          = $_POST['title'];
             $description    = $_POST['description'];
@@ -189,19 +207,22 @@ namespace Application\Controller {
                 }
             }
 
-            $this->redirector->redirect('showEvaluation', array('evaluation_id' => $evaluation_id, 'professor_id' => $professor_id));
+            return $this->redirector->redirect('showEvaluation', array('evaluation_id' => $evaluation_id, 'professor_id' => $professor_id));
 
         }
 
         public function destroyAction($evaluation_id, $professor_id)
         {
+            if($this->_allIsGood === false)
+                return;
+            
             $evaluation = new \Application\Model\Evaluation($professor_id);
             $ques       = new \Application\Model\Questions($evaluation_id);
 
             $evaluation->remove($evaluation_id);
             $ques->remove();
 
-           $this->redirector->redirect('indexEvaluation', array('professor_id' => $professor_id));
+           return $this->redirector->redirect('indexEvaluation', array('professor_id' => $professor_id));
 
         }
 

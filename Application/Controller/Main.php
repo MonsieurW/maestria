@@ -15,8 +15,11 @@ namespace Application\Controller {
 
         public function indexAction()
         {
+            if($this->_allIsGood === false)
+                return;
+            
             if ($this->connected === false) {
-               $this->redirector->redirect('mainlogin');
+               return $this->redirector->redirect('mainlogin');
             }
 
             $evaluation             = new \Application\Model\Evaluation();
@@ -29,8 +32,11 @@ namespace Application\Controller {
 
         public function connectAction()
         {
+            if($this->_allIsGood === false)
+                return;
+            
             if ($this->connected === true) {
-               $this->redirector->redirect('mainindex');
+               return $this->redirector->redirect('mainindex');
             }
 
             $this->data->referer = (isset($_SERVER['HTTP_REFERER'])) ? $_SERVER['HTTP_REFERER'] : '';
@@ -69,9 +75,9 @@ namespace Application\Controller {
             \Application\Maestria\Log::debug('Lifetime : '.$hoa['lifetime']->format('d-m-Y H:i:s'));
 
             if ($redirect === null) {
-               $this->redirector->redirect('mainindex');
+               return $this->redirector->redirect('mainindex');
             } else {
-               $this->redirector->url($redirect);
+               return $this->redirector->url($redirect);
             }
 
         }
@@ -84,7 +90,7 @@ namespace Application\Controller {
 
             \Hoa\Session\Session::destroy();
             \Application\Maestria\Log::debug('Logout');
-            $this->redirector->redirect('mainindex');
+            return $this->redirector->redirect('mainindex');
         }
 
         public function registerAction()
@@ -93,14 +99,17 @@ namespace Application\Controller {
                 return $this->greut->render();
             }
 
-            $this->redirector->redirect('mainlogin');
+            return $this->redirector->redirect('mainlogin');
         }
 
         public function profilAction($id)
         {
+            if($this->_allIsGood === false)
+                return;
+            
             if ($this->connected === false) {
 
-                $this->redirector->redirect('mainlogin');
+                return $this->redirector->redirect('mainlogin');
             }
             if($this->readUserInformation($id) === true)
 
@@ -112,6 +121,9 @@ namespace Application\Controller {
 
         public function profilallAction()
         {
+            if($this->_allIsGood === false)
+                return;
+            
             $query       = $this->router->getQuery();
             $page        = isset($query['page']) ? $query['page'] : 1;
             $nbPost      = 20;
@@ -127,6 +139,9 @@ namespace Application\Controller {
 
         public function createAction()
         {
+            if($this->_allIsGood === false)
+                return;
+            
             $p = function ($id) {
                 if(array_key_exists($id, $_POST))
 
@@ -137,7 +152,7 @@ namespace Application\Controller {
 
             if ($this->connected === false) {
 
-                $this->redirector->redirect('mainlogin');
+                return $this->redirector->redirect('mainlogin');
             }
 
             $login      = $p('login');
@@ -146,19 +161,25 @@ namespace Application\Controller {
             $model      = new \Application\Model\User();
 
             $model->add($login, $password, $user);
-            $this->redirector->redirect('profilall');
+            return $this->redirector->redirect('profilall');
         }
 
         public function errorAction()
         {
+            if($this->_allIsGood === false)
+                return;
+            
             $this->greut->render();
         }
 
         public function profileditAction($id)
         {
+            if($this->_allIsGood === false)
+                return;
+            
             if ($this->connected === false) {
 
-                $this->redirector->redirect('mainlogin');
+                return $this->redirector->redirect('mainlogin');
             }
 
             if ($this->isAdmin === true or $id === $this->loginId) {
@@ -182,11 +203,14 @@ namespace Application\Controller {
                 return $this->greut->render();
             }
 
-            $this->redirector->redirect('mainindex');
+            return $this->redirector->redirect('mainindex');
         }
 
         public function profilupdateAction($id)
         {
+            if($this->_allIsGood === false)
+                return;
+            
             $p = function ($id) {
                 if(array_key_exists($id, $_POST))
 
@@ -241,14 +265,17 @@ namespace Application\Controller {
                 $uc->sync($id, $class);
                 $ud->sync($id, $domain);
 
-                $this->redirector->redirect('profiluser', array('id' => $id));
+                return $this->redirector->redirect('profiluser', array('id' => $id));
             }
 
-            $this->redirector->redirect('mainindex');
+            return $this->redirector->redirect('mainindex');
         }
 
         protected function readUserInformation($id)
         {
+            if($this->_allIsGood === false)
+                return;
+            
             $model = new \Application\Model\User();
 
             if ($model->exists($id) === true ) {

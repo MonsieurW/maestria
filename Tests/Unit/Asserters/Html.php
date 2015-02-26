@@ -38,8 +38,13 @@ class Html extends asserters\variable
         // var_dump($this->_errors);
 
         libxml_clear_errors();
-
+        
         parent::setWith($dom);
+    }
+
+    public function getValue()
+    {
+        return $this->value;
     }
 
     public function xquery($query)
@@ -53,8 +58,23 @@ class Html extends asserters\variable
         if($return === false){
             $this->fail('Query ('.$query.') has an error');
         }
-     
-        return $this->generator->__call('object', [$return]);   
+
+        return $this->generator->getAsserterInstance('\Camael\Api\Tests\Unit\Asserters\Node', [$return]);
+    } 
+
+    public function xevaluate($query)
+    {
+        if($this->_xpath === null) {
+            $this->_xpath = new \DOMXPath($this->getValue());
+        }
+
+        $return = $this->_xpath->evaluate($query);
+
+        if($return === false){
+            $this->fail('Query ('.$query.') has an error');
+        }
+
+        return $this->generator->getAsserterInstance('\Camael\Api\Tests\Unit\Asserters\Node', [$return]);
     }
 
 

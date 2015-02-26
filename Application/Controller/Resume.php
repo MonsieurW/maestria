@@ -8,6 +8,9 @@ namespace Application\Controller {
     {
         public function indexAction($evaluate_id)
         {
+            if($this->_allIsGood === false)
+                return;
+            
             $answer = new \Application\Model\Answer();
             $eval   = new \Application\Model\Evaluation();
             $class  = new \Application\Model\Classe();
@@ -45,6 +48,9 @@ namespace Application\Controller {
 
         public function showAction($evaluate_id, $resume_id)
         {
+            if($this->_allIsGood === false)
+                return;
+            
             // TODO : $resume_id are not used, etles users sont mal filtré ici !
             $classroom_id   = $resume_id;
             $evaluation     = new \Application\Model\Evaluation();

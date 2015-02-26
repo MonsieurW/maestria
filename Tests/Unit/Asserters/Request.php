@@ -17,10 +17,9 @@ class Request extends \atoum\asserters\variable
         $dir = realpath(__DIR__.'/../../../Public/');
         \Sohoa\Framework\Framework::initialize($dir);
 
-        $this->_framework  = new \Mock\Application\Maestria\Maestria();
-        $this->_router     = new \Mock\Sohoa\Framework\Router();
-
-        $this->_framework->_router = $this->_router;
+        $this->_framework           = new \Mock\Application\Maestria\Maestria();
+        $this->_router              = new \Mock\Sohoa\Framework\Router();
+        $this->_framework->_router  = $this->_router;
 
         $this->_framework->setAcl();
         $this->_framework->kit('redirector', new \Camael\Api\Tests\Unit\Mock\Redirect());
@@ -28,10 +27,6 @@ class Request extends \atoum\asserters\variable
 
         $this->_dispatcher = $this->_framework->getDispatcher();
         $this->_view       = $this->_framework->getView();
-
-        //$this->_router->construct();
-
-        // print_r($this->_router->dump());
     }
 
     public function __call($name, $arg)
@@ -48,8 +43,6 @@ class Request extends \atoum\asserters\variable
         if (isset($arg[1]) === true && is_array($arg[1]) === false) {
             throw new \Exception("Post argument must be an array", 1);
         }
-
-        // print_r($this->_router->dump());
 
         $this->_router->getMockController()->getMethod = $name;
         $this->_router->route($arg[0]);
