@@ -11,9 +11,10 @@ namespace Application\Controller\Tests\Unit {
         // index   => List all users
         public function testIndex()
         {
-            $this->function->exit = null;
             $request = $this->request;
             $html    = $request->get('/')->html;
+
+            echo $request;
 
             $this
                 ->if($item = $html->xquery('//div')[0])

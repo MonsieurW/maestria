@@ -21,10 +21,5 @@ namespace Application\Controller\Kit {
 
             return;
         }
-
-        public function exit()
-        {
-        	exit;
-        }
     }
 }

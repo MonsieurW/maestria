@@ -14,7 +14,7 @@ namespace Application\Controller {
         protected $isModerator = false;
         protected $loginUser = '';
         protected $_acl = null;
-        protected $_allIsGood = false;
+        protected $_allIsGood = true;
 
         public function construct()
         {
@@ -50,7 +50,7 @@ namespace Application\Controller {
                 $this->_acl->addUser($model['user'], $group);
             }
 
-            $this->check();
+            return $this->check();
         }
 
         public function isAvailable()
@@ -63,12 +63,14 @@ namespace Application\Controller {
             $app = 'app.'.$call.'.'.$action;
 
             if ($this->connected === false) {
-               return $this->redirector->redirect('mainlogin');
+               return $this->redirect('mainlogin');
             }
 
             if ($this->_acl->isAllow($this->loginUser, $app) === false) {
-                return $this->redirector->redirect('mainerror');
+                return $this->redirect('mainerror');
             }
+
+            return;
 
         }
 
@@ -82,8 +84,13 @@ namespace Application\Controller {
 
         public function check()
         {
-            $this->isAvailable();
+            return $this->isAvailable();
         }
 
+        public function redirect($id)
+        {
+            $this->_allIsGood = false;
+            return $this->redirector->redirect($id);
+        }
     }
 }
