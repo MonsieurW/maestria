@@ -5,7 +5,7 @@ namespace Camael\Api\Tests\Unit\Asserters;
 use mageekguy\atoum;
 use mageekguy\atoum\asserters;
 
-class Node extends asserters\variable implements \arrayAccess
+class Node extends asserters\variable implements \arrayAccess, \Countable
 {
 
     protected $_errors = [];
@@ -39,5 +39,10 @@ class Node extends asserters\variable implements \arrayAccess
     public function offsetExists($key)
     {
         return ($this->getValue()->item($key) !== null);
+    }
+
+    public function count()
+    {
+        return ($this->getValue()->length);
     }
 }

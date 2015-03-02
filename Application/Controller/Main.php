@@ -19,12 +19,12 @@ namespace Application\Controller {
                 return;
             
             if ($this->connected === false) {
-               return $this->redirector->redirect('mainlogin');
+               return $this->redirector->redirect('mainconnect');
             }
 
             $evaluation             = new \Application\Model\Evaluation();
             $evaluation             = $evaluation->all();
-            // TODO : Make pages
+
             $this->data->evaluation = $evaluation;
 
             return $this->greut->render();
@@ -96,7 +96,7 @@ namespace Application\Controller {
         public function registerAction()
         {
             if ($this->connected === true) {
-                return $this->greut->render();
+                // return $this->greut->render();
             }
 
             return $this->redirector->redirect('mainlogin');
@@ -112,7 +112,6 @@ namespace Application\Controller {
                 return $this->redirector->redirect('mainlogin');
             }
             if($this->readUserInformation($id) === true)
-
                 return $this->greut->render();
             else
                 return $this->greut->render(array('Main' , 'NotFound'));

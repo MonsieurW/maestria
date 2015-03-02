@@ -13,7 +13,7 @@ class Request extends \atoum\asserters\variable
     public function __construct()
     {
         parent::__construct();
-
+        
         $dir = realpath(__DIR__.'/../../../Public/');
         \Sohoa\Framework\Framework::initialize($dir);
 
@@ -21,17 +21,18 @@ class Request extends \atoum\asserters\variable
         $this->_router              = new \Mock\Sohoa\Framework\Router();
         $this->_framework->_router  = $this->_router;
 
-        $this->_framework->setAcl();
-        $this->_framework->kit('redirector', new \Camael\Api\Tests\Unit\Mock\Redirect());
-        
-
+        $this->_framework->getView()->setOutputStream(new \Camael\Api\Tests\Unit\Mock\Stringbuffer());
+        $this->_framework->setAcl();    
+        $this->_framework->kit('redirector', new \Camael\Api\Tests\Unit\Mock\Redirect($this->_framework)); // Use mocked kit
+    
         $this->_dispatcher = $this->_framework->getDispatcher();
         $this->_view       = $this->_framework->getView();
     }
 
     public function __call($name, $arg)
     {
-        $method = ['get', 'post', 'put', 'patch', 'update', 'new', 'destroy'];
+        $method  = ['get', 'post', 'put', 'patch', 'update', 'new', 'destroy'];
+        $request = '';
 
         if(in_array($name, $method) === false)
             return parent::__call($name, $arg);
@@ -50,15 +51,19 @@ class Request extends \atoum\asserters\variable
         $_POST = (isset($arg[1]) === true) ? $arg[1] : [];
 
         ob_start();
-        $this->_dispatcher->dispatch($this->_router, $this->_view, $this->_framework);
-        $request = ob_get_contents();
-        ob_end_clean();
+            $this->_dispatcher->dispatch($this->_router, $this->_view, $this->_framework);
 
+            echo $this->_view->getOutputStream()->readAll();
+            $this->_view->getOutputStream()->truncate(0);
+            $this->_view->reset();
+
+            $request = ob_get_contents();
+        ob_end_clean();
         $this->setWith($request);
         return $this;
     }
 
-    public function echoBody()
+    public function __toString()
     {
         return $this->value."\n";
     }

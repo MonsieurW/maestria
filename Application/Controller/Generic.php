@@ -62,6 +62,8 @@ namespace Application\Controller {
 
             $app = 'app.'.$call.'.'.$action;
 
+
+            
             if ($this->connected === false) {
                return $this->redirect('mainlogin');
             }

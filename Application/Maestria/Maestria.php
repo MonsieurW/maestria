@@ -20,5 +20,16 @@ namespace Application\Maestria {
         {
             return $this->_acl;
         }
+
+        public function initView()
+        {
+            if (!$this->_view) {
+                $this->_view = new Greut();
+            }
+
+            $this->_view->setFramework($this);
+
+            return $this;
+        }
     }
 }

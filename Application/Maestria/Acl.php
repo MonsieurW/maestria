@@ -111,8 +111,12 @@ namespace Application\Maestria {
             $resource = $this->_acl->getResource('foo');
             $user->addGroup($group);
 
-            $this->_acl->addUser($user);
-            $resource->addUser($user);
+            if($this->_acl->userExists($user) === false)
+                $this->_acl->addUser($user);
+
+
+            if($resource->userExists($user) === false)
+                $resource->addUser($user);
 
             return $this;
         }
