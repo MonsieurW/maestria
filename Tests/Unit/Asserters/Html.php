@@ -35,8 +35,6 @@ class Html extends asserters\variable
             $this->_errors[$key] = vsprintf('Line: %s, Column: %s, Code: %s, Message: %s', $arg);
         }
 
-        // var_dump($this->_errors);
-
         libxml_clear_errors();
         
         parent::setWith($dom);
@@ -45,6 +43,10 @@ class Html extends asserters\variable
     public function getValue()
     {
         return $this->value;
+    }
+
+    public function __toString() {
+        return $this->getValue()->saveHtml();
     }
 
     public function xquery($query)

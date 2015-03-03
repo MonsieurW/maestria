@@ -4,7 +4,7 @@ $this->block('container');
 ?>
 <div class="container">
 	<div class="row">
-		<?php foreach ($evaluation as $value) { ?>
+			<?php foreach ($evaluation as $value) { ?>
 		<div class="rowing well">
 			<h4>
 				<?php echo $value['label']; ?><br />
