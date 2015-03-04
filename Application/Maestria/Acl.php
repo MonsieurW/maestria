@@ -17,11 +17,20 @@ namespace Application\Maestria {
             $student      = new \Hoa\Acl\Group('student');
             $resource     = new \Hoa\Acl\Resource('foo');
 
-            $this->_acl->addGroup($admin);
-            $this->_acl->addGroup($professor);
-            $this->_acl->addGroup($moderator);
-            $this->_acl->addGroup($student);
-            $this->_acl->addResource($resource);
+            if($this->_acl->groupExists('admin') === false)
+                $this->_acl->addGroup($admin);
+
+            if($this->_acl->groupExists('professor') === false)
+                $this->_acl->addGroup($professor);
+        
+            if($this->_acl->groupExists('moderator') === false)
+                $this->_acl->addGroup($moderator);
+        
+            if($this->_acl->groupExists('student') === false)
+                $this->_acl->addGroup($student);
+
+            if($this->_acl->resourceExists('foo') === false)
+                $this->_acl->addResource($resource);
 
             $this->load();
 

@@ -3,6 +3,9 @@ namespace Application\Controller\Tests\Unit {
 
     class Main extends \atoum\test
     {
+        /**
+         * @engine inline
+         */
         public function beforeTestMethod($testMethod)
         {
             $this->define->request = '\Camael\Api\Tests\Unit\Asserters\Request';
@@ -11,8 +14,10 @@ namespace Application\Controller\Tests\Unit {
         // index   => List all users
         public function testIndex()
         {
+
             $request = $this->request;
             $html    = $request->get('/')->html;
+
 
             $this
                 ->if($item = $html->xquery('//div')[0])
@@ -48,17 +53,6 @@ namespace Application\Controller\Tests\Unit {
                 ->string($item[2]->getAttribute('class'))->isIdenticalTo('fa fa-road')
                 ->string($item[3]->getAttribute('class'))->isIdenticalTo('fa fa-paw')
             ;
-
-            var_dump($_SESSION);
-        }
-
-        public function testFoo()
-        {
-            if(isset($_SESSION) === false)
-                $_SESSION = [];
-
-            var_dump($_SESSION);
-
         }
     }
 }

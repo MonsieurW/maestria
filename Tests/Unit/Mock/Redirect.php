@@ -41,7 +41,6 @@ class Redirect extends \Application\Controller\Kit\Redirection
             echo $this->view->getOutputStream()->readAll();
             $this->view->getOutputStream()->truncate(0);
             $this->view->reset();
-            
         }
 
 }

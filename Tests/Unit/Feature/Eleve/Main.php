@@ -4,9 +4,7 @@ namespace Application\Acl\Eleve {
 }
 
 namespace Application\Acl\Eleve\Tests\Unit {
-    /**
-     * @engine inline
-     */
+
     class Main extends \atoum\test
     {
         public function beforeTestMethod($testMethod)
