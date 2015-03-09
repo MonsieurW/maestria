@@ -1,0 +1,16 @@
+//je voulais ton avis sur la facon de générer les données via JSON en js. C'est un exemple pour generer les fenetre pop up quand 
+//on clique sur balise .eval . Ca fonction mais je ne sais pas si tu as une maniere plus propre de faire
+
+//squelette HTML
+fixepopup =['<section class="titre ','"><div class="awsm exit">&#xf00d;</div><h3>','</h3></section><section class="contenu ">','</section>'];
+
+//données pr le .eval (je ne t'ai pas mis les données pr les autres pop ups possibles ms C équivalent
+ varpopup = {
+   "classe": ["CHOIX DE LA CLASSE",'<h6>3<sup>1</sup></h6><h6>3<sup>2</sup></h6><h6>3<sup>3</sup></h6>']};
+
+//ouverture fenetre popup	
+$('.eval').on('click', function(){
+	saclasse=$(this).attr('class');
+	$('#popup').slideToggle();
+		$('#inpopup').html(fixepopup[0]+ saclasse +fixepopup[1]+varpopup[saclasse][0]+fixepopup[2]+varpopup[saclasse][1]+fixepopup[3]);	
+});
